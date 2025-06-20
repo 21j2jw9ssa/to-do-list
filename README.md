@@ -12,7 +12,7 @@ where users may
 - **export** the list as a **text file**
 - **import a text file** to create a *new* list
 
-... and so on.
+and so on.
 
 # How to use the To-do List (MakeList)
 
