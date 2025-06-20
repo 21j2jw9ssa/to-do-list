@@ -34,7 +34,16 @@ It must NOT be **empty**, though, i.e. **""**.
 The sequence of items in the list can be changed by **dragging an item *at a time***.
 
 There are three types of sorting items in the list:
-- in ***ascending*** order
-  _asasasas
-- in ***descending*** order
+- in ***ascending*** order<br>
+Arrange all items from **smallest to largest**, i.e. A-Z, a-z, 0-9.<br>
+**After sorting**:<br>
+  the *greater* an item is, the closer it is to the **bottom** of the list;<br>
+the *smaller* an item is, the closer it is to the **top** of the list;
+
+- in ***descending*** order<br>
+Arrange all items from **largest to smallest**, i.e. Z-A, z-a, 9-0.<br>
+**After sorting**:<br>
+  the *greater* an item is, the closer it is to the **top** of the list;<br>
+the *smaller* an item is, the closer it is to the **bottom** of the list;
+
 - in a ***random*** order
