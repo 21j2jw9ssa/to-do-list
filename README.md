@@ -128,4 +128,4 @@ The item as well as its contents and checking status<br>
 will be gone for good<br>
 and **CANNOT** be undone.
 
-Or you can check out [this page] (https://21j2jw9ssa.github.io/to-do-list/help/todolist-help.html) for detailed help.
+Or you can check out [this page](https://21j2jw9ssa.github.io/to-do-list/help/todolist-help.html) for detailed help.
