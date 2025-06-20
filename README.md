@@ -14,7 +14,9 @@ where users may
 
 ... and so on.
 
-## How to use the To-do List (MakeList)
+# How to use the To-do List (MakeList)
+
+## Functions
 
 ### ***Add* items** to the list
 To add items to the list,
@@ -22,12 +24,17 @@ simply enter ***something*** at the tab writing<br>
 **"enter a name for the new item"**,<br>
 then click the button writing **"add an item"**.
 
-For *desktops and notebooks*, it can also be done pressing ***Enter***.
+For *desktops and notebooks*, it can also be done by pressing ***Enter***.
 
 *An item to be added* can be a space, a tab key, a name, or even a duplicate item, etc.
 
 It must NOT be **empty**, though, i.e. **""**.
 
-### ***Sort* items** from the list
--
--
+### ***Sort* items** in the list
+The sequence of items in the list can be changed by **dragging an item *at a time***.
+
+There are three types of sorting items in the list:
+- in ***ascending*** order
+  _asasasas
+- in ***descending*** order
+- in a ***random*** order
