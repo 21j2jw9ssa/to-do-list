@@ -62,8 +62,36 @@ simply click the button **"clear list"**.
 Doing so will clear ***all* items** in the list.
 The list **saved in the *web browser*** (if there is one) won't be affected.
 
-This action **CANNOT** be done.
+This action **CANNOT** be undone.
 
 ### iv. ***Save* list**
 
 To save the list to the web browser,
+click the button ***save as a file***.
+
+Doing so saves the current list to the web browser.
+
+If there is already a one saved in the web browser, then<br>
+- if the user clicks ***OK***, the new list overwrites the one saved in the browser
+- if the user clicks ***Cancel***, the list saved in the web browser does not get affected.
+
+### v. ***Load* list**
+
+To load the list saved in the web browser,
+click the button ***load file***.
+
+Doing so loads the list saved in the web browser to form a current one.
+
+If there is already a list being used, then<br>
+- if the user clicks ***OK***, the list saved in the browser overwrites the one being used
+- if the user clicks ***Cancel***, the list being used does NOT get affected.
+
+### vi. ***delete* list**
+
+To delete the list saved in the web browser,
+click the button ***delete file***.
+
+Doing so delete the list saved in the web browser (if there is already one).
+
+This action **CANNOT** be undone.
+
