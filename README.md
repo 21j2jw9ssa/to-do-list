@@ -71,7 +71,7 @@ click the button ***save as a file***.
 
 Doing so saves the current list to the web browser.
 
-If there is already a one saved in the web browser, then<br>
+If there is already one saved in the web browser, then<br>
 - if the user clicks ***OK***, the new list overwrites the one saved in the browser
 - if the user clicks ***Cancel***, the list saved in the web browser does not get affected.
 
@@ -109,3 +109,21 @@ This function accepts
 - *text* files
 - *csv* files
 - *rtf* files
+
+## Item functions
+
+### checking
+
+When checked (similar to ✅), the item becomes grey and gets stricken.
+
+### edit
+
+Change the contents of a list item.<br>
+The contents must NOT be empty after editing.
+
+### delete
+
+Remove a list item from a list<br>
+The item as well as its contents and checking status<br>
+will be gone for good<br>
+and **CANNOT** be undone.
