@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<!-- ALL CONTENTS OF THIS PROJECT IS MADE ON MY OWN. ALL RIGHTS RESERVED. -->
+<html>
+  <head>
+	<title>To-do List</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="todolist-style.css">
+  </head>
+  <body>
+	<h1 id="mainTitle">To-do List</h1>
+    <div id="nav_of_links">
+      <a href="">Home</a>
+      <a href="../help/todolist-help.html" title="how to use MakeList">Help</a>
+      <a href="../about me/todolist-about-me.html" title="about me">About me</a>
+    </div>
+	<script src="../nav.js"></script>
+	<input type="text" id="inputItem" placeholder="enter a name for the new item"/>
+	<!-- Functions of To-do List -->
+	<button id="addItem" class="listFunc" >add an item</button>
+	<button id="saveFile" class="listFunc" >save as a file</button>
+	<button id="sortItems" class="listFunc" >sort items</button>
+	<button id="loadFile" class="listFunc" >load file</button>
+	<button id="clearBuffer" class="listFunc" >clear list</button>
+	<button id="clearFile" class="listFunc" >delete file</button>
+	<button id="exportFile" class="listFunc" >export list</button>
+	<button id="importFile" class="listFunc" >import file</button>
+	<ul id="buffer"></ul>
+	<section>
+	  <a href="#mainTitle" id="nav_to_top">to the top</a>
+    </section>
+    <br/>
+	<script src="https://raw.githack.com/SortableJS/Sortable/master/Sortable.js"></script>   <!-- MODULE FOR DRAGGABLE LIST ITEMS -->
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>              <!-- ALERTS -->
+	<script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.1/dist/purify.min.js"></script>
+	<script src="todolist-list-manager.js"></script>                                         <!-- LIST MANAGER MODULE -->
+	<script src="todolist-file-handling.js"></script>                                        <!-- FILE IMPORT/EXPORT -->
+    <script src="todolist-list-item-draggable.js"></script>                                  <!-- DRAGGABLE LIST ITEMS -->
+	<script src="todolist-mechanism.js"></script>
+	<footer>All contents is made by myself.<br/>All rights reserved.</footer>
+  </body>
+</html>
