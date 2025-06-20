@@ -20,12 +20,12 @@ where users may
 To add items to the list,
 simply enter ***something*** at the tab writing<br>
 **"enter a name for the new item"**,<br>
+then click the button writing **"add an item"**.
 
+For *desktops and notebooks*, it can also be done pressing ***Enter***.
 
+*An item to be added* can be a space, a tab key, a name, or even a duplicate item, etc.
 
-then click the button writing **"add an item"**.<br>
-For *desktops and notebooks*, it can also be done pressing ***Enter***
-*It* can be a space, a tab key, a name, or even a duplicate item, etc.<br>
 It must NOT be **empty**, though, i.e. **""**.
 
 ### ***Sort* items** from the list
