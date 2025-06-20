@@ -18,11 +18,11 @@ where users may
 
 ## Functions
 
-### ***Add* items** to the list
+### i. ***Add* items** to the list
 To add items to the list,
 simply enter ***something*** at the tab writing<br>
 **"enter a name for the new item"**,<br>
-then click the button writing **"add an item"**.
+then click the button **"add an item"**.
 
 For *desktops and notebooks*, it can also be done by pressing ***Enter***.
 
@@ -30,7 +30,11 @@ For *desktops and notebooks*, it can also be done by pressing ***Enter***.
 
 It must NOT be **empty**, though, i.e. **""**.
 
-### ***Sort* items** in the list
+### ii. ***Sort* items** in the list
+
+To sort items in the list,
+simply click the button **"sort items"**.
+
 The sequence of items in the list can be changed by **dragging an item *at a time***.
 
 There are three types of sorting items in the list:
@@ -49,3 +53,17 @@ the *smaller* an item is, the closer it is to the **bottom** of the list;
 - in a ***random*** order<br>
 Arrange all items in a completely random manner.<br>
 It is done using ***Fisher–Yates* shuffle**.
+
+### iii. ***Clear* list**
+
+To clear all items in the list,
+simply click the button **"clear list"**.
+
+Doing so will clear ***all* items** in the list.
+The list **saved in the *web browser*** (if there is one) won't be affected.
+
+This action **CANNOT** be done.
+
+### iv. ***Save* list**
+
+To save the list to the web browser,
