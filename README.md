@@ -18,7 +18,7 @@ where users may
 
 ## Functions
 
-### i. ***Add* items** to the list
+### i. ***Add* list items**
 To add items to the list,
 simply enter ***something*** at the tab writing<br>
 **"enter a name for the new item"**,<br>
@@ -30,7 +30,7 @@ For *desktops and notebooks*, it can also be done by pressing ***Enter***.
 
 It must NOT be **empty**, though, i.e. **""**.
 
-### ii. ***Sort* items** in the list
+### ii. ***Sort* list items**
 
 To sort items in the list,
 simply click the button **"sort items"**.
@@ -95,3 +95,17 @@ Doing so delete the list saved in the web browser (if there is already one).
 
 This action **CANNOT** be undone.
 
+### vii. ***export* list**
+
+Doing so exports the *current* list as a **text file**.<br>
+By default, the file name is **"to-do list"**.<br>
+The user may **enter a custom file name** as well.
+
+### viii. ***import* a file**
+
+Doing so imports a file to **form a list**.<br>
+
+This function accepts
+- *text* files
+- *csv* files
+- *rtf* files
