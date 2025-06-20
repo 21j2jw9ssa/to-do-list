@@ -111,7 +111,7 @@ itemN, checkedN
 ```
 Where for each item,
 ```itemN``` is its contents,
-and ```checkedN``` is its checked status.
+and ```checkedN``` is its checked status (```true``` and ```false``` only).
 
 ### viii. ***import* a file**
 
@@ -132,21 +132,33 @@ itemN, checkedN
 ```
 Where for each item,
 ```itemN``` is its contents,
-and ```checkedN``` is its checked status.
+and ```checkedN``` is its checked status (```true``` and ```false``` only).
 
 > [!CAUTION]
-> Advises about risks or negative outcomes of certain actions.
+> Failure to follow the structure above brings about an ***error***.
+> Here's an example:
+> ```
+> Line
+> 1 | John, false
+> 2 | Jessica, true
+> 3 | Albert, false, folk
+> 4 | Simon, trust
+> 5 | Billy, true
+> 6 | Paul, fault
+> ```
+> In this case, the ***first* error** will be found on line 3,<br>
+> where the checked status is NEITHER ```true``` nor ```false```.
 
 ## Item functions
 
 ### checking
 
-When checked (similar to ✅), the item becomes grey and gets stricken.
+When checked (similar to ✅), the item becomes **grey** and gets **stricken**.
 
 ### edit
 
 Change the contents of a list item.<br>
-The contents must NOT be empty after editing.
+The contents must NOT be **empty** after editing.
 
 ### delete
 
@@ -154,5 +166,7 @@ Remove a list item from a list<br>
 The item as well as its contents and checking status<br>
 will be gone for good<br>
 and **CANNOT** be undone.
+
+To do so, simply click the **red X**.
 
 For detailed on-site instructions, check out [this page](https://21j2jw9ssa.github.io/to-do-list/help/todolist-help.html) for detailed help.
