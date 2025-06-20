@@ -22,7 +22,7 @@ and so on.
 To add items to the list,
 simply enter ***something*** at the tab writing<br>
 **"enter a name for the new item"**,<br>
-then click the button **"add an item"**.
+then click the button **'add an item'**.
 
 For *desktops and notebooks*, it can also be done by pressing ***Enter***.
 
@@ -33,7 +33,7 @@ It must NOT be **empty**, though, i.e. **""**.
 ### ii. ***Sort* list items**
 
 To sort items in the list,
-simply click the button **"sort items"**.
+simply click the button **'sort items'**.
 
 The sequence of items in the list can be changed by **dragging an item *at a time***.
 
@@ -57,7 +57,7 @@ It is done using ***Fisher–Yates* shuffle**.
 ### iii. ***Clear* list**
 
 To clear all items in the list,
-simply click the button **"clear list"**.
+simply click the button **'clear list'**.
 
 Doing so will clear ***all* items** in the list.
 The list **saved in the *web browser*** (if there is one) won't be affected.
@@ -67,7 +67,7 @@ This action **CANNOT** be undone.
 ### iv. ***Save* list**
 
 To save the list to the web browser,
-click the button ***save as a file***.
+click the button ***'save as a file'***.
 
 Doing so saves the current list to the web browser.
 
@@ -78,7 +78,7 @@ If there is already one saved in the web browser, then<br>
 ### v. ***Load* list**
 
 To load the list saved in the web browser,
-click the button ***load file***.
+click the button ***'load file'***.
 
 Doing so loads the list saved in the web browser to form a current one.
 
@@ -89,13 +89,15 @@ If there is already a list being used, then<br>
 ### vi. ***delete* list**
 
 To delete the list saved in the web browser,
-click the button ***delete file***.
+click the button ***'delete file'***.
 
 Doing so delete the list saved in the web browser (if there is already one).
 
 This action **CANNOT** be undone.
 
 ### vii. ***export* list**
+
+To export the list as a file, click **'export list'**
 
 Doing so exports the *current* list as a **text file**.<br>
 By default, the file name is **"to-do list"**.<br>
@@ -114,6 +116,8 @@ Where for each item,
 and ```checkedN``` is its checked status (```true``` and ```false``` only).
 
 ### viii. ***import* a file**
+
+To import a file, click **'import list'**
 
 Doing so imports a file to **form a list**.<br>
 
@@ -135,7 +139,7 @@ Where for each item,
 and ```checkedN``` is its checked status (```true``` and ```false``` only).
 
 > [!CAUTION]
-> Failure to follow the structure above brings about an ***error***.
+> Failure to follow the structure above brings about an ***error***.<br>
 > Here's an example:
 > ```
 > Line
@@ -153,20 +157,23 @@ and ```checkedN``` is its checked status (```true``` and ```false``` only).
 
 ### checking
 
-When checked (similar to ✅), the item becomes **grey** and gets **stricken**.
+When **checked**, the item becomes **grey** and gets **stricken**.<br>
+To switch its status click the checkbox icon (similar to ✅)
 
 ### edit
 
 Change the contents of a list item.<br>
+To do so, click the **'edit'** button.<br>
 The contents must NOT be **empty** after editing.
 
 ### delete
 
 Remove a list item from a list<br>
-The item as well as its contents and checking status<br>
-will be gone for good<br>
-and **CANNOT** be undone.
+Doing so will remove the item<br>
+as well as its contents and checking status.<br>
 
 To do so, simply click the **red X**.
+
+It **CANNOT** be undone.
 
 For detailed on-site instructions, check out [this page](https://21j2jw9ssa.github.io/to-do-list/help/todolist-help.html) for detailed help.
