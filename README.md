@@ -101,6 +101,18 @@ Doing so exports the *current* list as a **text file**.<br>
 By default, the file name is **"to-do list"**.<br>
 The user may **enter a custom file name** as well.
 
+An exported file looks like the following:
+```
+item1, checked1
+item2, checked2
+item3, checked3
+...
+itemN, checkedN
+```
+Where for each item,
+```itemN``` is its contents,
+and ```checkedN``` is its checked status.
+
 ### viii. ***import* a file**
 
 Doing so imports a file to **form a list**.<br>
@@ -109,6 +121,21 @@ This function accepts
 - *text* files
 - *csv* files
 - *rtf* files
+
+When importing a file, make sure that it follows the following structure:
+```
+item1, checked1
+item2, checked2
+item3, checked3
+...
+itemN, checkedN
+```
+Where for each item,
+```itemN``` is its contents,
+and ```checkedN``` is its checked status.
+
+> [!CAUTION]
+> Advises about risks or negative outcomes of certain actions.
 
 ## Item functions
 
@@ -128,4 +155,4 @@ The item as well as its contents and checking status<br>
 will be gone for good<br>
 and **CANNOT** be undone.
 
-Or you can check out [this page](https://21j2jw9ssa.github.io/to-do-list/help/todolist-help.html) for detailed help.
+For detailed on-site instructions, check out [this page](https://21j2jw9ssa.github.io/to-do-list/help/todolist-help.html) for detailed help.
