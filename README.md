@@ -46,4 +46,6 @@ Arrange all items from **largest to smallest**, i.e. Z-A, z-a, 9-0.<br>
   the *greater* an item is, the closer it is to the **top** of the list;<br>
 the *smaller* an item is, the closer it is to the **bottom** of the list;
 
-- in a ***random*** order
+- in a ***random*** order<br>
+Arrange all items in a completely random manner.<br>
+It is done using ***Fisher–Yates* shuffle**.
