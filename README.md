@@ -1,6 +1,7 @@
 # To-do List
 
-To-do List (MakeList) is a website handling to-do list items, where users may
+To-do List (MakeList) is a website handling to-do list items,<br>
+where users may
 - ***add* items** to the list
 - ***delete* items** from the list
 - ***edit* items** in the list
@@ -11,7 +12,19 @@ To-do List (MakeList) is a website handling to-do list items, where users may
 - **export** the list as a **text file**
 - **import a text file** to create a *new* list
 
-## ash
--
+... and so on.
+
+## How to use the To-do List (MakeList)
+
+### ***Add* items** to the list
+To add items to the list,
+simply enter ***something*** at the tab writing<br>
+**"enter a name for the new item"**,<br>
+then click the button writing **"add an item"**.<br>
+For *desktops and notebooks*, it can also be done pressing ***Enter***
+*It* can be a space, a tab key, a name, or even a duplicate item, etc.<br>
+It must NOT be **empty**, though, i.e. **""**.
+
+### ***Sort* items** from the list
 -
 -
