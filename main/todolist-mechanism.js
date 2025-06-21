@@ -123,7 +123,7 @@ document.getElementById( "sortItems" ).addEventListener( "click", function() {
       },
     }).then( function( value ) {
       switch ( value ) {
-        case "ascending" :  gLM.SortListItemsASC_unrealistic() ;  break ;
+        case "ascending" :  gLM.SortListItemsASC() ;  break ;
         case "descending" : gLM.SortListItemsDSC() ;  break ;
         case "random" :     gLM.SortListItemsRand() ; break ;
         default: return ;
