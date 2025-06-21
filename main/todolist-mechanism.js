@@ -84,7 +84,7 @@ document.getElementById( "addItem" ).addEventListener( "click", function() {
       chkbox.type = "checkbox", chkbox.className = chkbox.name = "done" ; // as a checkbox
       tagElem.textContent = val ;
 
-      objAttr.append( chkbox, tagElem, btn1, btn2 ) ;
+      objAttr.append( chkbox, tagElem, " ", btn1, btn2 ) ;
 
       // New item default: not checked
       document.getElementById( "buffer" ).appendChild( objAttr ) ;
