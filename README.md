@@ -178,4 +178,4 @@ To do so, simply click the **red X**.
 
 It **CANNOT** be undone.
 
-For detailed on-site instructions, check out [the help page](https://21j2jw9ssa.github.io/to-do-list/help/todolist-help.html) for detailed help.
+For on-site instructions, check out [the help page](https://21j2jw9ssa.github.io/to-do-list/help/todolist-help.html).
