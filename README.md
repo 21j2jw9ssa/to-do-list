@@ -105,9 +105,9 @@ Doing so delete the list saved in the web browser (if there is already one).
 > [!CAUTION]
 > This action **CANNOT** be undone.<br>
 >
-> To prevent the situation,<br>
+> To prevent this situation,<br>
 > **[export](#vii-export-list)** the list as a file **in advance**,<br>
-> then **[import](#viii-import-list)** it to the To-do List site.
+> then **[import](#viii-import-list)** the exported file to the To-do List site.
 
 ### vii. ***export* list**
 
@@ -170,18 +170,18 @@ and ```checkedN``` is its checked status (```true``` and ```false``` only).
 
 ## Item functions
 
-### checking
+### i. checking
 
 When **checked**, the item becomes **grey** and gets **stricken**.<br>
 To switch its status, click the **checkbox icon** (similar to ✅)
 
-### edit
+### ii. edit
 
 Change the contents of a list item.<br>
 To do so, click the **'edit'** button.<br>
 The contents must NOT be **empty** after editing.
 
-### delete
+### iii. delete
 
 Remove a list item from a list<br>
 Doing so will remove the item<br>
@@ -189,6 +189,7 @@ as well as its contents and checking status.<br>
 
 To do so, simply click the **red X**.
 
-It **CANNOT** be undone.
+> [!CAUTION]
+> This action **CANNOT** be undone.
 
-For on-site instructions, check out [the help page](https://21j2jw9ssa.github.io/to-do-list/help/todolist-help.html).
+For on-site instructions, check out [this page](https://21j2jw9ssa.github.io/to-do-list/help/todolist-help.html).
