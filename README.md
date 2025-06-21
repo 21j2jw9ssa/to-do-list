@@ -16,6 +16,8 @@ and so on.
 
 To see the To-do List site, go to [the main page](https://21j2jw9ssa.github.io/to-do-list/main/todolist.html)
 
+For on-site instructions, check out [the help page](https://21j2jw9ssa.github.io/to-do-list/help/todolist-help.html).
+
 # How to use the To-do List (MakeList)
 
 ## I. Functions
@@ -199,5 +201,3 @@ we plan to enhance it to an advanced level, such as
 - adopting responsive web design (layout, visual design, etc.)
 - adding the **time-date** feature for each item
 - adding the **priority** feature (like low, medium, high, urgent, etc.)
-
-For on-site instructions, check out [this page](https://21j2jw9ssa.github.io/to-do-list/help/todolist-help.html).
