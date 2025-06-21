@@ -14,6 +14,8 @@ where users may
 
 and so on.
 
+To see the To-do List site, go to [the main page](https://21j2jw9ssa.github.io/to-do-list/main/todolist.html)
+
 # How to use the To-do List (MakeList)
 
 ## Functions
@@ -24,7 +26,7 @@ simply enter ***something*** at the tab writing<br>
 **"enter a name for the new item"**,<br>
 then click the button **'add an item'**.
 
-For *desktops and notebooks*, it can also be done by pressing ***Enter***.
+For *desktops and laptops*, it can also be done by pressing ***Enter***.
 
 *An item to be added* can be a space, a tab key, a name, or even a duplicate item, etc.
 
@@ -176,4 +178,4 @@ To do so, simply click the **red X**.
 
 It **CANNOT** be undone.
 
-For detailed on-site instructions, check out [this page](https://21j2jw9ssa.github.io/to-do-list/help/todolist-help.html) for detailed help.
+For detailed on-site instructions, check out [the help page](https://21j2jw9ssa.github.io/to-do-list/help/todolist-help.html) for detailed help.
