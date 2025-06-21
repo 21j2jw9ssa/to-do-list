@@ -223,6 +223,8 @@ const gLM = ( function() {
 
     /**
      * Saves list of items to the key `LocalStorage` pointing at.
+     * Different browsers, users, desktop numbers result in
+     * DIFFERENT storages.
      */
     SaveList() {
       localStorage.setItem( localStorageName, gList.map( function(item) {
