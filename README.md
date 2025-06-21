@@ -66,7 +66,8 @@ The list **saved in the *web browser*** (if there is one) won't be affected.
 
 > [!CAUTION]
 > This action **CANNOT** be undone.
-> To restore the list, one should do *either* of the following:
+> To restore the list,<br>
+> do *either* of the following:
 > - **[save](#iv-save-list)** it in the web browser **in advance**<br>
 >   then **[load](#v-load-list)** it later on.
 > - **[export](#vii-export-list)** it as a file<br>
@@ -102,7 +103,11 @@ click the button ***'delete file'***.
 Doing so delete the list saved in the web browser (if there is already one).
 
 > [!CAUTION]
-> This action **CANNOT** be undone.
+> This action **CANNOT** be undone.<br>
+>
+> To prevent the situation,<br>
+> **[export](#vii-export-list)** the list as a file **in advance**,<br>
+> then **[import](#viii-import-list)** it to the To-do List site.
 
 ### vii. ***export* list**
 
