@@ -18,7 +18,7 @@ To see the To-do List site, go to [the main page](https://21j2jw9ssa.github.io/t
 
 # How to use the To-do List (MakeList)
 
-## Functions
+## I. Functions
 
 ### i. ***Add* list items**
 To add items to the list,
@@ -168,7 +168,7 @@ and ```checkedN``` is its checked status (```true``` and ```false``` only).
 > In this case, the ***first* error** will be found on line 3,<br>
 > where the checked status is NEITHER ```true``` nor ```false```.
 
-## Item functions
+## II. Item functions
 
 ### i. checking
 
@@ -191,5 +191,13 @@ To do so, simply click the **red X**.
 
 > [!CAUTION]
 > This action **CANNOT** be undone.
+
+# Future developments
+
+Despite this to-do list app's useful features,
+we plan to enhance it to an advanced level, such as
+- adopting responsive web design (layout, visual design, etc.)
+- adding the **time-date** feature for each item
+- adding the **priority** feature (like low, medium, high, urgent, etc.)
 
 For on-site instructions, check out [this page](https://21j2jw9ssa.github.io/to-do-list/help/todolist-help.html).
