@@ -66,11 +66,11 @@ The list **saved in the *web browser*** (if there is one) won't be affected.
 
 > [!CAUTION]
 > This action **CANNOT** be undone.
-> To restore the list, one should:
-> - [save](#save-list) it in the web browser **in advance**<br>
->   then **load** it later on.
-> - export it as a file<br>
->   then import it later
+> To restore the list, one should do *either* of the following:
+> - **[save](#iv-save-list)** it in the web browser **in advance**<br>
+>   then **[load](#v-load-list)** it later on.
+> - **[export](#vii-export-list)** it as a file<br>
+>   then **[import](#viii-import-list)** it to the To-do List site.
 
 ### iv. ***Save* list**
 
@@ -124,7 +124,7 @@ Where for each item,
 ```itemN``` is its contents,
 and ```checkedN``` is its checked status (```true``` and ```false``` only).
 
-### viii. ***import* a file**
+### viii. ***import* list**
 
 To import a file, click **'import list'**
 
