@@ -64,7 +64,13 @@ simply click the button **'clear list'**.
 Doing so will clear ***all* items** in the list.
 The list **saved in the *web browser*** (if there is one) won't be affected.
 
-This action **CANNOT** be undone.
+> [!CAUTION]
+> This action **CANNOT** be undone.
+> To restore the list, one should:
+> - [save](#save-list) it in the web browser **in advance**<br>
+>   then **load** it later on.
+> - export it as a file<br>
+>   then import it later
 
 ### iv. ***Save* list**
 
@@ -95,7 +101,8 @@ click the button ***'delete file'***.
 
 Doing so delete the list saved in the web browser (if there is already one).
 
-This action **CANNOT** be undone.
+> [!CAUTION]
+> This action **CANNOT** be undone.
 
 ### vii. ***export* list**
 
@@ -128,7 +135,8 @@ This function accepts
 - *csv* files
 - *rtf* files
 
-When importing a file, make sure that it follows the following structure:
+When importing a file,<br>
+make sure that it follows the following structure:
 ```
 item1, checked1
 item2, checked2
@@ -160,7 +168,7 @@ and ```checkedN``` is its checked status (```true``` and ```false``` only).
 ### checking
 
 When **checked**, the item becomes **grey** and gets **stricken**.<br>
-To switch its status click the checkbox icon (similar to ✅)
+To switch its status, click the **checkbox icon** (similar to ✅)
 
 ### edit
 
