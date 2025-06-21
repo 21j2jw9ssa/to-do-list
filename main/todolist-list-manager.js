@@ -339,9 +339,18 @@ const gLM = ( function() {
     //////// SETTERS ////////
     /////////////////////////
 
-    // For dragging items in the To-do List
+    /**
+     * Setting index of the dragged item
+     * when STARTING to be dragged
+     * @param {Number} i index of item to be dragged
+     */
     SetDragStartIdx( i ) { initIdx = i ; },
 
+    /**
+     * Setting index of the dragged item
+     * when FINISHING being dragged
+     * @param {Number} i index of item being dragged
+     */
     SetDragEndIdx( i ) { finIdx = i ; },
 
     /////////////////////////
