@@ -26,18 +26,18 @@ For on-site instructions, check out [the help page](https://21j2jw9ssa.github.io
 To add items to the list,
 simply enter ***something*** at the tab writing<br>
 **"enter a name for the new item"**,<br>
-then click the button **'add an item'**.
+then click the button **add an item**.
 
 For *desktops and laptops*, it can also be done by pressing ***Enter***.
 
 *An item to be added* can be a space, a tab key, a name, or even a duplicate item, etc.
 
-It must NOT be **empty**, though, i.e. **""**.
+It must NOT be **empty**, though, i.e. ```""```.
 
 ### ii. ***Sort* list items**
 
 To sort items in the list,
-simply click the button **'sort items'**.
+simply click the button **sort items**.
 
 The sequence of items in the list can be changed by **dragging an item *at a time***.
 
@@ -61,7 +61,7 @@ It is done using ***Fisher–Yates* shuffle**.
 ### iii. ***Clear* list**
 
 To clear all items in the list,
-simply click the button **'clear list'**.
+simply click the button **clear list**.
 
 Doing so will clear ***all* items** in the list.<br>
 The list **saved in the *web browser*** (if there is one) won't be affected.
@@ -78,7 +78,7 @@ The list **saved in the *web browser*** (if there is one) won't be affected.
 ### iv. ***Save* list**
 
 To save the list to the web browser,
-click the button ***'save as a file'***.
+click the button ***save as a file***.
 
 Doing so saves the current list to the web browser.
 
@@ -89,7 +89,7 @@ If there is already one saved in the web browser, then<br>
 ### v. ***Load* list**
 
 To load the list saved in the web browser,
-click the button ***'load file'***.
+click the button ***load file***.
 
 Doing so loads the list saved in the web browser to form a current one.
 
@@ -100,7 +100,7 @@ If there is already a list being used, then<br>
 ### vi. ***delete* list**
 
 To delete the list saved in the web browser,
-click the button ***'delete file'***.
+click the button ***delete file***.
 
 Doing so delete the list saved in the web browser (if there is already one).<br>
 The current list, i.e. list in the buffer gets unaffected.
@@ -108,13 +108,14 @@ The current list, i.e. list in the buffer gets unaffected.
 > [!CAUTION]
 > This action **CANNOT** be undone.<br>
 >
-> To prevent this situation,<br>
+> To recover from this situation,<br>
 > **[export](#vii-export-list)** the list as a file **in advance**,<br>
-> then **[import](#viii-import-list)** the exported file to the To-do List site.
+> then **[import](#viii-import-list)** the exported file to the To-do List site<br>
+> and **[save](#iv-save-list)** it to the web browser. 
 
 ### vii. ***export* list**
 
-To export the list as a file, click **'export list'**
+To export the list as a file, click **export list**
 
 Doing so exports the *current* list as a **text file**.<br>
 By default, the file name is **"to-do list"**.<br>
@@ -128,8 +129,8 @@ item3, checked3
 ...
 itemN, checkedN
 ```
-Where for each item,
-```itemN``` is its contents,
+Where for each item,<br>
+```itemN``` is its contents,<br>
 and ```checkedN``` is its checked status (```true``` and ```false``` only).
 
 ### viii. ***import* list**
@@ -152,8 +153,8 @@ item3, checked3
 ...
 itemN, checkedN
 ```
-Where for each item,
-```itemN``` is its contents,
+Where for each item,<br>
+```itemN``` is its contents,<br>
 and ```checkedN``` is its checked status (```true``` and ```false``` only).
 
 > [!CAUTION]
@@ -168,8 +169,13 @@ and ```checkedN``` is its checked status (```true``` and ```false``` only).
 > 5 | Billy, true
 > 6 | Paul, fault
 > ```
-> In this case, the ***first* error** will be found on line 3,<br>
-> where the checked status is NEITHER ```true``` nor ```false```.
+> In this case, the ***first* error** will be found on **line *3***<br>
+> because after splitting, we learn that the item has<br>
+> contents ```Albert, false``` and<br>
+> checked status ```folk```.
+>
+> The checked status is NEITHER ```true``` nor ```false```,<br>
+> hence the error.
 
 ## II. Item functions
 
@@ -194,6 +200,8 @@ To do so, simply click the **red X**.
 
 > [!CAUTION]
 > This action **CANNOT** be undone.
+> 
+> Before doing so,<br>make sure that the item is no longer needed.
 
 # Future developments
 
