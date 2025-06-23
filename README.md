@@ -63,7 +63,7 @@ It is done using ***Fisher–Yates* shuffle**.
 To clear all items in the list,
 simply click the button **'clear list'**.
 
-Doing so will clear ***all* items** in the list.
+Doing so will clear ***all* items** in the list.<br>
 The list **saved in the *web browser*** (if there is one) won't be affected.
 
 > [!CAUTION]
@@ -102,7 +102,8 @@ If there is already a list being used, then<br>
 To delete the list saved in the web browser,
 click the button ***'delete file'***.
 
-Doing so delete the list saved in the web browser (if there is already one).
+Doing so delete the list saved in the web browser (if there is already one).<br>
+The current list, i.e. list in the buffer gets unaffected.
 
 > [!CAUTION]
 > This action **CANNOT** be undone.<br>
