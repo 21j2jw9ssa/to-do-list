@@ -25,8 +25,8 @@ For on-site instructions, check out [the help page](https://21j2jw9ssa.github.io
 ### i. ***Add* list items**
 To add items to the list,
 simply enter ***something*** at the tab writing<br>
-**"enter a name for the new item"**,<br>
-then click the button **add an item**.
+**enter a name for the new item**,<br>
+then click the button **add item**.
 
 For *desktops and laptops*, it can also be done by pressing ***Enter***.
 
@@ -37,7 +37,7 @@ It must NOT be **empty**, though, i.e. ```""```.
 ### ii. ***Sort* list items**
 
 To sort items in the list,
-simply click the button ```**sort items**```.
+simply click the button ```sort items```.
 
 The sequence of items in the list can be changed by **dragging an item *at a time***.
 
@@ -61,7 +61,7 @@ It is done using ***Fisher–Yates* shuffle**.
 ### iii. ***Clear* list**
 
 To clear all items in the list,
-simply click the button ```**clear list**```.
+simply click the button ```clear list```.
 
 Doing so will clear ***all* items** in the list.<br>
 The list **saved in the *web browser*** (if there is one) won't be affected.
@@ -78,7 +78,7 @@ The list **saved in the *web browser*** (if there is one) won't be affected.
 ### iv. ***Save* list**
 
 To save the list to the web browser,
-click the button ```***save as a file***```.
+click the button ```save file```.
 
 Doing so saves the current list to the web browser.
 
@@ -89,7 +89,7 @@ If there is already one saved in the web browser, then<br>
 ### v. ***Load* list**
 
 To load the list saved in the web browser,
-click the button ```***load file***```.
+click the button ```load file```.
 
 Doing so loads the list saved in the web browser to form a current one.
 
@@ -100,7 +100,7 @@ If there is already a list being used, then<br>
 ### vi. ***delete* list**
 
 To delete the list saved in the web browser,
-click the button ```***delete file***```.
+click the button ```delete file```.
 
 Doing so delete the list saved in the web browser (if there is already one).<br>
 The current list, i.e. list in the buffer gets unaffected.
@@ -115,7 +115,7 @@ The current list, i.e. list in the buffer gets unaffected.
 
 ### vii. ***export* list**
 
-To export the list as a file, click ```**export list**```
+To export the list as a file, click ```export list```
 
 Doing so exports the *current* list as a **text file**.<br>
 By default, the file name is ```**to-do list**```.<br>
@@ -135,7 +135,7 @@ and ```checkedN``` is its checked status (```true``` and ```false``` only).
 
 ### viii. ***import* list**
 
-To import a file, click ```**import list**```
+To import a file, click ```import list```
 
 Doing so imports a file to **form a list**.<br>
 
@@ -186,12 +186,13 @@ similar to the **icon ✅**.
 
 If **unchecked**, the item becomes **black** with<br>
 no text decorations whatsoever, just like the **icon ⬜**.
-To switch its status, click the **checkbox icon** 
+
+To switch its status, click the **checkbox icon**.
 
 ### ii. edit
 
 Change the contents of a list item.<br>
-To do so, click the **'edit'** button.<br>
+To do so, click the **edit** button.<br>
 The contents must NOT be **empty** after editing.
 
 ### iii. delete
