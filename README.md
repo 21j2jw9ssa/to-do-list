@@ -37,7 +37,7 @@ It must NOT be **empty**, though, i.e. ```""```.
 ### ii. ***Sort* list items**
 
 To sort items in the list,
-simply click the button **sort items**.
+simply click the button ```**sort items**```.
 
 The sequence of items in the list can be changed by **dragging an item *at a time***.
 
@@ -61,7 +61,7 @@ It is done using ***Fisher–Yates* shuffle**.
 ### iii. ***Clear* list**
 
 To clear all items in the list,
-simply click the button **clear list**.
+simply click the button ```**clear list**```.
 
 Doing so will clear ***all* items** in the list.<br>
 The list **saved in the *web browser*** (if there is one) won't be affected.
@@ -78,7 +78,7 @@ The list **saved in the *web browser*** (if there is one) won't be affected.
 ### iv. ***Save* list**
 
 To save the list to the web browser,
-click the button ***save as a file***.
+click the button ```***save as a file***```.
 
 Doing so saves the current list to the web browser.
 
@@ -89,7 +89,7 @@ If there is already one saved in the web browser, then<br>
 ### v. ***Load* list**
 
 To load the list saved in the web browser,
-click the button ***load file***.
+click the button ```***load file***```.
 
 Doing so loads the list saved in the web browser to form a current one.
 
@@ -100,7 +100,7 @@ If there is already a list being used, then<br>
 ### vi. ***delete* list**
 
 To delete the list saved in the web browser,
-click the button ***delete file***.
+click the button ```***delete file***```.
 
 Doing so delete the list saved in the web browser (if there is already one).<br>
 The current list, i.e. list in the buffer gets unaffected.
@@ -115,11 +115,11 @@ The current list, i.e. list in the buffer gets unaffected.
 
 ### vii. ***export* list**
 
-To export the list as a file, click **export list**
+To export the list as a file, click ```**export list**```
 
 Doing so exports the *current* list as a **text file**.<br>
-By default, the file name is **"to-do list"**.<br>
-The user may **enter a custom file name** as well.
+By default, the file name is ```**to-do list**```.<br>
+Users may save it in a **custom name** as well.
 
 An exported file looks like the following:
 ```
@@ -135,7 +135,7 @@ and ```checkedN``` is its checked status (```true``` and ```false``` only).
 
 ### viii. ***import* list**
 
-To import a file, click **'import list'**
+To import a file, click ```**import list**```
 
 Doing so imports a file to **form a list**.<br>
 
@@ -172,17 +172,21 @@ and ```checkedN``` is its checked status (```true``` and ```false``` only).
 > In this case, the ***first* error** will be found on **line *3***<br>
 > because after splitting, we learn that the item has<br>
 > contents ```Albert, false``` and<br>
-> checked status ```folk```.
+> checkbox status ```folk```.
 >
-> The checked status is NEITHER ```true``` nor ```false```,<br>
+> The checkbox status is NEITHER ```true``` nor ```false```,<br>
 > hence the error.
 
 ## II. Item functions
 
 ### i. checking
 
-When **checked**, the item becomes **grey** and gets **stricken**.<br>
-To switch its status, click the **checkbox icon** (similar to ✅)
+When **checked**, the item becomes **grey** and **stricken**,<br>
+similar to the **icon ✅**.
+
+If **unchecked**, the item becomes **black** with<br>
+no text decorations whatsoever, just like the **icon ⬜**.
+To switch its status, click the **checkbox icon** 
 
 ### ii. edit
 
