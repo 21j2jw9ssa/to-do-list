@@ -1,5 +1,17 @@
 "use strict"
-// PUBLIC, PRIVATE, UNDECIDED
+
+const ORDER = {
+  ASCENDING: "ASS",
+  DESCENDING: "DES CHIFUMIFUMI",
+}
+
+const ITEM_PROPERTY = {
+  CONTENTS: "BWVIOHQOQHOQJPQJPN",
+  CHECKBOX_STATUS: "Uqppaad vqwvuqwiwfvibqwbiw",
+} ;
+
+Object.freeze( ORDER, ITEM_PROPERTY ) ;
+
 /**
  * Global list manager
  */
@@ -16,7 +28,7 @@ const gLM = ( function() {
   /**
    * The array to store list items
    * 
-   * Each tuple `{contents: String, checked: boolean}` represents an item in the list.
+   * Each JSON tuple `{contents: String, checked: boolean}` represents an item in the list.
    * 
    * @type_1 `String` the item's contents
    * @type_2 `boolean` if the item is checked or not
@@ -105,82 +117,116 @@ const gLM = ( function() {
   function SwapAdjItems( i ) { SwapItems( i, i + 1 ) ; } // PRIVATE
 
   /**
-   * Remove all items in the item list without affecting the one stored in `localStorage`
+   * Remove all items in the item list
+   * without affecting the one stored in `localStorage`
    */
   function ClearList() { gList.splice( 0, gList.length ) ; } // PRIVATE
 
-  
   /**
    * Remove all items in the list (buffer)
    */
   function ClearBuffer() {
-    let buff = document.getElementById( "buffer" ) ;
-    buff.textContent = "" ;
+    const dirtyBlanker = "" ;
+    const cleanyBlanky = DOMPurify.sanitize(dirtyBlanker) ;
+    document.getElementById("buffer").innerHTML = cleanyBlanky ;
+
+    console.log(`ITEMS LEFT: ${items.length}`) ;
   } // ClearBuffer() PRIVATE
 
-  //// FUNC7: SAVE FILE WITH SWAL POPUP ALERTS
-  function MandatorySaveFile() {
-    localStorage.setItem( gLM.GetLocalStorageName(), gList ) ;
-    swal({
-      title: "File content:",
-      text: `${localStorage.getItem( gLM.GetLocalStorageName() )}`,
-      icon: 'info'
-    }) ;
-  } // MandatorySaveFile() PRIVATE
-
-  //// FUNC8: POP-UP ALERTS
-  function AlertError( ctnt ) { alert( "Error: ", ctnt ) ; } // PRIVATE
-
   /**
-   * FUNC1: parse JSON object string saved in the web browser
-   * 
-   * Read item stored in `localStorage` and write them to the list
+   * Read item stored in `localStorage` in the web browser
+   * and write them to the list
    */
   function ReadStringsIntoTheList() {
-    let startKey = 0, w1, jsonLays = 0, localStorageStr = localStorage.getItem( localStorageName ) ;
-    ClearList() ;
-    for ( let n = 0; n <= localStorageStr.length; n++ ) {
-      if ( localStorageStr[n] === '{' ) jsonLays++ ;
-      if ( ( localStorageStr[n] === ',' && jsonLays === 0 ) || n === localStorageStr.length ) {
-        w1 = `${ localStorageStr.slice( startKey, n ) }` ;
-        let item = JSON.parse(w1) ;
-        gLM.PushItemToList( item.contents, item.checked ) ;
-        startKey = n + 1 ;
-      } // if: detect a comma not in a string or reach the end of the localStorage string
-
-      if ( localStorageStr[n] === '}' ) jsonLays-- ;
-    } // for: every character in the localStorage string
+    gList.push.apply( gList,
+      JSON.parse( localStorage.getItem( localStorageName ) )
+    ) ; // reading JSON data
   } // ReadStringsIntoTheList() PRIVATE
 
-  //// FUNC2: WRITE ALL WORD STRINGS ONE BY ONE TO THE LIST BUFFER
-  function WriteAllItemsIntoTheList() {
-    for ( let n = 0 ; n < gList.length ; n++ ) {
-      let objAttr = document.createElement("li") ;
-      objAttr.draggable = true ;
-      objAttr.className = "items" ; // To have the browser correctly autofilling the form
+  /**
+   * Write all list items to the buffer.
+   */
+  function WriteAllItemsIntoTheList( batchSize = 500 ) {
+    let n = 0 ;
+    const buf = document.getElementById("buffer") ;
 
-      // btn1: the edit button
-      // btn2: the remove button
-      // chkbox: checking if the item has been done
-      // tagElem: item's contents
-      let btn1 = document.createElement("button"), btn2 = document.createElement("button") ;
-      let chkbox = document.createElement("input"), tagElem = document.createElement("tag") ;
-      btn1.className = "edit", btn1.textContent = "edit" ;
-      btn2.className = "remove", btn2.textContent = "X" ;
-      chkbox.type = "checkbox", chkbox.className = chkbox.name = "done" ;
-      tagElem.textContent = gList[n].contents ;
+    function renderNextBatch() {
+      const max = Math.min( n + batchSize, gList.length ) ;
+      for ( ; n < max ; n++ ) {
+        const objAttr = document.createElement("li") ;
+        objAttr.draggable = true ;
+        objAttr.className = "items" ; // To have the browser correctly autofilling the form
+  
+        // a checkbox
+        const chkbox = document.createElement("input") ;
+        chkbox.type = "checkbox" ;
+        chkbox.className = chkbox.name = "done" ;
+        chkbox.checked = gList[n].checked ;
+  
+        // tag for item contents
+        const tagElem = document.createElement("tag") ;
+        tagElem.textContent = gList[n].contents ;
+  
+        // an 'edit' button
+        const btn1 = document.createElement("button") ;
+        btn1.className = "edit" ;
+        btn1.textContent = "edit" ;
+  
+        // a 'remove' button
+        const btn2 = document.createElement("button") ;
+        btn2.className = "remove" ;
+        btn2.textContent = "X" ;
+  
+        if ( gList[n].checked ) {
+          tagElem.style.textDecoration = "line-through" ;
+          tagElem.style.opacity = 0.5 ;
+        } // if: the item has been done
+        else {
+          tagElem.style.textDecoration = "none" ;
+          tagElem.style.opacity = 1 ;
+        } // else: the item is yet to be done
 
-      objAttr.append( chkbox, tagElem, " ", btn1, btn2 ) ;
+        objAttr.dataset.index = n ;
+        objAttr.append( chkbox, tagElem, " ", btn1, btn2 ) ;
+        buf.append( objAttr ) ;
+      } // for: each item
 
-      document.getElementById("buffer").append( objAttr ) ;
+      if ( n < gList.length ) setTimeout( renderNextBatch, 0 ) ;
+    } // renderNextBatch(): process the next batch of data
 
-      document.querySelectorAll(".done")[n].checked = gList[n].checked ;
-      if ( document.querySelectorAll(".done")[n].checked ) {
-        document.querySelectorAll("tag")[n].style.textDecoration = gList[n].checked ? "line-through" : "none" ;
-        document.querySelectorAll("tag")[n].style.opacity = gList[n].checked ? 0.5 : 1 ;
-      } // if the item is checked
-    } // for: each item
-  } // WriteAllItemsIntoTheList() PRIVATE
+    renderNextBatch() ;
+  } // WriteAllItemsIntoTheList()
+
+  /**
+   * Sort all list items by a specific property;
+   * 
+   * the final result is in an ascending order.
+   * @param mode order of the final result; may be `ascending` or `descending`
+   */
+  function SortItemsByContents(mode) {
+    gList.sort( ( a, b ) => {
+      const nameA = a.contents.toUpperCase() ;
+      const nameB = b.contents.toUpperCase() ;
+      if ( nameA < nameB ) return ( mode === ORDER.ASCENDING ) ? -1 : 1 ;
+      if ( nameA > nameB ) return ( mode === ORDER.ASCENDING ) ? 1 : -1 ;
+
+      // names must be equal
+      return 0 ;
+    }) ;
+  } // SortItemsByContents()
+
+  /**
+   * Sort all list items by a specific property;
+   * 
+   * the final result is in an ascending order.
+   * @param mode order of the final result; may be `ascending` or `descending`
+   */
+  function SortItemsByCheckStatus(mode) {
+    if ( mode === ORDER.ASCENDING )
+      gList.sort( ( a, b ) => a.checked - b.checked ) ;
+    else
+      gList.sort( ( a, b ) => b.checked - a.checked ) ;
+  } // SortItemsByCheckStatus()
 
   return {
     // The following methods are PUBLIC.
@@ -198,12 +244,16 @@ const gLM = ( function() {
      */
     RmvItemsFromList( st, count ) { gList.splice( st, count ) ; }, // PUBLIC
 
+    /**
+     * Remove a specific item in the item list
+     * @param {Integer} st the index of the item where the deletion occurs
+     */
     RmvItemFromList( st ) { gList.splice( st, 1 ) ; }, // PUBLIC
 
     /**
      * Change the contents of a specific item without affecting its check property.
      * 
-     * @param {Integer} idx index where the editting item starts at; must not be smaller than zero
+     * @param {Integer} idx index where the editting item occurs; must not be smaller than zero
      * @param {String} ctnt item content to change to
      */
     EditItemCtnt( idx, ctnt ) { EditItemProperty( idx, ctnt, null ) ; }, // PUBLIC
@@ -211,25 +261,59 @@ const gLM = ( function() {
     /**
      * Change the checking property of a specific item with its contents unchanged.
      * 
-     * @param {Integer} idx index where the editting item starts at; must not be smaller than zero
+     * @param {Integer} idx index where the editting item occurs; must not be smaller than zero
      * @param {boolean} chk checked property to change to
     */
     EditItemChk( idx, chk )   { EditItemProperty( idx, null, chk ) ; }, // PUBLIC
 
+    /**
+     * Update indices of all items
+     * 
+     * @param {Number} batchSize items each batch to process. 500 by default 
+     */
+    async UpdateAllItemsIndices( batchSize = 100 ) {
+      const t = Date.now() ;
+
+      // list items are of static snapshot, NOT live!
+      const cc = Array.from( document.getElementsByTagName("li") ) ;
+
+      let i = 0 ;
+      const listSize = cc.length ;
+    
+      function renderNextBatch() {
+        const max = Math.min( i + batchSize, listSize ) ;
+
+        // update all items' indices
+        for ( ; i < max ; i++ )
+          if ( cc[i] ) cc[i].dataset.index = i ;
+
+        if ( i < listSize ) setTimeout( renderNextBatch, 0 ) ;
+        else console.log( `All items reindicing: ${(Date.now()-t)/1000} seconds` ) ;
+      } // renderNextBatch(): process the next batch of data
+
+      renderNextBatch() ;
+    }, // PUBLIC
+
+    /**
+     * Move items in the list buffer.
+     */
     MoveItemInsideTheList() {
       if ( this.ItemDraggedToDifIdx() ) MoveItem( initIdx, finIdx ) ;
       finIdx = initIdx = null ;
+
+      gLM.UpdateAllItemsIndices() ;
     }, // PUBLIC
 
     /**
      * Saves list of items to the key `LocalStorage` pointing at.
+     * 
      * Different browsers, users, desktop numbers result in
      * DIFFERENT storages.
      */
     SaveList() {
-      localStorage.setItem( localStorageName, gList.map( function(item) {
-        return ( typeof item === "object" && item !== null ) ? JSON.stringify(item) : String(item)
-      })) ;
+
+      // Latest code: save it as an array of JSON items
+      localStorage.setItem( localStorageName, JSON.stringify(gList) ) ;
     }, // PUBLIC
 
     /**
@@ -241,51 +325,76 @@ const gLM = ( function() {
     }, // PUBLIC
 
     /**
-     * Overwrite the old list with a new one once loaded from `localStorage`.
+     * Overwrite the old list with a new one
+     * once loaded from `localStorage`.
+     * 
+     * @param {{contents:String, checked:boolean}} newList a JSON list to be overweitten on the old list
      */
     OverwriteWithNewList( newList ) {
-      ClearBuffer() ;
-      ClearList() ;
+      // Clear all items in the list buffer
+      let t = Date.now() ;
+      this.DeleteList() ;
+      console.log(`List deletion: ${(Date.now()-t)/1000} seconds`) ;
+      
+      // Then write the new one to the list
+      t = Date.now() ;
       gList.push.apply( gList, newList ) ;
-      WriteAllItemsIntoTheList();
+      console.log(`Item pushing: ${(Date.now()-t)/1000} seconds`) ;
+      
+      t = Date.now() ;
+      WriteAllItemsIntoTheList(); // Finally, write all items to the buffer
+      console.log(`All items writing: ${(Date.now()-t)/1000} seconds`) ;
     }, // PUBLIC
 
+    /**
+     * Check the dragged item's final status.
+     * @returns if the item has been dragged to a different location
+     */
     ItemDraggedToDifIdx() { return finIdx !== initIdx ; },
 
     //// FUNC3: CREATE A LIST OF WORD STRINGS ON THE LIST BUFFER
     CreateList() {
-      if ( document.getElementById( "buffer" ).textContent !== "" )
-        ClearBuffer() ;
+      if ( document.getElementById( "buffer" ).textContent !== "" ) {
+        this.DeleteList() ;
+      } // if the list buffer has at least one item
+
       ReadStringsIntoTheList() ; // READ THE LOCAL FILE
       WriteAllItemsIntoTheList() ; // THEN WRITE IT TO THE LIST
     }, // CreateList()
 
-    //// FUNC4: SORT ALL ITEMS INSIDE A LIST BUFFER IN ASCENDING ORDER
-    SortListItemsASC() {
+    /**
+     * Sort all list items by a specific property;
+     * 
+     * the final result is in an ascending order.
+     * @param prop property which the item list buffer is sorted by.
+     * @param mode The order of sorting result. May be `ascending` or `descending` only
+     */
+    SortListItems( prop, mode ) {
       ClearBuffer() ;
 
-      const stack = [ 0, gList.length - 1 ] ; // Use `-2` because pairs are two elements
-
-      while ( stack.length > 0 ) {
-        const end = stack.pop(), start = stack.pop() ;
-        if ( start >= end ) continue ;
-    
-        let i = start - 1 ; // Start at the pair before the first
-        for ( let j = start ; j < end ; j += 1 ) {
-          if ( gList[j].contents.localeCompare( gList[end].contents ) < 0 ) {
-            SwapItems( ++i, j ) ;
-          } // if the current content is smaller than the pivot
-        }
-
-        SwapItems( i + 1, end ) ; // Move pivot pair ( index i + 2 ) to its correct position
-        stack.push( start, i, i + 2, end ) ; // Push left and right partition indices
-      } // while stack isn't empty
+      if ( prop === ITEM_PROPERTY.CONTENTS ) {
+        SortItemsByContents(mode) ;
+      } // if: sort by item contents
+      else if ( prop === ITEM_PROPERTY.CHECKBOX_STATUS ) {
+        SortItemsByContents( ORDER.ASCENDING ) ;
+        SortItemsByCheckStatus(mode) ;
+      } // else if: sort by checkbox status
+      else
+        throw Error(
+          `Property must be CONTENTS or CHECKBOX_STATUS,
+           we instead received ${mode}`
+        ) ;
 
       WriteAllItemsIntoTheList() ;
     }, // SortListItemsASC(): via quicksort for efficiency
 
-    //// FUNC5: SORT ALL ITEMS INSIDE A LIST BUFFER IN DESCENDING ORDER
-    SortListItemsDSC() {
+    /**
+     * Sort all list items by a specific property;
+     * 
+     * the final result is in a descending order.
+     * @param prop property which the item list buffer is sorted by.
+     */
+    SortListItemsDSC(prop) {
       ClearBuffer() ;
 
       const stack = [ 0, gList.length - 1 ] ; // Use `-2` because pairs are two elements
@@ -308,30 +417,28 @@ const gLM = ( function() {
       WriteAllItemsIntoTheList() ;
     }, // SortListItemsDSC(): via quicksort for efficiency
 
-    //// FUNC6: SORT ALL ITEMS INSIDE A LIST BUFFER IN A RANDOM MANNER 
-    SortListItemsRand() {
-      ClearBuffer() ;
-      for ( let c = gList.length ; c > 1 ; ) {
-        let idx = Math.floor( Math.random() * c ) ;
-        SwapItems( idx, --c ) ;
-      } // for:
-      WriteAllItemsIntoTheList() ;
-    }, // SortListItemsRand(): via Fisher–Yates shuffle for the absence of bias
-
-    //// FUNC9: POP-UP WINDOWS
+    //// FUNC9: POP-UP ALERTS
     PopUpMsg( type, msg ) {
       type = type.trim().toLowerCase() ;
       try {
         // Allow nothing except the following types:
         // error, warning, success, info
-        if ( ! [ "error","warning","success","info" ].includes(type) ) throw `Type must be one of the following:\nerror, warning, success, info,\nInstead receiving an invalid type: ${type}` ;
-        swal({
-          closeOnEsc: false,
-          closeOnClickOutside: false,
-          title: type.slice(0, 1).toUpperCase().concat( type.slice(1, type.length) ),
-          text: msg, 
-          icon: type,
-        }) ;
+        if ( ! [ "error","warning","success","info" ].includes(type) )
+          throw `Type must be one of the following:\nerror, warning, success, info,\nInstead receiving an invalid type: ${type}` ;
+
+        const typeName = type.slice(0, 1).toUpperCase().concat( type.slice(1, type.length) ) ;
+        if ( navigator.onLine ) {
+          swal.fire({
+            allowEscapeKey: false,
+            allowOutsideClick: false,
+            title: typeName,
+            text: msg, 
+            icon: type,
+          }) ;
+        } // if connected to internet
+        else {
+          alert( `${typeName}:\n${msg}` ) ;
+        } // else: not connected to internet
       } catch (err) {
         console.error( err ) ;
       }
