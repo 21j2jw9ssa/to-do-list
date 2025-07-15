@@ -16,166 +16,189 @@
 ///////////////////////////
 
 const items = document.getElementsByTagName( "tag" ) ;  //// "tag" items
+const dropdownList = document.getElementById( "dropdown_list" ) ;
 
 document.addEventListener( "DOMContentLoaded", function() {
+
+function UpdateDropdownState() {
+  dropdownList.disabled = items.length === 0 ;
+  if ( dropdownList.disabled ) dropdownList.value = "" ;
+} // UpdateDropdownState()
 
 /////////////////////////////////////////////
 //////// ITEM TRIGGERING INTEGRATION ////////
 /////////////////////////////////////////////
 
-document.body.addEventListener( "click", function( event ) {
-  if ( event.target && event.target.classList.contains( "remove" ) ) {
-    const parentElement = event.target.parentElement ; // Get the parent of the clicked ".remove" element
-    const parentIndex = Array.from( parentElement.parentNode.children ).indexOf( parentElement ) ;
+const listBuffer = document.getElementById( "buffer" ) ;
+
+listBuffer.addEventListener( "click", function( event ) {
+  if ( event.target.classList.contains( "remove" ) ) {
+    let t = Date.now() ;
+    const parentElem = event.target.parentElement ; // Get the parent of the clicked ".remove" element
+    const parentIndex = Array.from( parentElem.parentNode.children ).indexOf( parentElem ) ;
 
     gLM.RmvItemFromList( parentIndex ) ;
-    parentElement.remove() ; // Remove the parent element from the DOM
+    parentElem.remove() ; // Remove the parent element from the DOM
+
+    console.log( `Item removal: ${(Date.now()-t)/1000} seconds` ) ;
+
+    gLM.UpdateAllItemsIndices() ;
   } // if: remove an item in the list
-  else if ( event.target && event.target.classList.contains( "done" ) ) {
-    const chkbox = event.target, tagElem = chkbox.parentElement.querySelector("tag") ;
-    tagElem.style.textDecoration = chkbox.checked ? "line-through" : "none" ;
-    tagElem.style.opacity = chkbox.checked ? 0.5 : 1 ;
-    for ( let i = 0; i < items.length; i++ ) {
-      if ( document.querySelectorAll( ".done" )[i].checked !== gLM.GetList()[i].checked )
-        gLM.EditItemChk( i, chkbox.checked ) ;
-    }
+  else if ( event.target.classList.contains( "done" ) ) {
+    let t = Date.now() ;
+    const chkbox = event.target ;
+    const tagElem = chkbox.parentElement.querySelector("tag") ;
+    const index = +chkbox.parentElement.dataset.index ;
+
+    if ( chkbox.checked ) {
+      tagElem.style.textDecoration = "line-through" ;
+      tagElem.style.opacity = 0.5 ;
+    } // if: the item has been done
+    else {
+      tagElem.style.textDecoration = "none" ;
+      tagElem.style.opacity = 1 ;
+    } // else: the item is yet to be done
+
+    console.log( `Property changing to: ${chkbox.checked}\n${(Date.now() - t)/1000} seconds lapsed` ) ;
+    t = Date.now() ;
+    gLM.EditItemChk( index, chkbox.checked ) ;
+
+    console.log( `Item property changing: ${(Date.now() - t)/1000} seconds lapsed` ) ;
   } // else if: have a specific item checked / unchecked
-  else if ( event.target && event.target.classList.contains( "edit" ) ) {
-    swal({
-      text: "Edit the item\'s contents:",
-      content: 'input',
-      buttons: true,
-    }).then( function(value) {
-      if ( value === null ) ;
-      else if ( value === '' ) {
-        gLM.PopUpMsg( "error", "An item shouldn\'t be empty" ) ;
-      } else {
-        const parentElement = event.target.parentElement ;
-        parentElement.querySelector("tag").textContent = value ;
-        gLM.EditItemCtnt( Array.from(parentElement.parentNode.children).indexOf(parentElement), value ) ;
-      } // editing permitted
+  else if ( event.target.classList.contains( "edit" ) ) {
+    const parentElem = event.target.parentElement ;
+    const tagElem = parentElem.querySelector("tag") ;
+    const index = +parentElem.dataset.index ;
+
+    swal.fire({
+      title: "Edit the item\'s contents:",
+      inputPlaceholder: "Type item contents here",
+      showCancelButton: true,
+      input: "text",
+      inputValue: tagElem.textContent,
+      inputValidator: function(val) {
+        if ( val === "" ) // blocks input until valid
+          return "Item contents must NOT be empty" ;
+      }
+    }).then( function(val) {
+      if ( ! val.isDismissed ) {
+        tagElem.textContent = val.value ;
+        gLM.EditItemCtnt( index, val.value ) ;
+      } // if editing permitted
     }) ;
   } // else if: get the contents of a specific item adjusted
 
-//   MandatorySaveFile() ;
+  UpdateDropdownState() ;
 }) ;
 
 ////////////////////////////////////////////
 //////// BUTTON-TRIGGERED FUNCTIONS ////////
 ////////////////////////////////////////////
 
-//// BUTTON 1: Add an item to the list
 document.getElementById( "addItem" ).addEventListener( "click", function() {
-  let val = document.getElementById("inputItem").value ;
+  let inp = document.getElementById( "inputItem" ), val = inp.value ;
+  let buf = document.getElementById( "buffer" ) ;
   if ( val !== "" ) {
-    if ( ! gLM.GetList().some( item => item.item === val ) ) {
-      let objAttr = document.createElement("li") ;
-      objAttr.draggable = true ;
-      objAttr.className = "items" ; // To have the browser correctly autofilling the form
+    let objAttr = document.createElement("li") ;
+    objAttr.draggable = true ;
+    objAttr.className = "items" ; // To have the browser correctly autofilling the form
 
-      // btn1: button for content editing
-      // btn2: button for content removal
-      // chkbox: checking if the item has been done
-      // tagElem: item's contents
-      let btn1 = document.createElement("button"), btn2 = document.createElement("button") ;
-      let chkbox = document.createElement("input"), tagElem = document.createElement("tag") ;
-      btn1.className = "edit", btn1.textContent = "edit" ; // as an edit button
-      btn2.className = "remove", btn2.textContent = "X" ; // as a delete button
-      chkbox.type = "checkbox", chkbox.className = chkbox.name = "done" ; // as a checkbox
-      tagElem.textContent = val ;
+    // a checkbox
+    const chkbox = document.createElement("input") ;
+    chkbox.type = "checkbox" ;
+    chkbox.className = chkbox.name = "done" ; // as a checkbox
 
-      objAttr.append( chkbox, tagElem, " ", btn1, btn2 ) ;
+    // tag for item contents
+    const tagElem = document.createElement("tag") ;
+    tagElem.textContent = val ;
 
-      // New item default: not checked
-      document.getElementById( "buffer" ).appendChild( objAttr ) ;
-      gLM.PushItemToList( val, false ) ;
-      document.getElementById( "inputItem" ).value = "" ;
-    } // if: Check if the item already exists in the list
-    else {
-      gLM.PopUpMsg( "error", "The new item cannot be the same as anything in this list" ) ;
-    }
+    // an 'edit' button
+    const btn1 = document.createElement("button") ;
+    btn1.className = "edit" ;
+    btn1.textContent = "edit" ; // as an edit button
+    
+    // a 'remove' button
+    const btn2 = document.createElement("button") ;
+    btn2.className = "remove" ;
+    btn2.textContent = "X" ; // as a delete button
+
+    objAttr.append( chkbox, tagElem, " ", btn1, btn2 ) ;
+    objAttr.dataset.index = buf.children.length ;
+
+    // New item default: not checked
+    buf.appendChild( objAttr ) ;
+    gLM.PushItemToList( val, false ) ;
+    inp.value = "" ;
   } else {
-    gLM.PopUpMsg( "error", "The new item shouldn\'t be empty" ) ;
+    gLM.PopUpMsg( "error", "New item contents must NOT be empty" ) ;
   }
+
+  UpdateDropdownState() ;
 }) ;
 
 //// BUTTON 1-a: Add an item to the list by pressing Enter
 document.getElementById( "inputItem" ).addEventListener( "keydown", function( event ) {
-  if ( event.key === 'Enter') document.getElementById("addItem").click() ;
+  if ( event.key === 'Enter' ) {
+    // Prevent 'Enter' from being absorbed by web browsers
+    event.preventDefault() ;
+    event.stopPropagation() ;
+
+    document.getElementById( "addItem" ).click() ;
+  }
 }) ;
 
-//// BUTTON 2: SORT ALL ITEMS IN THE LIST
-document.getElementById( "sortItems" ).addEventListener( "click", function() {
-  if ( gLM.GetListSize() <= 0 ) {
-    gLM.PopUpMsg( "error", "This list is empty" ) ;
-  } else {
-    swal({
-      title: "You clicked the \'sort items\' button.",
-      text:  "How would you sort all items in this list?",
-      closeOnClickOutside: false,
-      buttons: {
-        closeOnEsc: false,
-        closeOnClickOutside: false,
-        ascending:  { text: "in ascending order"   },
-        descending: { text: "in descending order"  },
-        random:     { text: "randomly"      },
-        cancel: "none of above",
-      },
-    }).then( function( value ) {
-      switch ( value ) {
-        case "ascending" :  gLM.SortListItemsASC() ;  break ;
-        case "descending" : gLM.SortListItemsDSC() ;  break ;
-        case "random" :     gLM.SortListItemsRand() ; break ;
-        default: return ;
-      }
-      gLM.PopUpMsg( "success", "Sort completed" ) ;
-    }) ;
-  }
+// BUTTON 2: SORT ALL ITEMS IN THE LIST
+dropdownList.addEventListener( "change", function() {
+  if ( dropdownList.value === "magnitude_asc" )
+    gLM.SortListItems( ITEM_PROPERTY.CONTENTS, ORDER.ASCENDING ) ;
+  else if ( dropdownList.value === "magnitude_desc" )
+    gLM.SortListItems( ITEM_PROPERTY.CONTENTS, ORDER.DESCENDING ) ;
+  else if ( dropdownList.value === "checkbox_status_asc"  )
+    gLM.SortListItems( ITEM_PROPERTY.CHECKBOX_STATUS, ORDER.ASCENDING ) ;
+  else if ( dropdownList.value === "checkbox_status_desc" )
+    gLM.SortListItems( ITEM_PROPERTY.CHECKBOX_STATUS, ORDER.DESCENDING ) ;
 }) ;
 
 //// BUTTON 3: CLEAR THE LIST BUFFER
 document.getElementById( "clearBuffer" ).addEventListener( "click", function() {
   if ( gLM.GetListSize() > 0 ) {
-    swal({
-      closeOnEsc: false,
-      closeOnClickOutside: false,
+    swal.fire({
+      allowEscapeKey: false,
+      allowOutsideClick: false,
       title: 'Clear this list?',
       text: 'Doing so will remove all items\
              and cannot be undone.\
              \n\nWould you like to proceed?',
-      dangerMode: true,
-      buttons: true,
+      showCancelButton: true,
     }).then( function( wantToDelete ) {
-      if ( wantToDelete ) {
+      if ( wantToDelete.isConfirmed ) {
         gLM.DeleteList() ;
         gLM.PopUpMsg( "success", "List cleared" ) ;
+        UpdateDropdownState() ;
       }
     }) ;
   } else {
-    if ( navigator.onLine ) {
-      gLM.PopUpMsg( "error", "The list is empty" ) ;
-    }
-    else {
-      // AlertError( "The list buffer's empty" );
-    }
+    gLM.PopUpMsg( "error", "The list is empty" ) ;
+    UpdateDropdownState() ;
   }
+
 }) ;
 
 //// BUTTON 4: SAVE THE LIST IN THE WEB BROWSER
 document.getElementById( "saveFile" ).addEventListener( "click", function() {
   if ( gLM.GetListSize() > 0 ) {
     if ( gLM.GetLocalStorageStat() ) {
-      swal({
-        closeOnEsc: false,
-        closeOnClickOutside: false,
+      swal.fire({
+        allowEscapeKey: false,
+        allowOutsideClick: false,
         title: 'Save this list as a file?',
         text: 'There\'s already one saved on this site.\
-               Doing so will overwrite the old one\
+               \nDoing so will overwrite the old one\
                and it\'ll be unrecoverable.\
                \n\nWould you like to proceed?',
-        buttons: true,
+        showCancelButton: true,
       }).then( function( wantToOverwrite ) {
-        if ( wantToOverwrite ) {
+        if ( wantToOverwrite.isConfirmed ) {
           gLM.SaveList() ;
           gLM.PopUpMsg( "success", "File saved successfully" ) ;
         }
@@ -186,9 +209,9 @@ document.getElementById( "saveFile" ).addEventListener( "click", function() {
     }
   } else {
     if ( navigator.onLine ) {
-      gLM.PopUpMsg( "error", "The list to save can\'t be empty." ) ;
+      gLM.PopUpMsg( "error", "The list to save must NOT be empty." ) ;
     } else {
-      alert("The list to save can\'t be empty.")
+      alert("The list to save must NOT be empty.")
     }
   }
 }) ;
@@ -198,54 +221,59 @@ document.getElementById( "loadFile" ).addEventListener( "click", function() {
   if ( gLM.GetLocalStorageStat() ) {
     if ( gLM.GetListSize() > 0 ) {
       if ( navigator.onLine ) {
-        swal({
-          closeOnEsc: false,
-          closeOnClickOutside: false,
+        swal.fire({
+          allowEscapeKey: false,
+          allowOutsideClick: false,
           title: 'Load file?',
           text: 'Doing so will overwrite the list and become unrecoverable.\
                  \nProceed anyway?',
-          buttons: true,
+          showCancelButton: true,
         }).then( function( wantToLoadFile ) {
-          if ( wantToLoadFile ) {
+          if ( wantToLoadFile.isConfirmed ) {
+            const s = Date.now() ;
             gLM.CreateList();
+            console.log(`Loading: ${(Date.now()-s)/1000} seconds lapsed`) ;
+            UpdateDropdownState() ;
             gLM.PopUpMsg( "success", "File loaded successfully" ) ;
           }
-        //   MandatorySaveFile() ;
         }) ;
       } else {
-        // if ( confirm( "Load file?\n\nDoing so will overwrite the list and become unrecoverable.\nProceed anyway?" ) )
-        //   alert( "File Loaded successfully!" ) ;
+        if ( confirm( "Load file?\n\nDoing so will overwrite the list and become unrecoverable.\nProceed anyway?" ) ) {
+          UpdateDropdownState() ;
+          alert( "File Loaded successfully!" ) ;
+        }
       }
     } else {
+      const s = Date.now() ;
       gLM.CreateList() ;
-      if ( navigator.onLine ) {
-        gLM.PopUpMsg( "success", "File saved successfully" ) ;
-      } else {
-        alert( "File loaded successfully!" ) ;
-      }
+      console.log(`Loading: ${(Date.now()-s)/1000} seconds lapsed`) ;
+      UpdateDropdownState() ;
+      gLM.PopUpMsg( "success", "File saved successfully" ) ;
     }
   } else {
     gLM.PopUpMsg( "error", "No local file stored" ) ;
   }
+
+  // UpdateDropdownState() ;
 }) ;
 
 //// BUTTON 6: DELETE THE FILE IN THE WEB BROWSER (i.e. THE LIST ITSELF)
 document.getElementById( "clearFile" ).addEventListener( "click", function() {
   if ( gLM.GetLocalStorageStat() ) {
-    swal({
-      closeOnEsc: false,
-      closeOnClickOutside: false,
+    swal.fire({
+      allowEscapeKey: false,
+      allowOutsideClick: false,
       title: 'Delete the local file?',
       text: 'It will destroy the file\
              and cannot be undone.\
              \n\nWould you like to proceed?',
-      dangerMode: true,
-      buttons: true,
+      showCancelButton: true,
     }).then( function( wantToDeleteFile ) {
-      if ( wantToDeleteFile ) {
+      if ( wantToDeleteFile.isConfirmed ) {
         localStorage.removeItem( gLM.GetLocalStorageName() );
         gLM.PopUpMsg( "success", "File deleted successfully" ) ;
       }
+      UpdateDropdownState() ;
     }) ;
   //   Standard Method:
   //   if (confirm(`Are you sure that you want to delete the local file?\nThis can't be undone.`)) {
@@ -254,8 +282,10 @@ document.getElementById( "clearFile" ).addEventListener( "click", function() {
   //   }
   } else {
     gLM.PopUpMsg( "error", "There is no local list file" ) ;
-  //   AlertError("there's no such file");
+    UpdateDropdownState() ;
   }
+
+  // UpdateDropdownState() ;
 }) ;
 
 //// BUTTON 7: EXPORT AS A FILE
@@ -270,6 +300,7 @@ document.getElementById( "exportFile" ).addEventListener( "click", function() {
 //// BUTTON 8: IMPORT A FILE
 document.getElementById( "importFile" ).addEventListener( "click", function() {
   ImportFile() ;
+  UpdateDropdownState() ;
 }) ;
 
 }) ;
