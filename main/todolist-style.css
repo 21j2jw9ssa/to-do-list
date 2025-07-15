@@ -1,17 +1,29 @@
-@import "../makelist.css" ;
+@import "../makelist.css";
 
 /*******************************/
 /***** LIST BUFFER SECTION *****/
 /*******************************/
-#inputItem {
-  width: 100% ; height: 40px ;
-  font-size: 24px ;
-  border-radius: 20px ; border-style: solid ; border-width: thin ; /* BORDER */
-  margin-bottom: 12px ; margin-top: 12px ;
-}
 #buffer {
   text-align: left ; font-size: 36px ; /* TEXT */
-  border-style: dashed ; border-radius: 10px ; border-color: #4fcf4f ; border-width: 4px ; /* BORDER */
+  border: 4px dashed #4fcf4f ;
+  border-radius: 10px ;
+}
+
+/******************************/
+/***** LIST ITEMS SECTION *****/
+/******************************/
+
+/** INDIVIDUAL ITEM ENTITIES **/
+.items {
+  font-size: 28px;
+  list-style-type: none ; /* no notations */
+  vertical-align: top ;
+}
+
+/** ITEM CONTENTS **/
+tag {
+  list-style-type: inherit ;
+  padding-left: 12px ;
 }
 
 /** REMOVE button **/
@@ -19,35 +31,32 @@
   background: none ;
   color: #ff0000 ; font-size: .75em ; /* TEXT */
   border: none ;
+  cursor: pointer ;
 }
 .remove:active {
   color: #ff9fff ;
 }
 
-/** CHECKED button **/
+/** CHECKBOX button **/
 .done {
-  color: currentColor;
-  width: 24px ;
-  height: 24px ;
+  color: currentColor ;
+  width: 20px ;
+  height: 20px ;
   border: 24px solid currentColor ;
   border-radius: 24px ;
   cursor: pointer ;
 }
 
-/** CHECKED button **/
-.items {
-  list-style-type: none ;
-  vertical-align: top;
-}
-
-/** CHECKED button **/
-tag {
-  list-style-type: inherit ;
-  padding-left: 12px ;
-}
-
 /** EDIT button **/
 .edit {
+  cursor: pointer ;
   border: none ;
   font-size: .5em ;
 }
+
+/*************************************/
+/***** FOR LARGER-SCREENED USERS *****/
+/*************************************/
+/* @media (min-width: 800px) { */
+
+/* } */
