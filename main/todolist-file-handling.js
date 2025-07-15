@@ -7,24 +7,27 @@
 //// FUNC1: EXPORT THE LIST AS A FILE
 function ExportFile() {
   try {
-    swal({
-      text: "File name to save (default: \"to-do list\"):",
-      content: 'input',
-      buttons: true,
-    }).then( function( value ) {
-      if ( value === null ) ;
+    swal.fire({
+      title: "Enter name to download the list",
+      input: "text",
+      inputPlaceholder: "default: to-do list",
+      showCancelButton: true,
+    }).then( function(resp) {
+      if ( resp.isDismissed ) ;
       else {
         let sout = "" ;                                             // text contents to store to file
         for ( let i = 0 ; i < items.length ; i++ ) {
           sout = sout.concat( items[i].textContent, ',' ) ;
           sout = sout.concat( items[i].parentElement.querySelector( "input" ).checked.toString() ) ;
-          if ( i + 1 !== items.length ) sout = sout.concat('\r\n') ;
+          if ( i + 1 !== items.length ) sout = sout.concat('\r\n') ; // line break for each line-reading
         }
-        const blob = new Blob( [sout], { type: "text/plain" } ) ;   // export type: text files
-        const link = document.createElement( "a" ) ;                // Create a temporary link element
-        link.href = URL.createObjectURL( blob ), link.download = ( value === "" ) ? "to-do list" : value ;
+        const blob = new Blob( [sout], { type: "text/plain" } ) ;           // export type: text files
+        const link = document.createElement( "a" ) ;                        // Create a temporary link element
+        link.href = URL.createObjectURL( blob ) ;                           // create URL object
+        link.download = ( resp.value === "" ) ? "to-do list" : resp.value ; // file naming
 
-        document.body.appendChild( link ), link.click() ; // Append link to the document and trigger download
+        // Append link to the document and trigger download
+        document.body.appendChild( link ), link.click() ; 
         document.body.removeChild( link ), URL.revokeObjectURL( link.href ) ; // Clean up
       } // edition permitted
     }) ;
@@ -36,7 +39,7 @@ function ExportFile() {
 //// FUNC2: IMPORT THE FILE TO GET A LIST
 async function ImportFile() {
   try {
-    // Open file picker for text files
+    // Open file picker for files
     const [fileHandle] = await window.showOpenFilePicker({
       types: [
         { // acceptable file type 1: text/plain
@@ -54,9 +57,12 @@ async function ImportFile() {
       ]
     }) ;
 
+    let t = Date.now() ;
     const file = await fileHandle.getFile(), text = await file.text() ;
     const lines = text.split( "\r\n" ), newList = [] ;
+    console.log(`File waiting: ${(Date.now()-t)/1000} seconds`) ;
 
+    t = Date.now() ;
     for ( let nLine = 1 ; nLine <= lines.length ; nLine++ ) {
       let curLine = lines[ nLine - 1 ] ;
       if ( curLine !== "" ) {
@@ -97,24 +103,29 @@ async function ImportFile() {
         } // else: both the contents and the checked status are present
       } // Skip empty lines
     } // check every line in the imported file
+    console.log(`File processing: ${(Date.now()-t)/1000} seconds`) ;
 
     if ( navigator.onLine ) {
       if ( gLM.GetListSize() > 0 ) {
-        swal({
-          closeOnEsc: false,
-          closeOnClickOutside: false,
-          title: 'Load file?',
+        swal.fire({
+          allowEscapeKey: false,
+          allowOutsideClick: false,
+          title: 'Import list file?',
           text: 'Doing so will overwrite the list and become unrecoverable.\
-                 \nProceed anyway?',
-          buttons: true,
+                 \nWould you like to proceed?',
+          showCancelButton: true
         }).then( function( wantToLoadFile ) {
-          if ( wantToLoadFile ) {
+          if ( wantToLoadFile.isConfirmed ) {
+            t = Date.now() ;
             gLM.OverwriteWithNewList( newList ) ;
+            console.log(`File writing: ${(Date.now()-t)/1000} seconds`) ;
             gLM.PopUpMsg( "success", "List imported successfully" )
           } // if the user clicks yes
         }) ;
       } else {
+        t = Date.now() ;
         gLM.OverwriteWithNewList( newList ) ;
+        console.log(`File writing: ${(Date.now()-t)/1000} seconds`) ;
         gLM.PopUpMsg( "success", "List imported successfully" ) ;
       }
     }
