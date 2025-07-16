@@ -170,12 +170,12 @@ const gLM = ( function() {
         // an 'edit' button
         const btn1 = document.createElement("button") ;
         btn1.className = "edit" ;
-        btn1.textContent = "edit" ;
+        btn1.textContent = "🖊️" ;
   
         // a 'remove' button
         const btn2 = document.createElement("button") ;
         btn2.className = "remove" ;
-        btn2.textContent = "X" ;
+        btn2.textContent = "❌" ;
   
         if ( gList[n].checked ) {
           tagElem.style.textDecoration = "line-through" ;
