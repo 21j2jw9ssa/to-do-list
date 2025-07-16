@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <!-- ALL CONTENTS OF THIS PROJECT IS MADE ON MY OWN. ALL RIGHTS RESERVED. -->
-<html>
+<html lang="en">
   <head>
     <title>To-do List | Help</title>
+	  <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="todolist-help-style.css">
   </head>
@@ -11,25 +12,42 @@
     <div id="nav_of_links">
       <a href="../main/todolist.html" title="return to homepage">Home</a>
       <a href="">Help</a>
-      <a href="../about/todolist-about-me.html" title="about me">About me</a>
+      <a href="../about/todolist-about-me.html" title="about me">About</a>
     </div>
+	  <!-- NAVIGATION BAR -->
 	  <script src="../nav.js"></script>
-    <br>
+	  <script src="link_direct.js"></script>
     <h2>How to use To-do List</h2>
-  	<!-- Functions of To-do List -->
-  	<a href="#help_1_addItem"><button class="listFunc">add an item</button></a>
-  	<a href="#help_2_saveFile"><button class="listFunc">save</button></a>
-  	<a href="#help_3_sortItems"><button class="listFunc">sort items</button></a>
-  	<a href="#help_4_loadFile"><button class="listFunc">load</button></a>
-  	<a href="#help_5_clearBuffer"><button class="listFunc">clear list</button></a>
-  	<a href="#help_6_clearFile"><button class="listFunc">delete</button></a>
-  	<a href="#help_7_exportFile"><button class="listFunc">export list</button></a>
-  	<a href="#help_8_importFile"><button class="listFunc">import list</button></a>
+	  <div id="input_wrapper">
+	    <input type="text" id="inputItem" placeholder="enter new item" disabled>
+      <a href="#help_1_addItem" id="addItem" class="listFunc" >add item</a>
+    </div>
+    <div class="btn_container">
+  	  <a href="#help_2_saveFile" class="listFunc">clear the list buffer</a>
+  	  <a href="#help_4_loadFile" class="listFunc">save list</a>
+  	  <a href="#help_5_clearBuffer" class="listFunc">export list</a>
+  	  <a href="#help_6_clearFile" class="listFunc">load list</a>
+  	  <a href="#help_7_exportFile" class="listFunc">import list<br>(text files only)</a>
+  	  <a href="#help_8_importFile" class="listFunc">delete the saved list</a>
+    </div>
+    <div class="custom-select">
+      order by:
+      <select id="dropdown_list">
+        <option value="help_3_sortItems">'sort items' section</option>
+        <option value="help_3_1_magnitude_asc">smallest to largest</option>
+        <option value="help_3_2_magnitude_desc">largest to smallest</option>
+        <option value="help_3_3_checkbox_status_asc">latest done to earliest done</option>
+        <option value="help_3_4_checkbox_status_desc">earliest done to latest done</option>
+      </select>
+    </div>
     <ul>
       <li id="help_1_addItem"><h3>Add an item</h3></li>
       <p>
-        Add an item to the list <b>at a time</b>. Users can also press <em>Enter</em> to do so.<br>
-        The item to be added should NOT be empty.<br>
+        Add an item to the list <b>at a time</b>.<br>
+        For desktop and laptop users,<br>it can be done by pressing <em>Enter</em>, too.
+      </p>
+      <p>
+        An item to be added should NOT be empty.<br><br>
         For example:
         <ul>
           <li>'Good morning' - OK</li>
@@ -49,26 +67,45 @@
         </p>
       </p>
       <li id="help_3_sortItems"><h3>Sort items</h3></li>
-      <p>Sort all items in the list.<br>
-        It only works if there is at least one item in the list.
-        <dl>
-          <dt>In <b>ascending</b> order</dt>
-          <dd>
-            Arrange all items from smallest to largest, i.e. A-Z, a-z, 0-9<br>
-            <b>After sorting:</b>
-            the <em>greater</em> an item is, the closer it is to the <em><b>bottom</b></em> of the list;
-            the <em>less</em> an item is, the closer it is to the <em><b>top</b></em> of the list.
-          </dd>
-          <dt>In <b>descending</b> order</dt>
-          <dd>
-            Arrange all items from largest to smallest, i.e. Z-A, z-a, 9-0<br>
-            <b>After sorting:</b>
-            the <em>greater</em> an item is, the closer it is to the <em><b>top</b></em> of the list;
-            the <em>less</em> an item is, the closer it is to the <em><b>bottom</b></em> of the list.
-          </dd>
-          <dt>In <b>random</b> order</dt>
-          <dd>Arrange all items in a completely random manner.</dd>
-        </dl>
+      <p>
+        Sort all items in the list.<br>
+        To do so, there should be at least one item in the list buffer.
+      </p>
+      <p>
+        There are four ways to sort items:
+        <ul>
+          <li id="help_3_1_magnitude_asc">
+            <h4>smallest to largest</h4>
+            <p>
+              Arrange all items from smallest to largest, i.e. A-Z, a-z, 0-9<br>
+              <b>After sorting:</b>
+              the <em>greater</em> an item is, the closer it is to the <em><b>bottom</b></em> of the list;
+              the <em>less</em> an item is, the closer it is to the <em><b>top</b></em> of the list.
+            </p>
+          </li>
+          <li id="help_3_2_magnitude_desc">
+            <h4>largest to smallest</h4>
+            <p>
+              Arrange all items from largest to smallest, i.e. Z-A, z-a, 9-0<br>
+              <b>After sorting:</b>
+              the <em>greater</em> an item is, the closer it is to the <em><b>top</b></em> of the list;
+              the <em>less</em> an item is, the closer it is to the <em><b>bottom</b></em> of the list.
+            </p>
+          </li>
+          <li id="help_3_3_checkbox_status_asc">
+            <h4>latest done to earliest done</h4>
+            <p>
+              Arrange all items by checkbox status from latest done to earliest done.<br>
+              <b>After sorting:</b>
+            </p>
+          </li>
+          <li id="help_3_4_checkbox_status_desc">
+            <h4>earliest done to latest done</h4>
+            <p>
+              Arrange all items by checkbox status from latest done to earliest done.<br>
+            </p>
+          </li>
+        </ul>
       </p>
       <li id="help_4_loadFile"><h3>Load</h3></li>
       <p>
@@ -115,10 +152,12 @@
         <p>
           where for <em>each</em> specific item,<br>item_contenN is the contents,<br>and checkedN is the checked status (true or false only).<br>
         </p>
+        <p>
         Any flaws found in the file results in an <strong>error</strong>,<br>
         pointing out the line where the <em><b>first</b></em> error is found.<br><br>
-        When attempting to import the following file, for example:
+        </p>
         <p>
+          When attempting to import the following file, for example:<br>
           <code>
             Line<br>
             1 | John, false<br>
@@ -129,13 +168,19 @@
             6 | Paul, fault<br>
           </code>
         </p>
-        The first error will be found on line 3,<br>pointing out that its 'checked' status<br>is <em><b>neither</b></em> 'true' nor 'false'.
+        The first error will be found on line 3,<br>
+        pointing out that while<br>
+        the contents is <em>present</em>,
+        i.e. '<b>Albert, false</b>',<br>
+        its <b>checkbox</b> status
+        is <em><b>neither</b></em> 'true' nor 'false'.
+        </p>
       </p>
     </ul>
     <section>
       <a href="#mainTitle" id="nav_to_top">to the top</a>
     </section>
-    <br/>
-	  <footer>All contents is made by myself.<br/>All rights reserved.</footer>
+    <br>
+	  <footer>All contents is made by myself.<br>All rights reserved.</footer>
   </body>
 </html>
