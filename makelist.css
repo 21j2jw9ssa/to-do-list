@@ -114,6 +114,8 @@ a {
   border-right: none ;
   border-top-left-radius: 24px ;
   border-bottom-left-radius: 24px ;
+  border-top-right-radius: 0px ;
+  border-bottom-right-radius: 0px ;
   outline: none ;
 }
 
