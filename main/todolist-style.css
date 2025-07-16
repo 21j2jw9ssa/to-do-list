@@ -40,8 +40,8 @@ tag {
 /** CHECKBOX button **/
 .done {
   color: currentColor ;
-  width: 20px ;
-  height: 20px ;
+  /* width: 20px ;
+  height: 20px ; */
   border: 24px solid currentColor ;
   border-radius: 24px ;
   cursor: pointer ;
@@ -57,6 +57,9 @@ tag {
 /*************************************/
 /***** FOR LARGER-SCREENED USERS *****/
 /*************************************/
-/* @media (min-width: 800px) { */
-
-/* } */
+@media (max-width: 800px) {
+  .done {
+    width: 20px ;
+    height: 20px ;
+  }
+}
