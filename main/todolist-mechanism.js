@@ -115,12 +115,12 @@ document.getElementById( "addItem" ).addEventListener( "click", function() {
     // an 'edit' button
     const btn1 = document.createElement("button") ;
     btn1.className = "edit" ;
-    btn1.textContent = "edit" ; // as an edit button
+    btn1.textContent = "🖊️" ; // as an edit button
     
     // a 'remove' button
     const btn2 = document.createElement("button") ;
     btn2.className = "remove" ;
-    btn2.textContent = "X" ; // as a delete button
+    btn2.textContent = "❌" ; // as a delete button
 
     objAttr.append( chkbox, tagElem, " ", btn1, btn2 ) ;
     objAttr.dataset.index = buf.children.length ;
