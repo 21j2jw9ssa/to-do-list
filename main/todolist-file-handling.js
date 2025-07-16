@@ -36,40 +36,50 @@ function ExportFile() {
   } // catch:
 } // SaveAsTextFile()
 
+//// FUNC2-a: OPEN FILE TO BROWSE TEXT FILES
+async function openFile() {
+  return new Promise( (resolve, reject) => {
+    const input = document.createElement("input") ;
+    input.type = "file" ;
+    input.accept = '.txt' ;
+  
+    input.onchange = () => {
+      const file = input.files[0] ;
+      if ( file ) resolve( file ) ;
+      else reject( new Error( "No file selected" ) ) ;
+    };
+  
+    // Trigger the file input
+    input.click();
+  }) ;
+}
+
 //// FUNC2: IMPORT THE FILE TO GET A LIST
 async function ImportFile() {
   try {
-    // Open file picker for files
-    const [fileHandle] = await window.showOpenFilePicker({
-      types: [
-        { // acceptable file type 1: text/plain
-          description: 'text files',
-          accept: { 'text/plain': ['.txt'] }
-        },
-        { // acceptable file type 2: csv
-          description: 'CSV files',
-          accept: { 'text/csv': ['.csv'] }
-        },
-        { // acceptable file type 3: rich-text files
-          description: 'rich-text files',
-          accept: { 'text/markdown': ['.rtf'] }
-        }
-      ]
-    }) ;
-
-    let t = Date.now() ;
-    const file = await fileHandle.getFile(), text = await file.text() ;
+    const file = await openFile(), text = await file.text() ;
     const lines = text.split( "\r\n" ), newList = [] ;
-    console.log(`File waiting: ${(Date.now()-t)/1000} seconds`) ;
 
-    t = Date.now() ;
     for ( let nLine = 1 ; nLine <= lines.length ; nLine++ ) {
       let curLine = lines[ nLine - 1 ] ;
       if ( curLine !== "" ) {
         let finCmaIdx = curLine.lastIndexOf(",") ;         // index of the final comma on the current line
         let ctnt = curLine.slice( 0, finCmaIdx ).trim() ;  // item's contents
         let checked = curLine.slice( finCmaIdx + 1 ).trim() ; // item's checked status
-        if ( checked !== "true" && checked !== "false" ) {
+        if ( ctnt === "" ) {
+          throw { // throws an FileContentError pointing out the empty contents
+            name: "FileContentError",
+            msg:
+            `\
+            Error happened when reading line ${nLine}:
+            
+            ${curLine}
+            
+            The item contents must NOT be empty.
+            `
+          } ;
+        } // if the item contents is EMPTY
+        else if ( checked !== "true" && checked !== "false" ) {
           throw { // throws an FileContentError pointing out the invalid/missing checked status
             name: "FileContentError",
             msg:
@@ -85,25 +95,11 @@ async function ImportFile() {
               `
           } ;
         } // if the checked property is NEITHER true nor false
-        else if ( ctnt === "" ) {
-          throw { // throws an FileContentError pointing out the empty contents
-            name: "FileContentError",
-            msg:
-              `\
-              Error happened when reading line ${nLine}:
-
-              ${curLine}
-
-              The item contents must NOT be empty.
-              `
-          } ;
-        } // if the item contents is EMPTY
         else {
           newList.push( { contents: ctnt, checked: checked === "true" } ) ;
         } // else: both the contents and the checked status are present
       } // Skip empty lines
     } // check every line in the imported file
-    console.log(`File processing: ${(Date.now()-t)/1000} seconds`) ;
 
     if ( navigator.onLine ) {
       if ( gLM.GetListSize() > 0 ) {
@@ -116,20 +112,19 @@ async function ImportFile() {
           showCancelButton: true
         }).then( function( wantToLoadFile ) {
           if ( wantToLoadFile.isConfirmed ) {
-            t = Date.now() ;
+            // t = Date.now() ;
             gLM.OverwriteWithNewList( newList ) ;
-            console.log(`File writing: ${(Date.now()-t)/1000} seconds`) ;
+            // console.log(`File writing: ${(Date.now()-t)/1000} seconds`) ;
             gLM.PopUpMsg( "success", "List imported successfully" )
           } // if the user clicks yes
         }) ;
       } else {
-        t = Date.now() ;
+        // t = Date.now() ;
         gLM.OverwriteWithNewList( newList ) ;
-        console.log(`File writing: ${(Date.now()-t)/1000} seconds`) ;
+        // console.log(`File writing: ${(Date.now()-t)/1000} seconds`) ;
         gLM.PopUpMsg( "success", "List imported successfully" ) ;
       }
     }
-
     return true ; // import succeeds
   } catch (err) {
     if ( err.name === "FileContentError" ) {
