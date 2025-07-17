@@ -17,5 +17,9 @@ p {
 }
 
 code {
-  font-family: "Cascadia Code", Consolas, "Lucida Console" ;
+  font-family: "Cascadia Code", Consolas, "Lucida Console", monospace ;
+}
+
+#inputItem:disabled {
+  border: inherit ;
 }
