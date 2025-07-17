@@ -5,7 +5,7 @@ body {
   vertical-align: middle ;
   line-height: 1 ;
   text-align: center ;
-  font-family: "franklin gothic", Tahoma, "Trebuchet MS", Verdana ;
+  font-family: "franklin gothic", Tahoma, Verdana ;
   background-color: #ffffff ;
   padding: 10px ;
   font-size: 18px ;
@@ -64,7 +64,7 @@ a {
   align-items: center ;
   justify-content: center ;
   font-size: 125% ;
-  height: 72px ;
+  height: 84px ;
   width: 49% ;
   color: black ;
   background-color: #ff9f9f ;
@@ -75,7 +75,7 @@ a {
 
 /** All function buttons **/
 .listFunc {
-  font-family: "Frutiger", "franklin gothic", Tahoma, "Trebuchet MS", Verdana ;
+  font-family: "Frutiger", "franklin gothic", Tahoma, Verdana ;
   cursor: pointer ;
 }
 .listFunc:hover {
@@ -119,6 +119,9 @@ a {
   outline: none ;
 }
 
+/*********************************************************/
+/***** 'ADD ITEM BUTTON' (INTEGRATED WITH THE INPUT) *****/
+/*********************************************************/
 #addItem {
   display: flex ; /* key part */
   align-items: center ; /* vertical centering */
