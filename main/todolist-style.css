@@ -33,18 +33,6 @@ tag {
   padding-left: 6px ;
 }
 
-/** REMOVE button **/
-.remove {
-  background: none ;
-  color: #ff0000 ;
-  font-size: .75em ;
-  border: none ;
-  cursor: pointer ;
-}
-.remove:active {
-  color: #ff9fff ;
-}
-
 /** CHECKBOX button **/
 .done {
   width: var(--boxSize) ;
@@ -95,11 +83,25 @@ tag {
 
 /** EDIT button **/
 .edit {
+  padding: 0px ;
   background: none ;
   text-align: center ;
   cursor: pointer ;
   border: none ;
   font-size: .75em ;
+}
+
+/** REMOVE button **/
+.remove {
+  padding: 0px ;
+  background: none ;
+  color: #ff0000 ;
+  font-size: .75em ;
+  border: none ;
+  cursor: pointer ;
+}
+.remove:active {
+  color: #ff9fff ;
 }
 
 /*************************************/
