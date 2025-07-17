@@ -33,22 +33,19 @@ const listBuffer = document.getElementById( "buffer" ) ;
 
 listBuffer.addEventListener( "click", function( event ) {
   if ( event.target.classList.contains( "remove" ) ) {
-    let t = Date.now() ;
     const parentElem = event.target.parentElement ; // Get the parent of the clicked ".remove" element
     const parentIndex = Array.from( parentElem.parentNode.children ).indexOf( parentElem ) ;
 
     gLM.RmvItemFromList( parentIndex ) ;
     parentElem.remove() ; // Remove the parent element from the DOM
 
-    console.log( `Item removal: ${(Date.now()-t)/1000} seconds` ) ;
-
     gLM.UpdateAllItemsIndices() ;
   } // if: remove an item in the list
   else if ( event.target.classList.contains( "done" ) ) {
     let t = Date.now() ;
     const chkbox = event.target ;
-    const tagElem = chkbox.parentElement.querySelector("tag") ;
-    const index = +chkbox.parentElement.dataset.index ;
+    const tagElem = chkbox.parentElement.parentElement.querySelector("tag") ;
+    const index = +chkbox.parentElement.parentElement.dataset.index ;
 
     if ( chkbox.checked ) {
       tagElem.style.textDecoration = "line-through" ;
@@ -59,11 +56,7 @@ listBuffer.addEventListener( "click", function( event ) {
       tagElem.style.opacity = 1 ;
     } // else: the item is yet to be done
 
-    console.log( `Property changing to: ${chkbox.checked}\n${(Date.now() - t)/1000} seconds lapsed` ) ;
-    t = Date.now() ;
     gLM.EditItemChk( index, chkbox.checked ) ;
-
-    console.log( `Item property changing: ${(Date.now() - t)/1000} seconds lapsed` ) ;
   } // else if: have a specific item checked / unchecked
   else if ( event.target.classList.contains( "edit" ) ) {
     const parentElem = event.target.parentElement ;
@@ -99,7 +92,7 @@ document.getElementById( "addItem" ).addEventListener( "click", function() {
   let inp = document.getElementById( "inputItem" ), val = inp.value ;
   let buf = document.getElementById( "buffer" ) ;
   if ( val !== "" ) {
-    let objAttr = document.createElement("li") ;
+    const objAttr = document.createElement("li") ;
     objAttr.draggable = true ;
     objAttr.className = "items" ; // To have the browser correctly autofilling the form
 
@@ -107,6 +100,13 @@ document.getElementById( "addItem" ).addEventListener( "click", function() {
     const chkbox = document.createElement("input") ;
     chkbox.type = "checkbox" ;
     chkbox.className = chkbox.name = "done" ; // as a checkbox
+
+    const chkmark = document.createElement("span") ;
+    chkmark.className = "checkmark" ;
+    
+    const chkbox_container = document.createElement("label") ;
+    chkbox_container.className = "checkbox-container" ;
+    chkbox_container.append( chkbox, chkmark ) ;
 
     // tag for item contents
     const tagElem = document.createElement("tag") ;
@@ -120,9 +120,9 @@ document.getElementById( "addItem" ).addEventListener( "click", function() {
     // a 'remove' button
     const btn2 = document.createElement("button") ;
     btn2.className = "remove" ;
-    btn2.textContent = "❌" ; // as a delete button
+    btn2.textContent = "🗑️" ; // as a delete button
 
-    objAttr.append( chkbox, tagElem, " ", btn1, btn2 ) ;
+    objAttr.append( chkbox_container, tagElem, " ", btn1, btn2 ) ;
     objAttr.dataset.index = buf.children.length ;
 
     // New item default: not checked
@@ -230,9 +230,7 @@ document.getElementById( "loadFile" ).addEventListener( "click", function() {
           showCancelButton: true,
         }).then( function( wantToLoadFile ) {
           if ( wantToLoadFile.isConfirmed ) {
-            const s = Date.now() ;
             gLM.CreateList();
-            console.log(`Loading: ${(Date.now()-s)/1000} seconds lapsed`) ;
             UpdateDropdownState() ;
             gLM.PopUpMsg( "success", "File loaded successfully" ) ;
           }
@@ -244,9 +242,7 @@ document.getElementById( "loadFile" ).addEventListener( "click", function() {
         }
       }
     } else {
-      const s = Date.now() ;
       gLM.CreateList() ;
-      console.log(`Loading: ${(Date.now()-s)/1000} seconds lapsed`) ;
       UpdateDropdownState() ;
       gLM.PopUpMsg( "success", "File saved successfully" ) ;
     }
@@ -298,8 +294,9 @@ document.getElementById( "exportFile" ).addEventListener( "click", function() {
 }) ;
 
 //// BUTTON 8: IMPORT A FILE
-document.getElementById( "importFile" ).addEventListener( "click", function() {
-  ImportFile() ;
+document.getElementById( "importFile" ).addEventListener( "click", async function() {
+  const status = await ImportFile() ;
+  console.log( status ) ;
   UpdateDropdownState() ;
 }) ;
 
