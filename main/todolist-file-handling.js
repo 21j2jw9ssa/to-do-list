@@ -101,31 +101,31 @@ async function ImportFile() {
       } // Skip empty lines
     } // check every line in the imported file
 
-    if ( navigator.onLine ) {
-      if ( gLM.GetListSize() > 0 ) {
-        swal.fire({
-          allowEscapeKey: false,
-          allowOutsideClick: false,
-          title: 'Import list file?',
-          text: 'Doing so will overwrite the list and become unrecoverable.\
-                 \nWould you like to proceed?',
-          showCancelButton: true
-        }).then( function( wantToLoadFile ) {
-          if ( wantToLoadFile.isConfirmed ) {
-            // t = Date.now() ;
-            gLM.OverwriteWithNewList( newList ) ;
-            // console.log(`File writing: ${(Date.now()-t)/1000} seconds`) ;
-            gLM.PopUpMsg( "success", "List imported successfully" )
-          } // if the user clicks yes
-        }) ;
-      } else {
-        // t = Date.now() ;
-        gLM.OverwriteWithNewList( newList ) ;
-        // console.log(`File writing: ${(Date.now()-t)/1000} seconds`) ;
-        gLM.PopUpMsg( "success", "List imported successfully" ) ;
+    return new Promise( (resolve, reject) => {
+      if ( navigator.onLine ) {
+        if ( gLM.GetListSize() > 0 ) {
+          swal.fire({
+            allowEscapeKey: false,
+            allowOutsideClick: false,
+            title: 'Import list file?',
+            text: 'Doing so will overwrite the list and become unrecoverable.\
+                   \nWould you like to proceed?',
+            showCancelButton: true
+          }).then( function( wantToLoadFile ) {
+            if ( wantToLoadFile.isConfirmed ) {
+              gLM.OverwriteWithNewList( newList ) ;
+              gLM.PopUpMsg( "success", "List imported successfully" ) ;
+              resolve( "Update list completed" ) ;
+            } // if the user clicks yes
+            else reject( "Decided not to update the list" ) ;
+          }) ;
+        } else {
+          gLM.OverwriteWithNewList( newList ) ;
+          gLM.PopUpMsg( "success", "List imported successfully" ) ;
+          resolve( "Update list completed" ) ;
+        }
       }
-    }
-    return true ; // import succeeds
+    }) ;
   } catch (err) {
     if ( err.name === "FileContentError" ) {
       gLM.PopUpMsg( "error", err.msg ) ;
@@ -134,4 +134,5 @@ async function ImportFile() {
       gLM.PopUpMsg( "error", "Cannot import list from the file" ) ;
     } // if: not abort errors
   }
+  // }) ;
 } // ImportList()
