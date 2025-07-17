@@ -129,8 +129,6 @@ const gLM = ( function() {
     const dirtyBlanker = "" ;
     const cleanyBlanky = DOMPurify.sanitize(dirtyBlanker) ;
     document.getElementById("buffer").innerHTML = cleanyBlanky ;
-
-    console.log(`ITEMS LEFT: ${items.length}`) ;
   } // ClearBuffer() PRIVATE
 
   /**
@@ -160,8 +158,14 @@ const gLM = ( function() {
         // a checkbox
         const chkbox = document.createElement("input") ;
         chkbox.type = "checkbox" ;
-        chkbox.className = chkbox.name = "done" ;
-        chkbox.checked = gList[n].checked ;
+        chkbox.className = chkbox.name = "done" ; // as a checkbox
+
+        const chkmark = document.createElement("span") ;
+        chkmark.className = "checkmark" ;
+
+        const chkbox_container = document.createElement("label") ;
+        chkbox_container.className = "checkbox-container" ;
+        chkbox_container.append( chkbox, chkmark ) ;
   
         // tag for item contents
         const tagElem = document.createElement("tag") ;
@@ -175,9 +179,10 @@ const gLM = ( function() {
         // a 'remove' button
         const btn2 = document.createElement("button") ;
         btn2.className = "remove" ;
-        btn2.textContent = "❌" ;
-  
-        if ( gList[n].checked ) {
+        btn2.textContent = "🗑️" ;
+
+        if ( gList[n].checked ) {// checkbox-container checkmark
+          chkbox.checked = true ;
           tagElem.style.textDecoration = "line-through" ;
           tagElem.style.opacity = 0.5 ;
         } // if: the item has been done
@@ -187,7 +192,7 @@ const gLM = ( function() {
         } // else: the item is yet to be done
 
         objAttr.dataset.index = n ;
-        objAttr.append( chkbox, tagElem, " ", btn1, btn2 ) ;
+        objAttr.append( chkbox_container, tagElem, " ", btn1, btn2 ) ;
         buf.append( objAttr ) ;
       } // for: each item
 
@@ -332,18 +337,12 @@ const gLM = ( function() {
      */
     OverwriteWithNewList( newList ) {
       // Clear all items in the list buffer
-      let t = Date.now() ;
       this.DeleteList() ;
-      console.log(`List deletion: ${(Date.now()-t)/1000} seconds`) ;
-      
+
       // Then write the new one to the list
-      t = Date.now() ;
       gList.push.apply( gList, newList ) ;
-      console.log(`Item pushing: ${(Date.now()-t)/1000} seconds`) ;
-      
-      t = Date.now() ;
+
       WriteAllItemsIntoTheList(); // Finally, write all items to the buffer
-      console.log(`All items writing: ${(Date.now()-t)/1000} seconds`) ;
     }, // PUBLIC
 
     /**
