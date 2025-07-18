@@ -2,10 +2,9 @@
 /***** BACKGROUND *****/
 /**********************/
 body {
-  vertical-align: middle ;
   line-height: 1 ;
   text-align: center ;
-  font-family: "franklin gothic", Tahoma, Verdana ;
+  font-family: "Roboto", "franklin gothic", "Ubuntu", Verdana ;
   background-color: #ffffff ;
   padding: 10px ;
   font-size: 18px ;
@@ -21,7 +20,7 @@ a {
 /**********************/
 #mainTitle {
   font-size: 48px ;
-  font-weight: normal ; /* FONT */
+  font-weight: normal ;
   margin-bottom: 20px ;
 }
 
@@ -31,13 +30,11 @@ a {
 #nav_of_links {
   display: flex ; /* make sure each tab has the SAME width */
   flex: 100% ;
-  overflow: hidden ;
   text-align: center ;
   background-color: #3f3f3f
 }
 #nav_of_links a {
   padding: 15px 15px ;
-  vertical-align: middle ;
   text-decoration: none ; /* remove the usual UNDERLINE */
   flex: 2 ;
   font-size: 1.25em ;
@@ -63,7 +60,7 @@ a {
   display: inline-flex ; /* Make a behave like a flexbox button */
   align-items: center ;
   justify-content: center ;
-  font-size: 125% ;
+  font-size: 150% ;
   height: 96px ;
   width: 49% ;
   color: black ;
@@ -75,7 +72,7 @@ a {
 
 /** All function buttons **/
 .listFunc {
-  font-family: "Frutiger", "franklin gothic", Tahoma, Verdana ;
+  font-family: "Roboto", "franklin gothic", "Ubuntu", Verdana ;
   cursor: pointer ;
 }
 .listFunc:hover {
@@ -172,8 +169,9 @@ a {
 /*************************************/
 /***** FOR LARGER-SCREENED USERS *****/
 /*************************************/
-/* @media (min-width: 800px) {
-  .listFunc {
-    width: fit-content ;
+@media (max-width: 500px) {
+  .listFunc:not( [ id="addItem" ] )  {
+    font-size: 125% ;
+    /* width: fit-content ; */
   }
-} */
+}
