@@ -32,17 +32,16 @@ function UpdateDropdownState() {
 const listBuffer = document.getElementById( "buffer" ) ;
 
 listBuffer.addEventListener( "click", function( event ) {
-  if ( event.target.classList.contains( "remove" ) ) {
+  if ( event.target.name === "remove" ) {
     const parentElem = event.target.parentElement ; // Get the parent of the clicked ".remove" element
     const parentIndex = Array.from( parentElem.parentNode.children ).indexOf( parentElem ) ;
-
+    
     gLM.RmvItemFromList( parentIndex ) ;
     parentElem.remove() ; // Remove the parent element from the DOM
-
+    
     gLM.UpdateAllItemsIndices() ;
   } // if: remove an item in the list
-  else if ( event.target.classList.contains( "done" ) ) {
-    let t = Date.now() ;
+  else if ( event.target.name === "done" ) {
     const chkbox = event.target ;
     const tagElem = chkbox.parentElement.parentElement.querySelector("tag") ;
     const index = +chkbox.parentElement.parentElement.dataset.index ;
@@ -58,7 +57,7 @@ listBuffer.addEventListener( "click", function( event ) {
 
     gLM.EditItemChk( index, chkbox.checked ) ;
   } // else if: have a specific item checked / unchecked
-  else if ( event.target.classList.contains( "edit" ) ) {
+  else if ( event.target.name === "edit" ) {
     const parentElem = event.target.parentElement ;
     const tagElem = parentElem.querySelector("tag") ;
     const index = +parentElem.dataset.index ;
@@ -89,45 +88,9 @@ listBuffer.addEventListener( "click", function( event ) {
 ////////////////////////////////////////////
 
 document.getElementById( "addItem" ).addEventListener( "click", function() {
-  let inp = document.getElementById( "inputItem" ), val = inp.value ;
-  let buf = document.getElementById( "buffer" ) ;
-  if ( val !== "" ) {
-    const objAttr = document.createElement("li") ;
-    objAttr.draggable = true ;
-    objAttr.className = "items" ; // To have the browser correctly autofilling the form
-
-    // a checkbox
-    const chkbox = document.createElement("input") ;
-    chkbox.type = "checkbox" ;
-    chkbox.className = chkbox.name = "done" ; // as a checkbox
-
-    const chkmark = document.createElement("span") ;
-    chkmark.className = "checkmark" ;
-    
-    const chkbox_container = document.createElement("label") ;
-    chkbox_container.className = "checkbox-container" ;
-    chkbox_container.append( chkbox, chkmark ) ;
-
-    // tag for item contents
-    const tagElem = document.createElement("tag") ;
-    tagElem.textContent = val ;
-
-    // an 'edit' button
-    const btn1 = document.createElement("button") ;
-    btn1.className = "edit" ;
-    btn1.textContent = "🖊️" ; // as an edit button
-    
-    // a 'remove' button
-    const btn2 = document.createElement("button") ;
-    btn2.className = "remove" ;
-    btn2.textContent = "🗑️" ; // as a delete button
-
-    objAttr.append( chkbox_container, tagElem, " ", btn1, btn2 ) ;
-    objAttr.dataset.index = buf.children.length ;
-
-    // New item default: not checked
-    buf.appendChild( objAttr ) ;
-    gLM.PushItemToList( val, false ) ;
+  let inp = document.getElementById( "inputItem" ) ;
+  if ( inp.value !== "" ) {
+    gLM.AddItem() ;
     inp.value = "" ;
   } else {
     gLM.PopUpMsg( "error", "New item contents must NOT be empty" ) ;
