@@ -23,159 +23,178 @@
       <a href="#help_1_addItem" id="addItem" class="listFunc" >add item</a>
     </div>
     <div class="btn_container">
-  	  <a href="#help_2_saveFile" class="listFunc">clear the list buffer</a>
-  	  <a href="#help_4_loadFile" class="listFunc">save list</a>
-  	  <a href="#help_5_clearBuffer" class="listFunc">export list</a>
-  	  <a href="#help_6_clearFile" class="listFunc">load list</a>
-  	  <a href="#help_7_exportFile" class="listFunc">import list<br>(text files only)</a>
-  	  <a href="#help_8_importFile" class="listFunc">delete the saved list</a>
+  	  <a href="#help_2_clearBuffer" class="listFunc">clear list buffer</a>
+  	  <a href="#help_5_saveFile" class="listFunc">save list</a>
+  	  <a href="#help_3_exportFile" class="listFunc">export list</a>
+  	  <a href="#help_6_loadFile" class="listFunc">load list</a>
+  	  <a href="#help_4_importFile" class="listFunc">import list (text files only)</a>
+  	  <a href="#help_7_clearFile" class="listFunc">delete saved list</a>
     </div>
     <div class="custom-select">
       order by:
       <select id="dropdown_list">
-        <option value="help_3_sortItems">'sort items' section</option>
-        <option value="help_3_1_magnitude_asc">smallest to largest</option>
-        <option value="help_3_2_magnitude_desc">largest to smallest</option>
-        <option value="help_3_3_checkbox_status_asc">latest done to earliest done</option>
-        <option value="help_3_4_checkbox_status_desc">earliest done to latest done</option>
+        <option value="help_8_sortItems">'sort items' section</option>
+        <option value="help_8_1_magnitude_asc">smallest to largest</option>
+        <option value="help_8_2_magnitude_desc">largest to smallest</option>
+        <option value="help_8_3_checkbox_status_asc">latest done to earliest done</option>
+        <option value="help_8_4_checkbox_status_desc">earliest done to latest done</option>
       </select>
     </div>
     <ul>
-      <li id="help_1_addItem"><h3>Add an item</h3></li>
-      <p>
-        Add an item to the list <b>at a time</b>.<br>
-        For desktop and laptop users,<br>it can be done by pressing <em>Enter</em>, too.
-      </p>
-      <p>
-        An item to be added should NOT be empty.<br><br>
-        For example:
-        <ul>
-          <li>'Good morning' - OK</li>
-          <li>'biscuts' - OK</li>
-          <li>'But I'm OK!' - OK</li>
-          <li>' ' - <b>OK</b></li>
-          <li>'' - <b>NOT OK</b></li>
-        </ul>
-      </p>
-      <li id="help_2_saveFile"><h3>Save</h3></li>
-      <p>
-        Save the list in the web browser.<br>
-        If there is already a list saved in the web browser, users may either overwrite it with a new list.<br>
+      <li id="help_1_addItem">
+        <h3>Add an item</h3>
         <p>
-          <b>OK</b> to overwrite the old list with a new one<br>
-          <b>Cancel</b> to do nothing
-        </p>
-      </p>
-      <li id="help_3_sortItems"><h3>Sort items</h3></li>
-      <p>
-        Sort all items in the list.<br>
-        To do so, there should be at least one item in the list buffer.
-      </p>
-      <p>
-        There are four ways to sort items:
-        <ul>
-          <li id="help_3_1_magnitude_asc">
-            <h4>smallest to largest</h4>
-            <p>
-              Arrange all items from smallest to largest, i.e. A-Z, a-z, 0-9<br>
-              <b>After sorting:</b>
-              the <em>greater</em> an item is, the closer it is to the <em><b>bottom</b></em> of the list;
-              the <em>less</em> an item is, the closer it is to the <em><b>top</b></em> of the list.
-            </p>
-          </li>
-          <li id="help_3_2_magnitude_desc">
-            <h4>largest to smallest</h4>
-            <p>
-              Arrange all items from largest to smallest, i.e. Z-A, z-a, 9-0<br>
-              <b>After sorting:</b>
-              the <em>greater</em> an item is, the closer it is to the <em><b>top</b></em> of the list;
-              the <em>less</em> an item is, the closer it is to the <em><b>bottom</b></em> of the list.
-            </p>
-          </li>
-          <li id="help_3_3_checkbox_status_asc">
-            <h4>latest done to earliest done</h4>
-            <p>
-              Arrange all items by checkbox status from latest done to earliest done.<br>
-              <b>After sorting:</b>
-            </p>
-          </li>
-          <li id="help_3_4_checkbox_status_desc">
-            <h4>earliest done to latest done</h4>
-            <p>
-              Arrange all items by checkbox status from latest done to earliest done.<br>
-            </p>
-          </li>
-        </ul>
-      </p>
-      <li id="help_4_loadFile"><h3>Load</h3></li>
-      <p>
-        Load the list saved in the web browser.<br>This only works when there is a list saved in the web browser.
-      </p>
-      <li id="help_5_clearBuffer"><h3>Clear list</h3></li>
-      <p>
-        Clear all items of the list;<br>the list (if saved) in the web browser remains unchanged.<br>
-        This only works when there is at least one item in the list.
-      </p>
-      <li id="help_6_clearFile"><h3>Delete</h3></li>
-      <p>
-        Delete the list stored in the web browser;<br>the list buffer remains unchanged.<br>
-        This only works when there is a list saved in the web browser.
-      </p>
-      <li id="help_7_exportFile"><h3>Export</h3></li>
-      <p>Export the list as a file (text files only).<br><strong>All</strong> items in this list can be seen in the exported file.</p>
-      <p>Once exported, the file looks like the following:<br>
-        <p>
-          <code>
-            item_content1, checked1<br>
-            item_content2, checked2<br>
-            item_content3, checked3<br>
-            ...<br>
-            item_content_N, checked_N
-          </code><br>
+          Adds an item to the list <b>at a time</b>.<br>
+          it can be done on desktops and laptops by pressing <em>Enter</em>, too.
         </p>
         <p>
-          where for <em>each</em> specific item,<br>item_contentN is the contents,<br>and checkedN is the checked status (true or false only).<br>
+          An item to be added must NOT be empty.<br>
+          For example:
+          <ul>
+            <li>'Good morning' - OK</li>
+            <li>'biscuts' - OK</li>
+            <li>'But I'm OK!' - OK</li>
+            <li>' ' - <b> NOT OK</b></li>
+            <li>'' - <b>NOT OK</b></li>
+          </ul>
         </p>
-      </p>
-      <li id="help_8_importFile"><h3>Import</h3></li>
-      <p>Import the list from a file (text files only).</p>
-      <p>Make sure the file to import follows the <strong>following</strong> pattern:<br>
+      </li>
+      <li id="help_2_clearBuffer">
+        <h3>Clear list</h3>
         <p>
-          <code>
-            item_content1, checked1<br>
-            item_content2, checked2<br>
-            item_content3, checked3<br>
-            ...<br>
-            item_content_N, checked_N
-          </code>
+          Clear all items of the list;<br>the list (if saved) in the web browser remains unchanged.<br>
+          This only works when there is at least one item in the list.
+        </p>
+      </li>
+      <li id="help_3_exportFile">
+        <h3>Export</h3>
+        <p>Export the list as a file (text files only).<br><strong>All</strong> items in this list can be seen in the exported file.</p>
+        <p>
+          Once exported, the file looks like the following:<br>
+          <p>
+            <code>
+              item1, checked1<br>
+              item2, checked2<br>
+              item3, checked3<br>
+              ...<br>
+              itemN, checkedN
+            </code><br>
+          </p>
+          <p>
+            where for <em>each</em> item,<br>itemN is the contents,<br>and checkedN is the checked status (true or false only).<br>
+          </p>
+        </p>
+      </li>
+      <li id="help_4_importFile">
+        <h3>Import</h3>
+        <p>
+          Import the list from a file (text files only).
         </p>
         <p>
-          where for <em>each</em> specific item,<br>item_contenN is the contents,<br>and checkedN is the checked status (true or false only).<br>
+          Make sure the file to import follows the <strong>following</strong> pattern:<br>
+          <p>
+            <code>
+              item1, checked1<br>
+              item2, checked2<br>
+              item3, checked3<br>
+              ...<br>
+              itemN, checkedN
+            </code>
+          </p>
+          <p>
+            where for <em>each</em> specific item,<br>itemN is the contents,<br>and checkedN is the checked status (true or false only).<br>
+          </p>
+          <p>
+            Any flaws found in the file results in an <strong>error</strong>,<br>
+            pointing out the line where the <em><b>first</b></em> error is found.<br><br>
+          </p>
+          <p>
+            When attempting to import the following file, for example:<br>
+            <code>
+              Line<br>
+              1 | John, false<br>
+              2 | Jessica, true<br>
+              3 | Albert, false, folk<br>
+              4 | Simon, trust<br>
+              5 | Billy, true<br>
+              6 | Paul, fault<br>
+            </code>
+          </p>
+          <p>
+            The first error will be found on line 3,<br>
+            pointing out that while<br>
+            the contents is <em>present</em>,
+            i.e. '<b>Albert, false</b>',<br>
+            its <b>checkbox</b> status
+            is <em><b>neither</b></em> 'true' nor 'false'.
+          </p>
+        </p>
+      </li>
+      <li id="help_5_saveFile">
+        <h3>Save</h3>
+        <p>
+          Saves the list in the web browser.<br>
+          If there is already a one saved in the web browser, users may overwrite it with a new list by clicking <b>OK</b>.<br>
+        </p>
+      </li>
+      <li id="help_6_loadFile">
+        <h3>Load</h3>
+        <p>
+          Load the list saved in the web browser.<br>This only works when there is a list saved in the web browser.
+        </p>
+      </li>
+      <li id="help_7_clearFile">
+        <h3>Delete</h3>
+        <p>
+          Delete the list stored in the web browser;<br>the list buffer remains unchanged.<br>
+          This only works when there is a list saved in the web browser.
+        </p>
+      </li>
+      <li id="help_8_sortItems">
+        <h3>Sort items</h3>
+        <p>
+          Sorts all items in the list, based on a specific property.<br>
+          <em><b>NOTE:</b> There should be at least one item in the list buffer.</em>
         </p>
         <p>
-        Any flaws found in the file results in an <strong>error</strong>,<br>
-        pointing out the line where the <em><b>first</b></em> error is found.<br><br>
+          There are four ways to sort items:
+          <ul>
+            <li id="help_8_1_magnitude_asc">
+              <h4>smallest to largest</h4>
+              <p>
+                Arranges all items from smallest to largest, i.e. A-Z, a-z, 0-9<br>
+                <b>After sorting:</b>
+                the <em>greater</em> an item is, the closer it is to the <em><b>bottom</b></em> of the list;
+                the <em>less</em> an item is, the closer it is to the <em><b>top</b></em> of the list.
+              </p>
+            </li>
+            <li id="help_8_2_magnitude_desc">
+              <h4>largest to smallest</h4>
+              <p>
+                Arranges all items from largest to smallest, i.e. Z-A, z-a, 9-0<br>
+                <b>After sorting:</b>
+                the <em>greater</em> an item is, the closer it is to the <em><b>top</b></em> of the list;
+                the <em>less</em> an item is, the closer it is to the <em><b>bottom</b></em> of the list.
+              </p>
+            </li>
+            <li id="help_8_3_checkbox_status_asc">
+              <h4>latest done to earliest done</h4>
+              <p>
+                Arranges all items by checkbox status from latest done to earliest done.<br>
+                <b>After sorting:</b>
+                All things done are placed near the bottom of the list, whereas all things not yet done are placed near the top of the list.<br>
+                Both of the done and the not-yet-done 
+              </p>
+            </li>
+            <li id="help_8_4_checkbox_status_desc">
+              <h4>earliest done to latest done</h4>
+              <p>
+                Arranges all items by checkbox status from latest done to earliest done.<br>
+              </p>
+            </li>
+          </ul>
         </p>
-        <p>
-          When attempting to import the following file, for example:<br>
-          <code>
-            Line<br>
-            1 | John, false<br>
-            2 | Jessica, true<br>
-            3 | Albert, false, folk<br>
-            4 | Simon, trust<br>
-            5 | Billy, true<br>
-            6 | Paul, fault<br>
-          </code>
-        </p>
-        The first error will be found on line 3,<br>
-        pointing out that while<br>
-        the contents is <em>present</em>,
-        i.e. '<b>Albert, false</b>',<br>
-        its <b>checkbox</b> status
-        is <em><b>neither</b></em> 'true' nor 'false'.
-        </p>
-      </p>
+      </li>
     </ul>
     <section>
       <a href="#mainTitle" id="nav_to_top">to the top</a>
