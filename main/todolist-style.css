@@ -82,26 +82,34 @@ tag {
 }
 
 /** EDIT button **/
-.edit {
+
+.material-symbols-rounded[name="edit"] {
   padding: 0px ;
   background: none ;
   text-align: center ;
   cursor: pointer ;
   border: none ;
-  font-size: .75em ;
+  font-size: .8em ;
 }
 
 /** REMOVE button **/
-.remove {
-  padding: 0px ;
+.material-symbols-rounded[name="remove"] {
   background: none ;
   color: #ff0000 ;
-  font-size: .75em ;
+  font-size: .8em ;
   border: none ;
   cursor: pointer ;
+  :active {
+    color: #ff9fff ;
+  }
 }
-.remove:active {
-  color: #ff9fff ;
+
+.material-symbols-rounded:hover {
+  color: green ;
+}
+
+.material-symbols-rounded:active {
+  color: orangered ;
 }
 
 /*************************************/
