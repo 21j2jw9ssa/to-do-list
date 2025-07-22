@@ -4,7 +4,7 @@
 body {
   line-height: 1 ;
   text-align: center ;
-  font-family: "Roboto", "franklin gothic", "Ubuntu", Verdana ;
+  font-family: "Roboto", "franklin gothic", "Ubuntu", Verdana, sans-serif ;
   background-color: #ffffff ;
   padding: 10px ;
   font-size: 18px ;
@@ -57,6 +57,7 @@ a {
 
 /** All function buttons but the one named "add item" **/
 .listFunc:not( [ id="addItem" ] ) {
+  box-sizing: border-box ;
   display: inline-flex ; /* Make a behave like a flexbox button */
   align-items: center ;
   justify-content: center ;
@@ -67,12 +68,12 @@ a {
   background-color: #ff9f9f ;
   border-radius: 6.25px ;
   border-style: none ;
-  padding: 0px ;
+  padding: 0px 10px ;
 }
 
 /** All function buttons **/
 .listFunc {
-  font-family: "Roboto", "franklin gothic", "Ubuntu", Verdana ;
+  font-family: "Roboto", "franklin gothic", "Ubuntu", Verdana, sans-serif ;
   cursor: pointer ;
 }
 .listFunc:hover {
@@ -172,6 +173,5 @@ a {
 @media (max-width: 500px) {
   .listFunc:not( [ id="addItem" ] )  {
     font-size: 125% ;
-    /* width: fit-content ; */
   }
 }
