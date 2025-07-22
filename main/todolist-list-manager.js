@@ -142,6 +142,49 @@ const gLM = ( function() {
   } // ReadStringsIntoTheList() PRIVATE
 
   /**
+   * Generates an edit button for an item
+   */
+  function NewEditButton() {
+    const btn = document.createElement("button") ;
+    btn.className = "material-symbols-rounded" ;
+    btn.name = "edit" ;
+    btn.textContent = "edit_square" ;
+    // btn1.textContent = "🖊️" ;
+    
+    return btn ;
+  } // NewEditButton()
+  
+  /**
+   * Generates an remove button for an item
+  */
+  function NewDeleteButton() {
+    const btn = document.createElement("button") ;
+    btn.className = "material-symbols-rounded" ;
+    btn.name = "remove" ;
+    btn.textContent = "delete" ;
+    // btn2.textContent = "🗑️" ;
+
+    return btn ;
+  } // NewDeleteButton()
+
+  /**
+   * Generates a checkbox element
+   */
+  function NewCheckbox() {
+    const chkbox = document.createElement("input") ;
+    chkbox.type = "checkbox" ;
+    chkbox.className = chkbox.name = "done" ; // as a checkbox
+
+    const chkmark = document.createElement("span") ;
+    chkmark.className = "checkmark" ;
+
+    const chkbox_container = document.createElement("label") ;
+    chkbox_container.className = "checkbox-container" ;
+    chkbox_container.append( chkbox, chkmark ) ;
+    return chkbox_container ;
+  } // NewCheckbox()
+
+  /**
    * Write all list items to the buffer.
    */
   function WriteAllItemsIntoTheList( batchSize = 500 ) {
@@ -154,35 +197,19 @@ const gLM = ( function() {
         const objAttr = document.createElement("li") ;
         objAttr.draggable = true ;
         objAttr.className = "items" ; // To have the browser correctly autofilling the form
-  
-        // a checkbox
-        const chkbox = document.createElement("input") ;
-        chkbox.type = "checkbox" ;
-        chkbox.className = chkbox.name = "done" ; // as a checkbox
 
-        const chkmark = document.createElement("span") ;
-        chkmark.className = "checkmark" ;
+        const chkbox_container = NewCheckbox() ; // a checkbox
 
-        const chkbox_container = document.createElement("label") ;
-        chkbox_container.className = "checkbox-container" ;
-        chkbox_container.append( chkbox, chkmark ) ;
-  
         // tag for item contents
         const tagElem = document.createElement("tag") ;
         tagElem.textContent = gList[n].contents ;
-  
-        // an 'edit' button
-        const btn1 = document.createElement("button") ;
-        btn1.className = "edit" ;
-        btn1.textContent = "🖊️" ;
-  
-        // a 'remove' button
-        const btn2 = document.createElement("button") ;
-        btn2.className = "remove" ;
-        btn2.textContent = "🗑️" ;
+
+        const btn1 = NewEditButton() ;   // an 'edit' button
+        const btn2 = NewDeleteButton() ; // a 'remove' button
 
         if ( gList[n].checked ) {// checkbox-container checkmark
-          chkbox.checked = true ;
+          const chkboxStat = chkbox_container.getElementsByTagName("input")[0] ;
+          chkboxStat.checked = true ;
           tagElem.style.textDecoration = "line-through" ;
           tagElem.style.opacity = 0.5 ;
         } // if: the item has been done
@@ -227,18 +254,16 @@ const gLM = ( function() {
    * @param mode order of the final result; may be `ascending` or `descending`
    */
   function SortItemsByCheckStatus(mode) {
-    if ( mode === ORDER.ASCENDING )
-      gList.sort( ( a, b ) => a.checked - b.checked ) ;
-    else
-      gList.sort( ( a, b ) => b.checked - a.checked ) ;
+    if ( mode === ORDER.ASCENDING ) gList.sort( ( a, b ) => a.checked - b.checked ) ;
+    else gList.sort( ( a, b ) => b.checked - a.checked ) ;
   } // SortItemsByCheckStatus()
 
   return {
-    // The following methods are PUBLIC.
+    // The following methods are PUBLIC to global scope.
     /**
      * Inserts multiple items at once into the list array.
      * 
-     * @param  {...any} elem elements to insert into the list 
+     * @param {...any} elem elements to insert into the list 
      */
     PushItemToList( ctnt, chked ) { gList.push( { contents: ctnt, checked: chked } ) ; },  // PUBLIC
 
@@ -316,7 +341,6 @@ const gLM = ( function() {
      * DIFFERENT storages.
      */
     SaveList() {
-
       // Latest code: save it as an array of JSON items
       localStorage.setItem( localStorageName, JSON.stringify(gList) ) ;
     }, // PUBLIC
@@ -365,7 +389,7 @@ const gLM = ( function() {
      * Sort all list items by a specific property;
      * 
      * the final result is in an ascending order.
-     * @param prop property which the item list buffer is sorted by.
+     * @param prop property which the item list buffer is sorted by. `CONTENTS` or `CHECKBOX_STATUS` only
      * @param mode The order of sorting result. May be `ascending` or `descending` only
      */
     SortListItems( prop, mode ) {
@@ -388,35 +412,10 @@ const gLM = ( function() {
     }, // SortListItemsASC(): via quicksort for efficiency
 
     /**
-     * Sort all list items by a specific property;
-     * 
-     * the final result is in a descending order.
-     * @param prop property which the item list buffer is sorted by.
+     * Generates a pop-up message using Sweetalert2
+     * @param {String} type type of pop-up message; must be `error`, `warning`, `success` or `info`
+     * @param {String} msg message contents
      */
-    SortListItemsDSC(prop) {
-      ClearBuffer() ;
-
-      const stack = [ 0, gList.length - 1 ] ; // Use `-2` because pairs are two elements
-    
-      while ( stack.length > 0 ) {
-        const end = stack.pop(), start = stack.pop() ;
-        if ( start >= end ) continue ;
-    
-        let i = start - 1 ; // Start at the pair before the first
-        for ( let j = start ; j < end ; j += 1 ) {
-          if ( gList[j].contents.localeCompare( gList[end].contents ) > 0 ) {
-            SwapItems( ++i, j ) ;
-          } // if the current content is smaller than the pivot
-        }
-    
-        SwapItems( i + 1, end ) ; // Move pivot pair ( index i + 2 ) to its correct position
-        stack.push( start, i, i + 2, end ) ; // Push left and right partition indices
-      } // while stack isn't empty
-
-      WriteAllItemsIntoTheList() ;
-    }, // SortListItemsDSC(): via quicksort for efficiency
-
-    //// FUNC9: POP-UP ALERTS
     PopUpMsg( type, msg ) {
       type = type.trim().toLowerCase() ;
       try {
@@ -442,6 +441,33 @@ const gLM = ( function() {
         console.error( err ) ;
       }
     }, // PopUpMsg()
+
+    /**
+     * Adding an item to the to-do list
+     */
+    AddItem() {
+      const val = document.getElementById( "inputItem" ).value ;
+      const objAttr = document.createElement("li") ;
+      const buf = document.getElementById( "buffer" ) ;
+
+      objAttr.draggable = true ;
+      objAttr.className = "items" ; // To have the browser correctly autofilling the form
+
+      const chkbox_container = NewCheckbox() ; // a checkbox
+
+      // tag for item contents
+      const tagElem = document.createElement("tag") ;
+      tagElem.textContent = val ;
+
+      const btn1 = NewEditButton() ;   // as an edit button
+      const btn2 = NewDeleteButton() ; // as a delete button
+
+      objAttr.dataset.index = buf.children.length ;
+      objAttr.append( chkbox_container, tagElem, " ", btn1, btn2 ) ;
+
+      buf.appendChild( objAttr ) ;
+      gLM.PushItemToList( val, false ) ; // New item default: not checked
+    },
 
     /////////////////////////
     //////// SETTERS ////////
