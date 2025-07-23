@@ -89,7 +89,7 @@ listBuffer.addEventListener( "click", function( event ) {
 
 document.getElementById( "addItem" ).addEventListener( "click", function() {
   let inp = document.getElementById( "inputItem" ) ;
-  if ( inp.value !== "" ) {
+  if ( inp.value.trim() !== "" ) {
     gLM.AddItem() ;
     inp.value = "" ;
   } else {
