@@ -150,7 +150,7 @@ const gLM = ( function() {
     btn.name = "edit" ;
     btn.textContent = "edit_square" ;
     // btn1.textContent = "🖊️" ;
-    
+
     return btn ;
   } // NewEditButton()
   
@@ -219,7 +219,7 @@ const gLM = ( function() {
         } // else: the item is yet to be done
 
         objAttr.dataset.index = n ;
-        objAttr.append( chkbox_container, tagElem, " ", btn1, btn2 ) ;
+        objAttr.append( chkbox_container, tagElem, btn1, btn2 ) ;
         buf.append( objAttr ) ;
       } // for: each item
 
@@ -463,7 +463,7 @@ const gLM = ( function() {
       const btn2 = NewDeleteButton() ; // as a delete button
 
       objAttr.dataset.index = buf.children.length ;
-      objAttr.append( chkbox_container, tagElem, " ", btn1, btn2 ) ;
+      objAttr.append( chkbox_container, tagElem, btn1, btn2 ) ;
 
       buf.appendChild( objAttr ) ;
       gLM.PushItemToList( val, false ) ; // New item default: not checked
