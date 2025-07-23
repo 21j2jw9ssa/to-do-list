@@ -53,7 +53,7 @@ tag {
 .checkmark {
   position: absolute ;
   left: 0 ;
-  bottom: 0px ;
+  bottom: -2px ;
   height: var(--chkboxSize) ;
   width: var(--chkboxSize) ;
   background-color: #eee ;
