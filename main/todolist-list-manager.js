@@ -145,7 +145,7 @@ const gLM = ( function() {
    * Generates an edit button for an item
    */
   function NewEditButton() {
-    const btn = document.createElement("button") ;
+    const btn = document.createElement("div") ;
     btn.className = "material-symbols-rounded" ;
     btn.name = "edit" ;
     btn.textContent = "edit_square" ;
@@ -158,7 +158,7 @@ const gLM = ( function() {
    * Generates an remove button for an item
   */
   function NewDeleteButton() {
-    const btn = document.createElement("button") ;
+    const btn = document.createElement("div") ;
     btn.className = "material-symbols-rounded" ;
     btn.name = "remove" ;
     btn.textContent = "delete" ;
