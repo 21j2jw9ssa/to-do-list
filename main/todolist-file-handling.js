@@ -45,13 +45,19 @@ async function openFile() {
   
     input.onchange = () => {
       const file = input.files[0] ;
-      console.log(file.type) ;
+
       if ( file ) {
-        if ( file.type === "text/plain" ) resolve( file ) ;
-        else reject( new Error( "Not a text file" ) ) ;
+        if ( file.type === "text/plain" ) {
+          resolve( file ) ;
+        } else {
+          reject({
+            name: "FileTypeError",
+            msg: `Imported file '${file.name}' is not a plain text file`
+          }) ;
+        }
       }
       else {
-        reject( new Error( "No file selected" ) ) ;
+        reject( "No file selected" ) ;
       }
     };
   
@@ -134,13 +140,15 @@ async function ImportFile() {
       }
     }) ;
   } catch (err) {
-    console.log(err) ;
     if ( err.name === "FileContentError" ) {
       gLM.PopUpMsg( "error", err.msg ) ;
     } // if: not valid list
+    else if ( err.name === "FileTypeError" ) {
+      gLM.PopUpMsg( "error", err.msg ) ;
+    } // if: file type is not text
     else if ( err.name !== "AbortError" ) {
       gLM.PopUpMsg( "error", "Cannot import list from the file" ) ;
-    } // if: not abort errors
+    } // if: error occurs without cancelling choosing a file
   }
   // }) ;
 } // ImportList()
