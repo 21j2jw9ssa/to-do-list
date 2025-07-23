@@ -82,35 +82,26 @@ tag {
 }
 
 /** EDIT button **/
-.material-symbols-rounded[name="edit"] {
+.material-symbols-rounded {
   vertical-align: middle ;
   box-sizing: content-box ;
   background: none ;
-  text-align: center ;
+  width: fit-content ;
   cursor: pointer ;
   border: none ;
   font-size: 1em ;
 }
 
-/** REMOVE button **/
-.material-symbols-rounded[name="remove"] {
-  vertical-align: middle ;
-  box-sizing: content-box ;
-  padding: 0px ;
-  background: none ;
-  color: #ff0000 ;
-  font-size: 1em ;
-  border: none ;
-  cursor: pointer ;
+.material-symbols-rounded {
+  padding-left: 5px ;
 }
 
-.material-symbols-rounded:hover {
-  cursor: pointer ;
-  color: green ;
+.material-symbols-rounded:nth-of-type(even) {
+  color: red ;
 }
 
 .material-symbols-rounded:active {
-  color: orangered ;
+  color: yellowgreen ;
 }
 
 /*************************************/
