@@ -4,7 +4,7 @@
 /***** GLOBAL VARIABLES *****/
 /****************************/
 :root {
-  --boxSize: 20px ; /* checkbox size */
+  --chkboxSize: 20px ;
 }
 
 /*******************************/
@@ -30,7 +30,7 @@
 /** ITEM CONTENTS **/
 tag {
   list-style-type: inherit ;
-  padding-left: 6px ;
+  padding-left: 10px ;
 }
 
 /** CHECKBOX button **/
@@ -53,9 +53,9 @@ tag {
 .checkmark {
   position: absolute ;
   left: 0 ;
-  top: 2px ;
-  height: var(--boxSize) ;
-  width: var(--boxSize) ;
+  bottom: 0px ;
+  height: var(--chkboxSize) ;
+  width: var(--chkboxSize) ;
   background-color: #eee ;
   border: 2px solid #ccc ;
   border-radius: 4px ;
@@ -82,29 +82,30 @@ tag {
 }
 
 /** EDIT button **/
-
 .material-symbols-rounded[name="edit"] {
-  padding: 0px ;
+  vertical-align: middle ;
+  box-sizing: content-box ;
   background: none ;
   text-align: center ;
   cursor: pointer ;
   border: none ;
-  font-size: .8em ;
+  font-size: 1em ;
 }
 
 /** REMOVE button **/
 .material-symbols-rounded[name="remove"] {
+  vertical-align: middle ;
+  box-sizing: content-box ;
+  padding: 0px ;
   background: none ;
   color: #ff0000 ;
-  font-size: .8em ;
+  font-size: 1em ;
   border: none ;
   cursor: pointer ;
-  :active {
-    color: #ff9fff ;
-  }
 }
 
 .material-symbols-rounded:hover {
+  cursor: pointer ;
   color: green ;
 }
 
