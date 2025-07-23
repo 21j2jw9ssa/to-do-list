@@ -45,8 +45,14 @@ async function openFile() {
   
     input.onchange = () => {
       const file = input.files[0] ;
-      if ( file ) resolve( file ) ;
-      else reject( new Error( "No file selected" ) ) ;
+      console.log(file.type) ;
+      if ( file ) {
+        if ( file.type === "text/plain" ) resolve( file ) ;
+        else reject( new Error( "Not a text file" ) ) ;
+      }
+      else {
+        reject( new Error( "No file selected" ) ) ;
+      }
     };
   
     // Trigger the file input
@@ -59,6 +65,7 @@ async function ImportFile() {
   try {
     const file = await openFile(), text = await file.text() ;
     const lines = text.split( "\r\n" ), newList = [] ;
+    console.log(file) ;
 
     for ( let nLine = 1 ; nLine <= lines.length ; nLine++ ) {
       let curLine = lines[ nLine - 1 ] ;
@@ -127,6 +134,7 @@ async function ImportFile() {
       }
     }) ;
   } catch (err) {
+    console.log(err) ;
     if ( err.name === "FileContentError" ) {
       gLM.PopUpMsg( "error", err.msg ) ;
     } // if: not valid list
