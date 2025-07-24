@@ -4,7 +4,7 @@
 /***** GLOBAL VARIABLES *****/
 /****************************/
 :root {
-  --chkboxSize: 20px ;
+  --chkboxSize: 25px ;
 }
 
 /*******************************/
@@ -25,18 +25,19 @@
   font-size: 28px;
   list-style-type: none ; /* no notations */
   vertical-align: top ;
+  padding: 0px ;
 }
 
 /** ITEM CONTENTS **/
 tag {
   list-style-type: inherit ;
-  padding-left: 16px ;
+  padding-left: calc( var(--chkboxSize) * .4 ) ;
 }
 
 /** CHECKBOX button **/
 .done {
-  width: var(--boxSize) ;
-  height: var(--boxSize) ;
+  width: var(--chkboxSize) ;
+  height: var(--chkboxSize) ;
 }
 .checkbox-container {
   display: inline-flex ;
@@ -53,7 +54,7 @@ tag {
 .checkmark {
   position: absolute ;
   left: 0 ;
-  bottom: -2px ;
+  bottom: 0px ;
   height: var(--chkboxSize) ;
   width: var(--chkboxSize) ;
   background-color: #eee ;
@@ -72,31 +73,29 @@ tag {
 }
 .checkbox-container input:checked ~ .checkmark::after {
   display: block ;
-  left: 6px ;
-  top: 1px ;
-  width: 6px ;
-  height: 12px ;
+  left: calc( var(--chkboxSize) * 0.3 ) ;
+  top: calc( var(--chkboxSize) * .05 ) ;
+  width: calc( var(--chkboxSize) * 0.3 ) ;
+  height: calc( var(--chkboxSize) * 0.6 ) ;
   border: solid white ;
-  border-width: 0 2px 2px 0 ;
+  border-width: 0 calc( var(--chkboxSize) * 0.08 ) calc( var(--chkboxSize) * .08 ) 0 ;
   transform: rotate(45deg) ;
 }
 
 /** EDIT button **/
 .material-symbols-rounded {
-  vertical-align: middle ;
+  /* vertical-align: middle ; */
   box-sizing: content-box ;
   background: none ;
-  width: fit-content ;
+  width: 20px ;
   cursor: pointer ;
   border: none ;
-  font-size: 1em ;
+  padding-left: 3px 0px ;
+  /* font-size: 100px ; */
 }
 
-.material-symbols-rounded {
-  padding-left: 5px ;
-}
-
-.material-symbols-rounded:nth-of-type(even) {
+.material-symbols-rounded[name="remove"] {
+  /* font-size: 30px ; */
   color: red ;
 }
 
