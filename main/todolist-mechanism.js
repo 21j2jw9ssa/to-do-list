@@ -32,32 +32,17 @@ function UpdateDropdownState() {
 const listBuffer = document.getElementById( "buffer" ) ;
 
 listBuffer.addEventListener( "click", function( event ) {
-  if ( event.target.name === "remove" ) {
+  console.log( `CLICKING: ${event.target.dataset.typeName}` ) ;
+  if ( event.target.dataset.typeName === "remove" ) {
     const parentElem = event.target.parentElement ; // Get the parent of the clicked ".remove" element
     const parentIndex = Array.from( parentElem.parentNode.children ).indexOf( parentElem ) ;
-    
+
     gLM.RmvItemFromList( parentIndex ) ;
     parentElem.remove() ; // Remove the parent element from the DOM
-    
+
     gLM.UpdateAllItemsIndices() ;
   } // if: remove an item in the list
-  else if ( event.target.name === "done" ) {
-    const chkbox = event.target ;
-    const tagElem = chkbox.parentElement.parentElement.querySelector("tag") ;
-    const index = +chkbox.parentElement.parentElement.dataset.index ;
-
-    if ( chkbox.checked ) {
-      tagElem.style.textDecoration = "line-through" ;
-      tagElem.style.opacity = 0.5 ;
-    } // if: the item has been done
-    else {
-      tagElem.style.textDecoration = "none" ;
-      tagElem.style.opacity = 1 ;
-    } // else: the item is yet to be done
-
-    gLM.EditItemChk( index, chkbox.checked ) ;
-  } // else if: have a specific item checked / unchecked
-  else if ( event.target.name === "edit" ) {
+  else if ( event.target.dataset.typeName === "edit" ) {
     const parentElem = event.target.parentElement ;
     const tagElem = parentElem.querySelector("tag") ;
     const index = +parentElem.dataset.index ;
@@ -79,6 +64,22 @@ listBuffer.addEventListener( "click", function( event ) {
       } // if editing permitted
     }) ;
   } // else if: get the contents of a specific item adjusted
+  else if ( event.target.name === "done" ) {
+    const chkbox = event.target ;
+    const tagElem = chkbox.parentElement.parentElement.querySelector("tag") ;
+    const index = +chkbox.parentElement.parentElement.dataset.index ;
+
+    if ( chkbox.checked ) {
+      tagElem.style.textDecoration = "line-through" ;
+      tagElem.style.opacity = 0.5 ;
+    } // if: the item has been done
+    else {
+      tagElem.style.textDecoration = "none" ;
+      tagElem.style.opacity = 1 ;
+    } // else: the item is yet to be done
+
+    gLM.EditItemChk( index, chkbox.checked ) ;
+  } // else if: have a specific item checked / unchecked
 
   UpdateDropdownState() ;
 }) ;
