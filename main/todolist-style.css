@@ -26,7 +26,7 @@
   font-size: 28px;
   list-style-type: none ; /* no notations */
   vertical-align: top ;
-  padding: 0px ;
+  padding: calc( var(--chkboxSize) / 20 ) 0px ;
 }
 
 /** ITEM CONTENTS **/
@@ -61,7 +61,6 @@ tag {
   background-color: #eee ;
   border: 2px solid #ccc ;
   border-radius: 4px ;
-  /* transition: background-color 0.2s ease ; */
 }
 .checkbox-container input:checked ~ .checkmark {
   background-color: #4caf50 ;
@@ -74,32 +73,43 @@ tag {
 }
 .checkbox-container input:checked ~ .checkmark::after {
   display: block ;
-  left: calc( var(--chkboxSize) * 0.3 ) ;
-  top: calc( var(--chkboxSize) * .05 ) ;
-  width: calc( var(--chkboxSize) * 0.3 ) ;
-  height: calc( var(--chkboxSize) * 0.6 ) ;
+  left: calc( var(--chkboxSize) * .3 ) ;
+  top: calc( var(--chkboxSize) / 20 ) ;
+  width: calc( var(--chkboxSize) * .3 ) ;
+  height: calc( var(--chkboxSize) * .6 ) ;
   border: solid white ;
   border-width: 0 calc( var(--chkboxSize) * 0.08 ) calc( var(--chkboxSize) * .08 ) 0 ;
   transform: rotate(45deg) ;
 }
 
-/** EDIT button **/
+/** EDIT & DELETE buttons **/
 .material-symbols-rounded {
-  /* vertical-align: middle ; */
   box-sizing: content-box ;
   background: none ;
   width: 20px ;
   cursor: pointer ;
   border: none ;
-  padding-left: 3px 0px ;
+  padding: 0px calc( var(--chkboxSize) / 5 ) ;
 }
 
+/** EDIT buttons **/
+.material-symbols-rounded[data-type-name="edit"] {
+  font-size: .9em ;
+}
+
+/** DELETE buttons **/
 .material-symbols-rounded[data-type-name="remove"] {
   color: red ;
+  font-size: .9em ;
+}
+
+.material-symbols-rounded:hover {
+  opacity: .6 ;
 }
 
 .material-symbols-rounded:active {
-  color: yellowgreen ;
+  opacity: 1 ;
+  color: purple ;
 }
 
 /*************************************/
