@@ -57,6 +57,7 @@ a {
 
 /** All function buttons but the one named "add item" **/
 .listFunc:not( [ id="addItem" ] ) {
+  line-height: 25px ;
   box-sizing: border-box ;
   display: inline-flex ; /* Make a behave like a flexbox button */
   align-items: center ;
@@ -69,6 +70,7 @@ a {
   border-radius: 6.25px ;
   border-style: none ;
   padding: 0px 10px ;
+  flex: 1 1 auto ;
 }
 
 /** All function buttons **/
@@ -94,11 +96,8 @@ a {
 /***********************************************************/
 /***** NEW ITEM INPUT SECTION (WITH 'ADD ITEM' BUTTON) *****/
 /***********************************************************/
-.custom-select {
-  font-size: 18px ;
-}
 #input_wrapper {
-  padding: 12px 0px ;
+  padding: 24px 0px ;
   display: flex ;
   width: 100% ;
   margin: auto ;
@@ -146,6 +145,9 @@ a {
 /***************************************/
 /***** DROPDOWN FOR ORDERING ITEMS *****/
 /***************************************/
+/* .custom-select {
+  font-size: 18px ;
+} */
 #dropdown_list {
   margin: 10px 0px ;
   font-size: 18px ;
