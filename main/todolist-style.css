@@ -25,7 +25,7 @@
 .items {
   font-size: 28px;
   list-style-type: none ; /* no notations */
-  vertical-align: top ;
+  /* vertical-align: top ; */
   padding: calc( var(--chkboxSize) / 20 ) 0px ;
 }
 
@@ -55,7 +55,6 @@ tag {
 .checkmark {
   position: absolute ;
   left: 0 ;
-  bottom: 0px ;
   height: var(--chkboxSize) ;
   width: var(--chkboxSize) ;
   background-color: #eee ;
