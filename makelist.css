@@ -1,3 +1,9 @@
+:root { /* 2 : 1 : 4 (dec) */
+  --bg-colour:        #bfdf7f ; /* -40, -20, -80 (hex) */
+  --bg-colour-hover:  #9fcf4f ; /* -60, -30, -b0 (hex) */
+  --bg-colour-active: #7fbf00 ; /* -80, -40, -100 (hex) */
+}
+
 /**********************/
 /***** BACKGROUND *****/
 /**********************/
@@ -5,10 +11,13 @@ body {
   line-height: 1 ;
   text-align: center ;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif ;
-  background-color: #ffffff ;
+  background-color: white ;
   padding: 10px ;
   font-size: 18px ;
   margin: 0 ;
+  max-width: 1000px ;
+  margin-left: auto ;
+  margin-right: auto ;
 }
 
 a {
@@ -20,7 +29,7 @@ a {
 /**********************/
 #mainTitle {
   font-size: 48px ;
-  font-weight: normal ;
+  font-weight: 500 ;
   margin-bottom: 20px ;
 }
 
@@ -31,6 +40,8 @@ a {
   display: flex ; /* make sure each tab has the SAME width */
   flex: 100% ;
   text-align: center ;
+  margin-left: auto ;
+  margin-right: auto ;
   background-color: #3f3f3f
 }
 #nav_of_links a {
@@ -39,16 +50,23 @@ a {
   flex: 2 ;
   font-size: 1.25em ;
   color: white ;
+  transition: background-color .1s ease ;
 }
 
 /* When pointer is at the navigation bar (desktop only) */
 #nav_of_links a:hover {
-  background-color: #ff7f9f ;
+  background-color: var(--bg-colour-hover) ;
+}
+
+#nav_of_links a:active {
+  color: black ;
+  background-color: var(--bg-colour-active);
 }
 
 /** Current page indicator **/
 #nav_of_links a.current_page {
-  background-color: #ff7f9f ;
+  color: black ;
+  background-color: var(--bg-colour-hover) ;
 }
 
 /******************************/
@@ -66,7 +84,7 @@ a {
   height: 96px ;
   width: 49% ;
   color: black ;
-  background-color: #ff9f9f ;
+  background-color: var(--bg-colour) ;
   border-radius: 6.25px ;
   border-style: none ;
   padding: 0px 10px ;
@@ -77,13 +95,14 @@ a {
 .listFunc {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif ;
   cursor: pointer ;
+  transition: background-color .125s ease ;
 }
 .listFunc:hover {
-  background-color: #ff7f7f ;
+  background-color: var(--bg-colour-hover) ;
 }
 .listFunc:active {
-  background-color: #ff5f5f ;
-  color: #ffffff ;
+  background-color: var(--bg-colour-active) ;
+  color: white ;
 }
 
 .btn_container {
@@ -108,7 +127,6 @@ a {
   padding: 12px 6px ;
   font-size: 18px ;
   border: 2px solid #7f7f7f ;
-  border-right: none ;
   border-top-left-radius: 24px ;
   border-bottom-left-radius: 24px ;
   border-top-right-radius: 0px ;
@@ -126,38 +144,41 @@ a {
   padding: 0px 8px ;
   font-size: 18px ;
   color: black ;
-  background-color: #ff9f9f ;
+  background-color: var(--bg-colour) ;
   border: 2px solid #7f7f7f ;
   border-top-right-radius: 24px ;
   border-bottom-right-radius: 24px ;
   text-decoration: none ;
+  border-left: none ;
   cursor: pointer ;
 }
 #addItem:hover {
-  border: 2px solid purple ;
-  background-color: #ff7f7f ;
+  background-color: var(--bg-colour-hover) ;
 }
 #addItem:active {
-  background-color: #ff5f5f ;
-  color: #ffffff ;
+  background-color: var(--bg-colour-active) ;
+  color: white ;
 }
 
 /***************************************/
 /***** DROPDOWN FOR ORDERING ITEMS *****/
 /***************************************/
-/* .custom-select {
+.custom-select {
+  margin: 20px 0px ;
   font-size: 18px ;
-} */
-#dropdown_list {
-  margin: 10px 0px ;
+}
+
+#dropdown-list {
+  margin: 20px 0px ;
   font-size: 18px ;
-  padding: 10px 0px ;
+  padding: 10px 10px ;
+  border-radius: 50px ;
   cursor: pointer ;
 }
-#dropdown_list:hover {
+#dropdown-list:hover {
   background-color: #efefef ;
 }
-#dropdown_list:focus {
+#dropdown-list:focus {
   background-color: #dfdfdf ;
 }
 
@@ -169,11 +190,30 @@ a {
   margin-bottom: 10px ;
 }
 
-/*************************************/
-/***** FOR LARGER-SCREENED USERS *****/
-/*************************************/
-@media (max-width: 500px) {
+/**************************************/
+/***** FOR SMALLER-SCREENED USERS *****/
+/**************************************/
+@media (max-width: 700px) {
   .listFunc:not( [ id="addItem" ] )  {
     font-size: 125% ;
+  }
+}
+
+/***************************************/
+/***** FOR DESKTOP/LAPTOP/TV USERS *****/
+/***************************************/
+@media (min-width: 700px) {
+  .listFunc:not( [ id="addItem" ] )  {
+    line-height: 30px ;
+    width: 30% ;
+    flex: 1 1 auto ;
+  }
+
+  .listFunc:not( [ id="addItem" ] ):nth-child(odd) {
+    order: 1; /* top row */
+  }
+
+  .listFunc:not( [ id="addItem" ] ):nth-child(even) {
+    order: 2; /* bottom row */
   }
 }
