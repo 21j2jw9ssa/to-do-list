@@ -1,219 +1,139 @@
-:root { /* 2 : 1 : 4 (dec) */
-  --bg-colour:        #bfdf7f ; /* -40, -20, -80 (hex) */
-  --bg-colour-hover:  #9fcf4f ; /* -60, -30, -b0 (hex) */
-  --bg-colour-active: #7fbf00 ; /* -80, -40, -100 (hex) */
+@import "../makelist.css";
+
+/****************************/
+/***** GLOBAL VARIABLES *****/
+/****************************/
+:root {
+  --chkboxSize: 25px ;
 }
 
-/**********************/
-/***** BACKGROUND *****/
-/**********************/
-body {
-  line-height: 1 ;
-  text-align: center ;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif ;
-  background-color: white ;
-  padding: 10px ;
-  font-size: 18px ;
-  margin: 0 ;
-  max-width: 1000px ;
-  margin-left: auto ;
-  margin-right: auto ;
-}
-
-a {
-  text-decoration: none ;
-}
-
-/**********************/
-/***** MAIN TITLE *****/
-/**********************/
-#mainTitle {
-  font-size: 48px ;
-  font-weight: 500 ;
-  margin-bottom: 20px ;
-}
-
-/**************************/
-/***** NAVIGATION BAR *****/
-/**************************/
-#nav_of_links {
-  display: flex ; /* make sure each tab has the SAME width */
-  flex: 100% ;
-  text-align: center ;
-  margin-left: auto ;
-  margin-right: auto ;
-  background-color: #3f3f3f
-}
-#nav_of_links a {
-  padding: 15px 15px ;
-  text-decoration: none ; /* remove the usual UNDERLINE */
-  flex: 2 ;
-  font-size: 1.25em ;
-  color: white ;
-  transition: background-color .1s ease ;
-}
-
-/* When pointer is at the navigation bar (desktop only) */
-#nav_of_links a:hover {
-  background-color: var(--bg-colour-hover) ;
-}
-
-#nav_of_links a:active {
-  color: black ;
-  background-color: var(--bg-colour-active);
-}
-
-/** Current page indicator **/
-#nav_of_links a.current_page {
-  color: black ;
-  background-color: var(--bg-colour-hover) ;
+/*******************************/
+/***** LIST BUFFER SECTION *****/
+/*******************************/
+#buffer {
+  text-align: left ;
+  font-size: 36px ;
+  border: 4px dashed var(--bg-colour-hover) ;
+  border-radius: 10px ;
 }
 
 /******************************/
-/***** TO-DO LIST BUTTONS *****/
+/***** LIST ITEMS SECTION *****/
 /******************************/
 
-/** All function buttons but the one named "add item" **/
-.listFunc:not( [ id="addItem" ] ) {
-  line-height: 25px ;
-  box-sizing: border-box ;
-  display: inline-flex ; /* Make a behave like a flexbox button */
+/** INDIVIDUAL ITEM ENTITIES **/
+.items {
+  font-size: 28px;
+  list-style-type: none ; /* no notations */
+  padding: calc( var(--chkboxSize) / 20 ) 0px ;
+}
+
+/** ITEM CONTENTS **/
+tag {
+  list-style-type: inherit ;
+  padding-left: calc( var(--chkboxSize) * .4 ) ;
+}
+
+/** CHECKBOX button **/
+.done {
+  width: var(--chkboxSize) ;
+  height: var(--chkboxSize) ;
+}
+.checkbox-container {
+  display: inline-flex ;
   align-items: center ;
-  justify-content: center ;
-  font-size: 150% ;
-  height: 96px ;
-  width: 49% ;
-  color: black ;
-  background-color: var(--bg-colour) ;
-  border-radius: 6.25px ;
-  border-style: none ;
-  padding: 0px 10px ;
-  flex: 1 1 auto ;
-}
-
-/** All function buttons **/
-.listFunc {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif ;
   cursor: pointer ;
-  transition: background-color .125s ease ;
+  position: relative ;
 }
-.listFunc:hover {
-  background-color: var(--bg-colour-hover) ;
-}
-.listFunc:active {
-  background-color: var(--bg-colour-active) ;
-  color: white ;
-}
-
-.btn_container {
-  display: flex ;
-  flex-wrap: wrap ;
-  gap: 5px ;
-  justify-content: center ;
-}
-
-/***********************************************************/
-/***** NEW ITEM INPUT SECTION (WITH 'ADD ITEM' BUTTON) *****/
-/***********************************************************/
-#input_wrapper {
-  padding: 24px 0px ;
-  display: flex ;
-  width: 100% ;
-  margin: auto ;
-}
-#inputItem {
-  flex: 1 ;
-  width: 30% ;
-  padding: 12px 6px ;
-  font-size: 18px ;
-  border: 2px solid #7f7f7f ;
-  border-top-left-radius: 24px ;
-  border-bottom-left-radius: 24px ;
-  border-top-right-radius: 0px ;
-  border-bottom-right-radius: 0px ;
-  outline: none ;
-}
-
-/*********************************************************/
-/***** 'ADD ITEM BUTTON' (INTEGRATED WITH THE INPUT) *****/
-/*********************************************************/
-#addItem {
-  display: flex ; /* key part */
-  align-items: center ; /* vertical centering */
-  justify-content: center ; /* horizontal centering */
-  padding: 0px 8px ;
-  font-size: 18px ;
-  color: black ;
-  background-color: var(--bg-colour) ;
-  border: 2px solid #7f7f7f ;
-  border-top-right-radius: 24px ;
-  border-bottom-right-radius: 24px ;
-  text-decoration: none ;
-  border-left: none ;
+.checkbox-container input {
+  opacity: 0 ;
+  position: relative ;
   cursor: pointer ;
 }
-#addItem:hover {
-  background-color: var(--bg-colour-hover) ;
+.checkmark {
+  position: absolute ;
+  left: 0 ;
+  height: var(--chkboxSize) ;
+  width: var(--chkboxSize) ;
+  background-color: #eee ;
+  border: 2px solid #ccc ;
+  border-radius: 4px ;
 }
-#addItem:active {
-  background-color: var(--bg-colour-active) ;
-  color: white ;
+.checkbox-container input:checked ~ .checkmark {
+  background-color: #4caf50 ;
+  border-color: #4caf50 ;
 }
-
-/***************************************/
-/***** DROPDOWN FOR ORDERING ITEMS *****/
-/***************************************/
-.custom-select {
-  margin: 20px 0px ;
-  font-size: 18px ;
+.checkmark::after {
+  content: "" ;
+  position: absolute ;
+  display: none ;
 }
-
-#dropdown-list {
-  margin: 20px 0px ;
-  font-size: 18px ;
-  padding: 10px 10px ;
-  border-radius: 50px ;
-  cursor: pointer ;
-}
-#dropdown-list:hover {
-  background-color: #efefef ;
-}
-#dropdown-list:focus {
-  background-color: #dfdfdf ;
-}
-
-/***************************/
-/***** LINK TO THE TOP *****/
-/***************************/
-#nav_to_top {
-  width: 100% ; height: 30px ;
-  margin-bottom: 10px ;
+.checkbox-container input:checked ~ .checkmark::after {
+  display: block ;
+  left: calc( var(--chkboxSize) * .3 ) ;
+  top: calc( var(--chkboxSize) / 20 ) ;
+  width: calc( var(--chkboxSize) * .3 ) ;
+  height: calc( var(--chkboxSize) * .6 ) ;
+  border: solid white ;
+  border-width: 0 calc( var(--chkboxSize) * 0.08 ) calc( var(--chkboxSize) * .08 ) 0 ;
+  transform: rotate(45deg) ;
 }
 
 /**************************************/
-/***** FOR SMALLER-SCREENED USERS *****/
+/***** GOOGLE ICONS (online only) *****/
 /**************************************/
-@media (max-width: 700px) {
-  .listFunc:not( [ id="addItem" ] )  {
-    font-size: 125% ;
-  }
+
+/** EDIT & DELETE buttons **/
+.material-symbols-rounded {
+  box-sizing: content-box ;
+  background: none ;
+  width: 20px ;
+  cursor: pointer ;
+  border: none ;
+  padding: 0px calc( var(--chkboxSize) / 5 ) ;
 }
 
-/***************************************/
-/***** FOR DESKTOP/LAPTOP/TV USERS *****/
-/***************************************/
-@media (min-width: 700px) {
-  .listFunc:not( [ id="addItem" ] )  {
-    line-height: 30px ;
-    width: 30% ;
-    flex: 1 1 auto ;
-  }
+/** EDIT buttons **/
+.material-symbols-rounded[data-type-name="edit"] {
+  font-size: .9em ;
+}
 
-  .listFunc:not( [ id="addItem" ] ):nth-child(odd) {
-    order: 1; /* top row */
-  }
+/** DELETE buttons **/
+.material-symbols-rounded[data-type-name="remove"] {
+  color: red ;
+  font-size: .9em ;
+}
 
-  .listFunc:not( [ id="addItem" ] ):nth-child(even) {
-    order: 2; /* bottom row */
-  }
+.material-symbols-rounded:hover {
+  opacity: .6 ;
+}
+
+.material-symbols-rounded:active {
+  opacity: 1 ;
+  color: crimson ;
+}
+
+/**********************************************/
+/***** EMOJIS AS functions (offline only) *****/
+/**********************************************/
+.offline-emoji-labelled {
+  background: none ;
+  border: none ;
+  font-size: 28px ;
+  cursor: pointer ;
+  padding: 0px 0px ;
+}
+
+/***********************/
+/***** SWEETALERTS *****/
+/***********************/
+.swal2-html-container {
+  /* text-align: left ; */
+}
+
+/*************************************/
+/***** FOR LARGER-SCREENED USERS *****/
+/*************************************/
+@media (max-width: 800px) {
+
 }
