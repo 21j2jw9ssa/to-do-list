@@ -30,6 +30,13 @@ function ExportFile() {
         link.href = URL.createObjectURL( blob ) ;                           // create URL object
         link.download = ( resp.value === "" ) ? "to-do list" : resp.value ; // generate file name
 
+        const opSys = navigator.userAgent ;
+        const isIOS = /iPhone|iPad|iPod/i.test(opSys) ;
+
+        if ( gLM.GetTempLocalStorageStat() && isIOS ) {
+          gLM.SetTempLocalStorage() ;
+        } // if: preview file on iOS
+
         // Append link to the document and trigger download
         document.body.appendChild( link ), link.click() ; 
         document.body.removeChild( link ), URL.revokeObjectURL( link.href ) ; // Clean up
