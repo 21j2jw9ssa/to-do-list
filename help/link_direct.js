@@ -13,12 +13,17 @@
 
 document.addEventListener( "DOMContentLoaded", function() {
 
+  const sortItemsDropdown = document.getElementById( "dropdown-list" ) ;
+
   // Direct users to the (sub) topics by the tab selected
-  document.getElementById( "dropdown_list" ).addEventListener( "change", function() {
+  sortItemsDropdown.addEventListener( "change", function() {
     const targetId = this.value ;
     if ( targetId ) {
       const target = document.getElementById( targetId ) ;
       if ( target ) target.scrollIntoView() ;
+      if ( targetId !== "" ) {
+        sortItemsDropdown.getElementsByTagName("option")[0].disabled = true ;
+      }
     }
   });
 
