@@ -4,7 +4,12 @@
 //////// FILE-HANDLING FUNCTIONS ////////
 /////////////////////////////////////////
 
-//// FUNC1: EXPORT THE LIST AS A FILE
+/**
+ * Export the collection of all items in the list buffer
+ * as a file
+ * 
+ * On iOS, given is a preview of a file to download
+ */
 function ExportFile() {
   try {
     swal.fire({
@@ -13,18 +18,17 @@ function ExportFile() {
       inputPlaceholder: "default: to-do list",
       showCancelButton: true,
     }).then( function(resp) {
-      if ( resp.isDismissed ) ;
-      else {
+      if ( ! resp.isDismissed ) {
         let sout = "" ;                                             // text contents to store to file
         for ( let i = 0 ; i < items.length ; i++ ) {
           sout = sout.concat( items[i].textContent, ',' ) ;
           sout = sout.concat( items[i].parentElement.querySelector( "input" ).checked.toString() ) ;
           if ( i + 1 !== items.length ) sout = sout.concat('\r\n') ; // line break for each line-reading
         }
-        const blob = new Blob( [sout], { type: "text/plain" } ) ;           // export type: text files
-        const link = document.createElement( "a" ) ;                        // Create a temporary link element
+        const blob = new Blob( [sout], { type: "text/plain" } ) ;           // export type: plain text
+        const link = document.createElement( "a" ) ;                        // create a temporary link
         link.href = URL.createObjectURL( blob ) ;                           // create URL object
-        link.download = ( resp.value === "" ) ? "to-do list" : resp.value ; // file naming
+        link.download = ( resp.value === "" ) ? "to-do list" : resp.value ; // generate file name
 
         // Append link to the document and trigger download
         document.body.appendChild( link ), link.click() ; 
@@ -36,7 +40,9 @@ function ExportFile() {
   } // catch:
 } // SaveAsTextFile()
 
-//// FUNC2-a: OPEN FILE TO BROWSE TEXT FILES
+/**
+ * Opens a file to have a user select the desired file
+ */
 async function openFile() {
   return new Promise( (resolve, reject) => {
     const input = document.createElement("input") ;
@@ -66,19 +72,20 @@ async function openFile() {
   }) ;
 }
 
-//// FUNC2: IMPORT THE FILE TO GET A LIST
+/**
+ * Imports a file to form a list in the list buffer
+ */
 async function ImportFile() {
   try {
     const file = await openFile(), text = await file.text() ;
     const lines = text.split( "\r\n" ), newList = [] ;
-    console.log(file) ;
 
     for ( let nLine = 1 ; nLine <= lines.length ; nLine++ ) {
       let curLine = lines[ nLine - 1 ] ;
       if ( curLine !== "" ) {
-        let finCmaIdx = curLine.lastIndexOf(",") ;         // index of the final comma on the current line
-        let ctnt = curLine.slice( 0, finCmaIdx ).trim() ;  // item's contents
-        let checked = curLine.slice( finCmaIdx + 1 ).trim() ; // item's checked status
+        let finCmaIdx = curLine.lastIndexOf(",") ;            // find the final comma on the current line
+        let ctnt = curLine.slice( 0, finCmaIdx ).trim() ;     // item's contents
+        let checked = curLine.slice( finCmaIdx + 1 ).trim() ; // item's checkbox status
         if ( ctnt === "" ) {
           throw { // throws an FileContentError pointing out the empty contents
             name: "FileContentError",
@@ -93,7 +100,7 @@ async function ImportFile() {
           } ;
         } // if the item contents is EMPTY
         else if ( checked !== "true" && checked !== "false" ) {
-          throw { // throws an FileContentError pointing out the invalid/missing checked status
+          throw { // throws an FileContentError pointing out the invalid/missing checkbox status
             name: "FileContentError",
             msg:
               `\
@@ -103,8 +110,8 @@ async function ImportFile() {
 
               The checked status must be 'true' or 'false'.
 
-              Instead, we received ${ ( checked !== "" ) ? "" : "there is"}
-              ${ ( checked !== "" ) ? `'${checked}'` : "no checked status" }
+              Instead, we received ${ ( finCmaIdx !== -1 ) ? "" : "there is"}
+              ${ ( finCmaIdx !== -1 ) ? `'${checked}'` : "no checked status" }
               `
           } ;
         } // if the checked property is NEITHER true nor false
@@ -114,41 +121,37 @@ async function ImportFile() {
       } // Skip empty lines
     } // check every line in the imported file
 
-    return new Promise( (resolve, reject) => {
-      if ( navigator.onLine ) {
-        if ( gLM.GetListSize() > 0 ) {
-          swal.fire({
-            allowEscapeKey: false,
-            allowOutsideClick: false,
-            title: 'Import list file?',
-            text: 'Doing so will overwrite the list and become unrecoverable.\
-                   \nWould you like to proceed?',
-            showCancelButton: true
-          }).then( function( wantToLoadFile ) {
-            if ( wantToLoadFile.isConfirmed ) {
-              gLM.OverwriteWithNewList( newList ) ;
-              gLM.PopUpMsg( "success", "List imported successfully" ) ;
-              resolve( "Update list completed" ) ;
-            } // if the user clicks yes
-            else reject( "Decided not to update the list" ) ;
-          }) ;
-        } else {
-          gLM.OverwriteWithNewList( newList ) ;
-          gLM.PopUpMsg( "success", "List imported successfully" ) ;
-          resolve( "Update list completed" ) ;
-        }
+    return new Promise( async (resolve, reject) => {
+      if ( gLM.GetListSize() > 0 ) {
+        swal.fire({
+          allowEscapeKey: false,
+          allowOutsideClick: false,
+          title: 'Import list file?',
+          text: 'Doing so will overwrite the list and become unrecoverable.\
+                 \nDoing it anyway?',
+          showCancelButton: true
+        }).then( async function( wantToLoadFile ) {
+          if ( wantToLoadFile.isConfirmed ) {
+            await gLM.OverwriteWithNewList( newList ) ;
+            console.log("YUCK") ;
+            gLM.PopUpMsg( "success", "List imported successfully" ) ;
+            resolve() ;
+          } // if the user clicks yes
+          else console.log( "Declined to update the list" ) ;
+        }) ;
+      } else {
+        await gLM.OverwriteWithNewList( newList ) ;
+        console.log("YUCK") ;
+        gLM.PopUpMsg( "success", "List imported successfully" ) ;
+        resolve() ;
       }
     }) ;
   } catch (err) {
-    if ( err.name === "FileContentError" ) {
+    if ( err.name === "FileContentError" )   // occurs if found errors
       gLM.PopUpMsg( "error", err.msg ) ;
-    } // if: not valid list
-    else if ( err.name === "FileTypeError" ) {
+    else if ( err.name === "FileTypeError" ) // occurs when file type is not plain text
       gLM.PopUpMsg( "error", err.msg ) ;
-    } // if: file type is not text
-    else if ( err.name !== "AbortError" ) {
+    else if ( err.name !== "AbortError" )    // occurs while choosing a file
       gLM.PopUpMsg( "error", "Cannot import list from the file" ) ;
-    } // if: error occurs without cancelling choosing a file
   }
-  // }) ;
 } // ImportList()
