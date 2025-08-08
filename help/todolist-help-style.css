@@ -1,4 +1,4 @@
-@import "../makelist.css" ;
+@import "../makelist.css";
 
 /****************************/
 /***** HELP DESCRIPTION *****/
@@ -7,15 +7,149 @@ ul {
   text-align: left ;
 }
 
+#helpTitle {
+  font-weight: 600 ;
+}
+
 /**********************/
 /***** HELP GUIDE *****/
 /**********************/
+#help_guide {
+  padding: 0px 20px ;
+}
+
+#instructions {
+  list-style-type: none ;
+  padding-left: 20px ;
+  padding-right: 20px ;
+}
+
+/* SUBTITLES */
+#instructions li > h2 {
+  padding-top: 30px ;
+  font-weight: 500 ;
+}
+
+/********************************************************/
+/***** INPUT EXAMPLE TABLE (FOR 'ADD ITEM' SECTION) *****/
+/********************************************************/
+table {
+  border-collapse: collapse ;
+}
+th, td {
+  padding: 10px ;
+  border: 2px solid gray ;
+  letter-spacing: .5px ;
+}
+th {
+  background-color: var(--bg-colour) ;
+  text-align: center ;
+  font-weight: 500 ;
+}
+/* EVEN ROWS, i.e. 2nd row, 4th row, 6th row, etc. */
+tbody > tr:nth-of-type(even) {
+  background-color: rgb(223,223,223) ;
+}
 p {
   line-height: 1.5 ;
-  padding-left: 24px ;
   padding-right: 24px ;
+}
+
+/***********************************/
+/***** TABLES FOR LIST EXAMPLE *****/
+/***********************************/
+.table-row {
+  display: inline-flex ;
+  flex-wrap: wrap ;
+  gap: 16px ;
+  justify-content: space-between ;
+}
+
+/***************************/
+/***** INDIVIDUAL TABS *****/
+/***************************/
+.tabs {
+  display: flex ;
+  overflow-x: auto ;         /* Enables horizontal scroll */
+  white-space: nowrap ;      /* Prevents wrapping */
+  scrollbar-width: none ;    /* Hides scrollbar in Firefox */
+  -ms-overflow-style: none ; /* Hides scrollbar in IE 10+ */
+  cursor: pointer ;
+  border: 1px solid #ccc ;
+}
+.tab {
+  box-sizing: border-box ;
+  padding: .75em 1em ;
+  display: inline-flex ; /* Make a behave like a flexbox button */
+  align-items: center ;
+  justify-content: center ;
+  text-align: center ;
+  flex: 1 ;
+  background: #eee ;
+  border-left: 1px solid #ccc ;
+}
+.tab:hover {
+  background-color: #dfdfdf ;
+}
+.tab.active {
+  background: #fff ;
+  border-top: 5px solid var(--bg-colour) ;
+  font-weight: bold ;
+  color: var(--bg-colour-active) ;
+}
+.tabs > .tab:nth-of-type(1) {
+  border-left: none ;
+  /* background-color: black ; */
+}
+
+/************************************/
+/***** SECTIONS OF TAB CONTENTS *****/
+/************************************/
+.tab-content {
+  /* font-size: 0.9em ; */
+  border: 1px solid #ccc ;
+  border-top: none ;
+  padding: 1em ;
+  display: none ;
+}
+.tab-content.active {
+  display: block ;
+}
+
+/******************************************************/
+/***** CODE, FILE CONTENTS, KEYWORDS & FILE TYPES *****/
+/******************************************************/
+kbd {
+  font-size: .8em ;
+  padding: 0px 2px ;
+  border: 2px solid #bfbfbf ;
+  border-radius: 6px ;
 }
 
 code {
   font-family: "Cascadia Code", Consolas, "Lucida Console", monospace ;
+  line-height: 1.5 ;
+  font-size: .9em ;
+}
+
+code:not(.examples) {
+  padding: .2em ;
+  font-size: .8em ;
+  background-color: #dfdfdf ;
+  border-radius: 6px ;
+}
+
+/*********************************/
+/***** RSD on mobile devices *****/
+/*********************************/
+@media screen and (max-width: 500px) {
+  /**********************/
+  /***** HELP GUIDE *****/
+  /**********************/
+
+  #instructions {
+    list-style-type: none ;
+    padding-left: 20px ;
+    padding-right: 20px ;
+  }
 }
