@@ -6,193 +6,721 @@
 	  <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="todolist-help-style.css">
+
+	  <!-- Google icons: rounded -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+    <!-- Custom ICON on different devices/browsers -->
+	  <link rel="icon" type="image/png" href="../icons/favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="../icons/favicon/favicon.svg" />
+    <link rel="shortcut icon" href="../icons/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../icons/favicon/apple-touch-icon.png" />
+	  <meta name="apple-mobile-web-app-title" content="MakeList" />
+    <link rel="manifest" href="../icons/favicon/site.webmanifest" />
+
   </head>
   <body>
     <h1 id="mainTitle">To-do List</h1>
     <div id="nav_of_links">
       <a href="../main/todolist.html" title="return to homepage">Home</a>
-      <a href="">Help</a>
+      <a href="" title="how to use MakeList">Help</a>
       <a href="../about/todolist-about-me.html" title="about me">About</a>
     </div>
-	  <!-- NAVIGATION BAR -->
-	  <script src="../nav.js"></script>
-	  <script src="link_direct.js"></script>
-    <h2>How to use To-do List</h2>
+    <h1 id="helpTitle">How to use To-do List</h1>
+    <p id="help_guide">
+      Click one of the following <strong>to-do list buttons</strong>
+      or any <em>tab</em> of the <strong>'sort items' dropdown list</strong>
+      to find the function you'd like to learn about.
+    </p>
 	  <div id="input_wrapper">
 	    <input type="text" id="inputItem" placeholder="enter new item" disabled>
-      <a href="#help_1_addItem" id="addItem" class="listFunc" >add item</a>
+      <a href="#add-item" id="addItem"  title="add item" class="listFunc">add item</a>
     </div>
     <div class="btn_container">
-  	  <a href="#help_2_clearBuffer" class="listFunc">clear list buffer</a>
-  	  <a href="#help_5_saveFile" class="listFunc">save list</a>
-  	  <a href="#help_3_exportFile" class="listFunc">export list</a>
-  	  <a href="#help_6_loadFile" class="listFunc">load list</a>
-  	  <a href="#help_4_importFile" class="listFunc">import list (text files only)</a>
-  	  <a href="#help_7_clearFile" class="listFunc">delete saved list</a>
+  	  <a href="#save-list" title="save list" class="listFunc">save list</a>
+  	  <a href="#clear-buffer" title="clear list buffer" class="listFunc">clear list buffer</a>
+  	  <a href="#load-list" title="load list" class="listFunc">load list</a>
+  	  <a href="#export-list" title="export list" class="listFunc">export list</a>
+  	  <a href="#delete-list" title="delete list" class="listFunc">delete list</a>
+  	  <a href="#import-list" title="import list" class="listFunc">import list</a>
     </div>
     <div class="custom-select">
-      order by:
-      <select id="dropdown_list">
-        <option value="help_8_sortItems">'sort items' section</option>
-        <option value="help_8_1_magnitude_asc">smallest to largest</option>
-        <option value="help_8_2_magnitude_desc">largest to smallest</option>
-        <option value="help_8_3_checkbox_status_asc">latest done to earliest done</option>
-        <option value="help_8_4_checkbox_status_desc">earliest done to latest done</option>
+	    ordering items by:
+      <select id="dropdown-list" title="sort items">
+        <option value="">select section</option>
+        <option value="sort-items">'sort items' section</option>
+        <option value="sort-items-magnitude-asc">smallest to largest</option>
+        <option value="sort-items-magnitude-desc">largest to smallest</option>
+        <option value="checkbox-status-asc">latest done to earliest done</option>
+        <option value="checkbox-status-desc">earliest done to latest done</option>
       </select>
     </div>
-    <ul>
-      <li id="help_1_addItem">
-        <h3>Add an item</h3>
+    <ul id="instructions">
+      <li id="add-item">
+        <h2>Add item</h2>
         <p>
-          Adds an item to the list <b>at a time</b>.<br>
-          it can be done on desktops and laptops by pressing <em>Enter</em>, too.
+          Adds an item to the list buffer
+          <strong>at a time</strong>.<br>
+          It can be done on <em>desktops and laptops</em> by pressing <kbd>Enter</kbd>, too.
         </p>
         <p>
-          An item to be added must NOT be empty.<br>
-          For example:
-          <ul>
-            <li>'Good morning' - OK</li>
-            <li>'biscuts' - OK</li>
-            <li>'But I'm OK!' - OK</li>
-            <li>' ' - <b> NOT OK</b></li>
-            <li>'' - <b>NOT OK</b></li>
-          </ul>
-        </p>
-      </li>
-      <li id="help_2_clearBuffer">
-        <h3>Clear list</h3>
-        <p>
-          Clear all items of the list;<br>the list (if saved) in the web browser remains unchanged.<br>
-          This only works when there is at least one item in the list.
-        </p>
-      </li>
-      <li id="help_3_exportFile">
-        <h3>Export</h3>
-        <p>Export the list as a file (text files only).<br><strong>All</strong> items in this list can be seen in the exported file.</p>
-        <p>
-          Once exported, the file looks like the following:<br>
-          <p>
-            <code>
-              item1, checked1<br>
-              item2, checked2<br>
-              item3, checked3<br>
-              ...<br>
-              itemN, checkedN
-            </code><br>
-          </p>
-          <p>
-            where for <em>each</em> item,<br>itemN is the contents,<br>and checkedN is the checked status (true or false only).<br>
-          </p>
-        </p>
-      </li>
-      <li id="help_4_importFile">
-        <h3>Import</h3>
-        <p>
-          Import the list from a file (text files only).
+          An item to be added must not be empty.<br>
+          An item what is made up of <strong>space(s) only</strong> is not acceptable, either.
         </p>
         <p>
-          Make sure the file to import follows the <strong>following</strong> pattern:<br>
-          <p>
-            <code>
-              item1, checked1<br>
-              item2, checked2<br>
-              item3, checked3<br>
-              ...<br>
-              itemN, checkedN
-            </code>
-          </p>
-          <p>
-            where for <em>each</em> specific item,<br>itemN is the contents,<br>and checkedN is the checked status (true or false only).<br>
-          </p>
-          <p>
-            Any flaws found in the file results in an <strong>error</strong>,<br>
-            pointing out the line where the <em><b>first</b></em> error is found.<br><br>
-          </p>
-          <p>
-            When attempting to import the following file, for example:<br>
-            <code>
-              Line<br>
-              1 | John, false<br>
-              2 | Jessica, true<br>
-              3 | Albert, false, folk<br>
-              4 | Simon, trust<br>
-              5 | Billy, true<br>
-              6 | Paul, fault<br>
-            </code>
-          </p>
-          <p>
-            The first error will be found on line 3,<br>
-            pointing out that while<br>
-            the contents is <em>present</em>,
-            i.e. '<b>Albert, false</b>',<br>
-            its <b>checkbox</b> status
-            is <em><b>neither</b></em> 'true' nor 'false'.
-          </p>
+          Take the following table as an example:
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">example</th>
+                <th scope="col">OK?</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Good morning</td>
+                <td>OK</td>
+              </tr>
+              <tr>
+                <td>biscuits</td>
+                <td>OK</td>
+              </tr>
+              <tr>
+                <td>But I'm OK!</td>
+                <td>OK</td>
+              </tr>
+              <tr>
+                <td>'' (empty)</td>
+                <td><strong>NOT OK</strong></td>
+              </tr>
+              <tr>
+                <td>' ' (a space)</td>
+                <td><strong>NOT OK</strong></td>
+              </tr>
+              <tr>
+                <td>'&nbsp;&nbsp;&nbsp;&nbsp;' (mere spaces)</td>
+                <td><strong>NOT OK</strong></td>
+              </tr>
+            </tbody>
+          </table>
         </p>
       </li>
-      <li id="help_5_saveFile">
-        <h3>Save</h3>
+      <li id="sort-items">
+        <h2>Sort items</h2>
         <p>
-          Saves the list in the web browser.<br>
-          If there is already a one saved in the web browser, users may overwrite it with a new list by clicking <b>OK</b>.<br>
-        </p>
-      </li>
-      <li id="help_6_loadFile">
-        <h3>Load</h3>
-        <p>
-          Load the list saved in the web browser.<br>This only works when there is a list saved in the web browser.
-        </p>
-      </li>
-      <li id="help_7_clearFile">
-        <h3>Delete</h3>
-        <p>
-          Delete the list stored in the web browser;<br>the list buffer remains unchanged.<br>
-          This only works when there is a list saved in the web browser.
-        </p>
-      </li>
-      <li id="help_8_sortItems">
-        <h3>Sort items</h3>
-        <p>
-          Sorts all items in the list, based on a specific property.<br>
-          <em><b>NOTE:</b> There should be at least one item in the list buffer.</em>
+          Sorts all items in the list buffer by a specific property such as contents and checkbox status.<br>
         </p>
         <p>
           There are four ways to sort items:
-          <ul>
-            <li id="help_8_1_magnitude_asc">
-              <h4>smallest to largest</h4>
+          <span id="sort-items-magnitude-asc">
+            <h3>Smallest to largest</h3>
+            <p>
+              Arranges all items from smallest to largest,<br>i.e. A to Z, a to z, 0 to 9, etc.
+            </p>
+            <p>
+              <strong>After sorting</strong><br>
+              the
+              <em>greater</em>
+              an item is, the closer it is to the <em><strong>bottom</strong></em>
+              of the list buffer;<br>
+              the
+              <em>smaller</em>
+              an item is, the closer it is to the <em><strong>top</strong></em>
+              of the list buffer.
+            </p>
+            <p>
+              Take the following lists for example:
+            </p>
+            <span id="sort-items-magnitude-asc-examples" class="tab-container">
+              <div class="tabs">
+                <div class="tab active" data-target="eg1">example 1</div>
+                <div class="tab" data-target="eg2">example 2</div>
+                <div class="tab" data-target="eg3">example 3</div>
+              </div>
+              <div id="eg1" class="tab-content active">
+                <div class="table-row">
+                  <div class="example-wrapper">
+                    <p>
+                      Before sorting:
+                    </p>
+                    <table id="magnitude_asc_eg1_before_sort">
+                    </table>
+                  </div>
+                  <div class="example-wrapper">
+                    <p>
+                      After sorting:
+                    </p>
+                    <table id="magnitude_asc_eg1_after_sort">
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <div id="eg2" class="tab-content">
+                <div class="table-row">
+                  <div class="example-wrapper">
+                    <p>
+                      Before sorting:
+                    </p>
+                    <table id="magnitude_asc_eg2_before_sort">
+                    </table>
+                  </div>
+                  <div class="example-wrapper">
+                    <p>
+                      After sorting:
+                    </p>
+                    <table id="magnitude_asc_eg2_after_sort">
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <div id="eg3" class="tab-content">
+                <div class="table-row">
+                  <div class="example-wrapper">
+                    <p>
+                      Before sorting:
+                    </p>
+                    <table id="magnitude_asc_eg3_before_sort">
+                    </table>
+                  </div>
+                  <div class="example-wrapper">
+                    <p>
+                      After sorting:
+                    </p>
+                    <table id="magnitude_asc_eg3_after_sort">
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </span>
+          </span>
+          <span id="sort-items-magnitude-desc">
+            <h3>Largest to smallest</h3>
+            <p>
+              Arranges all items from largest to smallest,<br>i.e. Z to A, z to a, 9 to 0, etc.
+            </p>
+            <p>
+              <strong>After sorting</strong><br>
+              the
+              <em>greater</em>
+              an item is, the closer it is to the <em><strong>top</strong></em>
+              of the list buffer;<br>
+              the
+              <em>smaller</em>
+              an item is, the closer it is to the <em><strong>bottom</strong></em>
+              of the list buffer.
+            </p>
+            <p>
+              Take the following lists for example:
+            </p>
+            <span id="sort-items-magnitude-desc-examples" class="tab-container">
+              <div class="tabs">
+                <div class="tab active" data-target="eg1">example 1</div>
+                <div class="tab" data-target="eg2">example 2</div>
+                <div class="tab" data-target="eg3">example 3</div>
+              </div>
+              <div id="eg1" class="tab-content active">
+                <div class="table-row">
+                  <div class="example-wrapper">
+                    <p>
+                      Before sorting:
+                    </p>
+                    <table id="magnitude_desc_eg1_before_sort">
+                    </table>
+                  </div>
+                  <div class="example-wrapper">
+                    <p>
+                      After sorting:
+                    </p>
+                    <table id="magnitude_desc_eg1_after_sort">
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <div id="eg2" class="tab-content">
+                <div class="table-row">
+                  <div class="example-wrapper">
+                    <p>
+                      Before sorting:
+                    </p>
+                    <table id="magnitude_desc_eg2_before_sort">
+                    </table>
+                  </div>
+                  <div class="example-wrapper">
+                    <p>
+                      After sorting:
+                    </p>
+                    <table id="magnitude_desc_eg2_after_sort">
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <div id="eg3" class="tab-content">
+                <div class="table-row">
+                  <div class="example-wrapper">
+                    <p>
+                      Before sorting:
+                    </p>
+                    <table id="magnitude_desc_eg3_before_sort">
+                    </table>
+                  </div>
+                  <div class="example-wrapper">
+                    <p>
+                      After sorting:
+                    </p>
+                    <table id="magnitude_desc_eg3_after_sort">
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </span>
+          </span>
+          <span id="sort-items-checkbox-status-asc">
+            <h3>Latest done to earliest done</h3>
+            <p>
+              Arranges all items from smallest to largest, then
+              arranges them again by checkbox status from latest done to earliest done.
+            </p>
+            <p>
+              <strong>After sorting</strong><br>
+              The items done are all placed
+              <em><strong>after</strong></em>
+              the things that are yet done.
+              Items in both groups are ordered from smallest to largest.
+            </p>
+            <p>
+              Take the following lists for example:
+            </p>
+            <span id="sort-items-checkbox-status-asc-examples" class="tab-container">
+              <div class="tabs">
+                <div class="tab active" data-target="eg1">example 1</div>
+                <div class="tab" data-target="eg2">example 2</div>
+                <div class="tab" data-target="eg3">example 3</div>
+              </div>
+              <div id="eg1" class="tab-content active">
+                <div class="table-row">
+                  <div class="example-wrapper">
+                    <p>
+                      Before sorting:
+                    </p>
+                    <table id="checkbox_asc_eg1_before_sort">
+                    </table>
+                  </div>
+                  <div class="example-wrapper">
+                    <p>
+                      After sorting:
+                    </p>
+                    <table id="checkbox_asc_eg1_after_sort">
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <div id="eg2" class="tab-content">
+                <div class="table-row">
+                  <div class="example-wrapper">
+                    <p>
+                      Before sorting:
+                    </p>
+                    <table id="checkbox_asc_eg2_before_sort">
+                    </table>
+                  </div>
+                  <div class="example-wrapper">
+                    <p>
+                      After sorting:
+                    </p>
+                    <table id="checkbox_asc_eg2_after_sort">
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <div id="eg3" class="tab-content">
+                <div class="table-row">
+                  <div class="example-wrapper">
+                    <p>
+                      Before sorting:
+                    </p>
+                    <table id="checkbox_asc_eg3_before_sort">
+                    </table>
+                  </div>
+                  <div class="example-wrapper">
+                    <p>
+                      After sorting:
+                    </p>
+                    <table id="checkbox_asc_eg3_after_sort">
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </span>
+          </span>
+          <span id="sort-items-checkbox-status-desc">
+            <h3>Earliest done to latest done</h3>
+            <p>
+              Arranges all items from smallest to largest, then
+              arranges them again by checkbox status from earliest done to latest done.
+            </p>
+            <p>
+              <strong>After sorting</strong><br>
+              The items done are all placed
+              <em><strong>before</strong></em>
+              the things that are yet done.
+              Items in both groups are ordered from smallest to largest.
+            </p>
+            <p>
+              Take the following lists for example:
+            </p>
+            <span id="sort-by-checkbox-desc-examples" class="tab-container">
+              <div class="tabs">
+                <div class="tab active" data-target="eg1">example 1</div>
+                <div class="tab" data-target="eg2">example 2</div>
+                <div class="tab" data-target="eg3">example 3</div>
+              </div>
+              <div id="eg1" class="tab-content active">
+                <div class="table-row">
+                  <div class="example-wrapper">
+                    <p>
+                      Before sorting:
+                    </p>
+                    <table id="checkbox_desc_eg1_before_sort">
+                    </table>
+                  </div>
+                  <div class="example-wrapper">
+                    <p>
+                      After sorting:
+                    </p>
+                    <table id="checkbox_desc_eg1_after_sort">
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <div id="eg2" class="tab-content">
+                <div class="table-row">
+                  <div class="example-wrapper">
+                    <p>
+                      Before sorting:
+                    </p>
+                    <table id="checkbox_desc_eg2_before_sort">
+                    </table>
+                  </div>
+                  <div class="example-wrapper">
+                    <p>
+                      After sorting:
+                    </p>
+                    <table id="checkbox_desc_eg2_after_sort">
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <div id="eg3" class="tab-content">
+                <div class="table-row">
+                  <div class="example-wrapper">
+                    <p>
+                      Before sorting:
+                    </p>
+                    <table id="checkbox_desc_eg3_before_sort">
+                    </table>
+                  </div>
+                  <div class="example-wrapper">
+                    <p>
+                      After sorting:
+                    </p>
+                    <table id="checkbox_desc_eg3_after_sort">
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </span>
+          </span>
+        </p>
+      </li>
+      <li id="clear-buffer">
+        <h2>Clear list buffer</h2>
+        <p>
+          Clears all items in the list buffer.<br>
+          The list, if saved in the web browser, remains unchanged.
+        </p>
+      </li>
+      <li id="export-list">
+        <h2>Export list</h2>
+        <p>
+          Exports all items in the buffer as a list in a text file.<br>
+          All items in this list can be seen in the exported file.
+        </p>
+        <p>
+          The following explains how to download a list consisting all items in the list buffer, depending on the web browser a user is using.
+        </p>
+        <span id="import-list_access_location" class="tab-container">
+          <div class="tabs">
+            <div class="tab active" data-target="win">Windows</div>
+            <div class="tab" data-target="mac">macOS</div>
+            <div class="tab" data-target="ios">iOS</div>
+            <div class="tab" data-target="android">Android</div>
+            <div class="tab" data-target="linux">Linux</div>
+          </div>
+          <div id="win" class="tab-content active">
+            <p>
+              Select a text file, i.e. a file that ends with
+              <code>.txt</code>
+              from the dropdown. Avoid selecting from “All files”
+            </p>
+          </div>
+          <div id="mac" class="tab-content">
+            <p>All files may appear. Ensure you pick a file ending in <code>.txt</code>.</p>
+          </div>
+          <div id="ios" class="tab-content">
+            <p>
+              Tap “Browse” and select a
+              <code>.txt</code>
+              file. Long-press to view file info if extensions are hidden.
+            </p>
+          </div>
+          <div id="android" class="tab-content">
+            <p>
+              Use the system file browser to locate a
+              <code>.txt</code>. File filters may not be strict.
+            </p>
+          </div>
+          <div id="linux" class="tab-content">
+            <p>All files appear. Pick a file that ends with
+              <code>.txt</code>.</p>
+          </div>
+        </span>
+        <p>
+          Once exported, the file looks like the following:<br>
+          <p>
+            <code class="examples">
+              item1, checked1<br>
+              item2, checked2<br>
+              item3, checked3<br>
+              ...<br>
+              itemN, checkedN
+            </code>
+          </p>
+          <p>
+            where for
+            <em>each</em> item,<br>
+            itemN is the contents,
+            <br>and checkedN is the checkbox status (true or false only).<br>
+          </p>
+        </p>
+      </li>
+      <li id="import-list">
+        <h2>Import list</h2>
+        <p>
+          Imports the list from a file.<br>
+          A file to import must be a 
+          <strong>text file</strong>
+          i.e. ends with
+          <code>.txt</code>.<br>
+          Any attempt to load a file that doesn't end with
+          <code>.txt</code>
+          results in an error.
+        </p>
+        <p>
+          The following shows how to load a text file to form a list buffer, depending on the web browser a user is using.
+        </p>
+        <span id="import-list_access_location" class="tab-container">
+          <div class="tabs">
+            <div class="tab active" data-target="win">Windows</div>
+            <div class="tab" data-target="mac">macOS</div>
+            <div class="tab" data-target="ios">iOS</div>
+            <div class="tab" data-target="android">Android</div>
+            <div class="tab" data-target="linux">Linux</div>
+          </div>
+          <div id="win" class="tab-content active">
+            <p>
+              Click the file dropdown list and select 'text files'.
+            </p>
+            <p>
+              If it's not possible, i.e. dropdown shows "All files" instead,<br>
+              pick a file that ends with
+              <code>.txt</code>.
+            </p>
+          </div>
+          <div id="mac" class="tab-content">
+            <p>
+              Since the dropdown only shows 'All files',
+              pick a file that ends with <code>.txt</code>.
+            </p>
+          </div>
+          <div id="ios" class="tab-content">
+            <p>
+              Tap “Browse” and select a
+              <code>.txt</code>
+              file. Long-press to view file info if extensions are hidden.
+            </p>
+            <p>
+              NOTE: on iPhone, iPod or iPad, the system may ask whether to download a file or to preview it first.<br>
+              Click tap "Share" or "Save to Files" if the file opens instead of downloading.
+            </p>
+          </div>
+          <div id="android" class="tab-content">
+            <p>
+              Applies to all browsers on Android devices,
+              including Samsung Internet
+            </p>
+            <p>
+              Use the system file browser to locate a
+              <code>.txt</code>. File filters may not be strict.
+            </p>
+          </div>
+          <div id="linux" class="tab-content">
+            <p>
+              All files may
+            </p>
+            <p>
+              All files appear. Pick a file that ends with
+              <code>.txt</code>.
+            </p>
+          </div>
+        </span>
+        <p>
+          Make sure the file to import follows the following
+          pattern:
+          <p>
+            <code class="examples">
+              item1, checked1<br>
+              item2, checked2<br>
+              item3, checked3<br>
+              ...<br>
+              itemN, checkedN
+            </code>
+          </p>
+          <p>
+            where for <em>each</em> specific item,<br>
+            <code>itemN</code> is the contents,<br>
+            and
+            <code>checkedN</code> is the checkbox status (true or false only).<br>
+          </p>
+          <p>
+            Any flaws found in the file results in an error,<br>
+            pointing out the line where the <em><strong>first</strong></em> error is found.
+          </p>
+          <p>
+            Look at the following cases:
+          </p>
+          <span id="import-list_check-contents" class="tab-container">
+            <div class="tabs">
+              <div class="tab active" data-target="cs1">case 1</div>
+              <div class="tab" data-target="cs2">case 2</div>
+              <div class="tab" data-target="cs3">case 3</div>
+            </div>
+            <div id="cs1" class="tab-content active">
               <p>
-                Arranges all items from smallest to largest, i.e. A-Z, a-z, 0-9<br>
-                <b>After sorting:</b>
-                the <em>greater</em> an item is, the closer it is to the <em><b>bottom</b></em> of the list;
-                the <em>less</em> an item is, the closer it is to the <em><b>top</b></em> of the list.
+                Case: checkbox status not valid
               </p>
-            </li>
-            <li id="help_8_2_magnitude_desc">
-              <h4>largest to smallest</h4>
               <p>
-                Arranges all items from largest to smallest, i.e. Z-A, z-a, 9-0<br>
-                <b>After sorting:</b>
-                the <em>greater</em> an item is, the closer it is to the <em><b>top</b></em> of the list;
-                the <em>less</em> an item is, the closer it is to the <em><b>bottom</b></em> of the list.
+                If an item's checkbox status is neither
+                <code>true</code>
+                nor
+                <code>false</code>
+                ,<br>
+                there is no way to tell whether it's done or not.
               </p>
-            </li>
-            <li id="help_8_3_checkbox_status_asc">
-              <h4>latest done to earliest done</h4>
               <p>
-                Arranges all items by checkbox status from latest done to earliest done.<br>
-                <b>After sorting:</b>
-                All things done are placed near the bottom of the list, whereas all things not yet done are placed near the top of the list.<br>
-                Both of the done and the not-yet-done 
+                An item with checkbox status neither true nor false results in an error.
               </p>
-            </li>
-            <li id="help_8_4_checkbox_status_desc">
-              <h4>earliest done to latest done</h4>
               <p>
-                Arranges all items by checkbox status from latest done to earliest done.<br>
+                For example:
               </p>
-            </li>
-          </ul>
+              <code class="examples">
+                Line<br>
+                1 | John, false<br>
+                2 | Jessica, true<br>
+                3 | Albert, false, folk<br>
+                4 | Simon, trust<br>
+                5 | Billy, true<br>
+                6 | Paul, fault<br>
+              </code>
+              <p>
+                The first error will be found on line 3<br>
+                because while the item's content is
+                <em>present</em>,
+                i.e. 'Albert, false',<br>
+                its checkbox status is
+                'folk', which is neither true nor false.
+              </p>
+            </div>
+            <div id="cs2" class="tab-content">
+              <p>
+                Case: item's content is empty (no sided spaces)
+              </p>
+              <p>
+                An item must have a content: it's essential part of the list. Not giving content of an item results in an error.
+              </p>
+              <p>
+                For example:
+              </p>
+              <code class="examples">
+                Line<br>
+                1 | sweets, true<br>
+                2 | crisps, true<br>
+                3 | maize, false<br>
+                4 | Simon, false<br>
+                5 | capsicum, true<br>
+                6 | salmon, false<br>
+                7 | &nbsp;&nbsp;,false<br>
+                8 | ice lolly, false<br>
+              </code>
+              <p>
+                The first error will be found on line 7<br>
+                because after getting rid of spaces from both sides of the item's contents, the item is simply <em><strong>empty</strong></em>.
+              </p>
+            </div>
+            <div id="cs3" class="tab-content">
+              <p>
+                Case: missing checkbox status
+              </p>
+              <p>
+                An item must have a checkbox status in order to tell if it's done or not.
+              </p>
+              <p>
+                Not giving a checkbox status of a item results in an error.
+              </p>
+              <p>
+                For example:
+              </p>
+              <code class="examples">
+                Line<br>
+                1 | screw, false<br>
+                2 | hammer, folk,<br>
+                3 | turpet, true<br>
+                4 | tape, trust<br>
+                5 | helmet,       <br>
+                6 | drill, fault<br>
+                7 | tractor, fault<br>
+                8 | vibrator, fault<br>
+                9 | steel, fault<br>
+              </code>
+              <p>
+                The first error will be found on line 2<br>
+                because while the item's content is
+                <em>present</em>,
+                i.e. '<strong>Albert, folk</strong>',<br>
+                its checkbox status
+                is not <em><strong>given</strong></em>.
+              </p>
+            </div>
+          </span>
+        </p>
+      </li>
+      <li id="save-list">
+        <h2>Save list</h2>
+        <p>
+          Saves the list in the web browser.<br>
+          If there is already a one saved in the web browser, users may overwrite it with a new list by clicking <strong>OK</strong>.<br>
+        </p>
+      </li>
+      <li id="load-list">
+        <h2>Load saved list</h2>
+        <p>
+          Loads the list saved in the web browser.<br>This only works when there is a list saved in the web browser.
+        </p>
+      </li>
+      <li id="delete-list">
+        <h2>Delete saved list</h2>
+        <p>
+          Deletes the list stored in the web browser;<br>the list buffer remains unchanged.<br>
+          This only works when there is a list saved in the web browser.
         </p>
       </li>
     </ul>
@@ -200,6 +728,12 @@
       <a href="#mainTitle" id="nav_to_top">to the top</a>
     </section>
     <br>
-	  <footer>All contents is made by myself.<br>All rights reserved.</footer>
+	  <footer>
+      All contents is made by myself.<br>All rights reserved.
+    </footer>
+	  <script src="../nav.js"></script>        <!-- NAVIGATION BAR -->
+	  <script src="link_direct.js"></script>   <!-- DROPDOWN LIST INSTRUCTION FOR SORTING ITEMS -->
+    <script src="load_examples.js"></script> <!-- EXAMPLE LISTS LOADING -->
+    <script src="tab_control.js"></script>   <!-- TAB DISPLAY -->
   </body>
 </html>
