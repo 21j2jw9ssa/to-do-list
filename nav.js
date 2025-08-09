@@ -1,7 +1,7 @@
 document.addEventListener( "DOMContentLoaded", function() {
 
   // Get all tabs of the navigator bar
-  const navBar = document.querySelectorAll( "#nav_of_links a" ) ;
+  const navBar = document.querySelectorAll( "#nav-of-links a" ) ;
 
   // Then detect the tab with an empty hyperlink reference:
   // it is the current page.
@@ -10,4 +10,5 @@ document.addEventListener( "DOMContentLoaded", function() {
       navBar[i].classList.add("current_page") ;
     } 
   }
+
 }) ;
