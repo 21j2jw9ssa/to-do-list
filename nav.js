@@ -7,8 +7,9 @@ document.addEventListener( "DOMContentLoaded", function() {
   // it is the current page.
   for ( let i = 0 ; i < navBar.length ; i++ ) {
     if ( navBar[i].getAttribute("href").length === 0 ) {
-      navBar[i].classList.add("current_page") ;
+      navBar[i].classList.add("current-page") ;
     } 
   }
 
 }) ;
+
