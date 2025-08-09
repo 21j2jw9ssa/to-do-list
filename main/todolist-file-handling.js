@@ -32,6 +32,7 @@ function ExportFile() {
 
         const opSys = navigator.userAgent ;
         const isIOS = /iPhone|iPad|iPod/i.test(opSys) ;
+        alert(opSys) ;
 
         if ( gLM.GetTempLocalStorageStat() && isIOS ) {
           gLM.SetTempLocalStorage() ;
@@ -162,3 +163,4 @@ async function ImportFile() {
       gLM.PopUpMsg( "error", "Cannot import list from the file" ) ;
   }
 } // ImportList()
+
