@@ -610,8 +610,9 @@ const gLM = ( function() {
     async RecoverListBuffer() {
       const opSys = navigator.userAgent ;
       const isIOS = /iPhone|iPad|iPod/i.test(opSys) ;
+      const isMac = /Macintosh/i.test(opSys) ;
 
-      if ( gLM.GetTempLocalStorageStat() && isIOS ) {
+      if ( gLM.GetTempLocalStorageStat() && ( isMac || isIOS ) ) {
         gList.push.apply( gList,
           JSON.parse( localStorage.getItem( tempLocalStorageName ) )
         ) ; // reading JSON data
