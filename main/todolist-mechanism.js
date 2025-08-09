@@ -237,8 +237,7 @@ document.getElementById( "exportFile" ).addEventListener( "click", function() {
 
 //// BUTTON 8: IMPORT A FILE
 document.getElementById( "importFile" ).addEventListener( "click", async function() {
-  const status = await ImportFile() ;
-  console.log( status ) ;
+  await ImportFile() ;
   UpdateDropdownState() ;
 }) ;
 
