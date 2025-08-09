@@ -25,16 +25,13 @@ function ExportFile() {
           sout = sout.concat( items[i].parentElement.querySelector( "input" ).checked.toString() ) ;
           if ( i + 1 !== items.length ) sout = sout.concat('\r\n') ; // line break for each line-reading
         }
+
         const blob = new Blob( [sout], { type: "text/plain" } ) ;           // export type: plain text
         const link = document.createElement( "a" ) ;                        // create a temporary link
         link.href = URL.createObjectURL( blob ) ;                           // create URL object
         link.download = ( resp.value === "" ) ? "to-do list" : resp.value ; // generate file name
 
-        const opSys = navigator.userAgent ;
-        const isIOS = /iPhone|iPad|iPod/i.test(opSys) ;
-        alert(opSys) ;
-
-        if ( gLM.GetTempLocalStorageStat() && isIOS ) {
+        if ( gLM.NeedSaveListBufferAfterReload() ) {
           gLM.SetTempLocalStorage() ;
         } // if: preview file on iOS
 
@@ -141,7 +138,6 @@ async function ImportFile() {
         }).then( async function( wantToLoadFile ) {
           if ( wantToLoadFile.isConfirmed ) {
             await gLM.OverwriteWithNewList( newList ) ;
-            console.log("YUCK") ;
             gLM.PopUpMsg( "success", "List imported successfully" ) ;
             resolve() ;
           } // if the user clicks yes
@@ -149,7 +145,6 @@ async function ImportFile() {
         }) ;
       } else {
         await gLM.OverwriteWithNewList( newList ) ;
-        console.log("YUCK") ;
         gLM.PopUpMsg( "success", "List imported successfully" ) ;
         resolve() ;
       }
@@ -163,4 +158,3 @@ async function ImportFile() {
       gLM.PopUpMsg( "error", "Cannot import list from the file" ) ;
   }
 } // ImportList()
-
