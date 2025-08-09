@@ -33,7 +33,7 @@ const InsertTableCtnt = ( file, id ) => {
   ) ;
 } ;
 
-const useFolder = "../list_examples/" ;
+const useFolder = "../list examples to import/" ;
 
 const sortType = [  // Examples in order:
   "magnitude_asc",  // - from smallest to largest
@@ -49,4 +49,5 @@ for ( let i of sortType ) {
   InsertTableCtnt( `${useFolder}${i}_eg2_after.csv`,  `${i}_eg2_after_sort` ) ;
   InsertTableCtnt( `${useFolder}${i}_eg3_before.csv`, `${i}_eg3_before_sort` ) ;
   InsertTableCtnt( `${useFolder}${i}_eg3_after.csv`,  `${i}_eg3_after_sort` ) ;
+
 }
