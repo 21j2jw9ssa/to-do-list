@@ -36,7 +36,7 @@ a {
 /**************************/
 /***** NAVIGATION BAR *****/
 /**************************/
-#nav_of_links {
+#nav-of-links {
   display: flex ; /* make sure each tab has the SAME width */
   flex: 100% ;
   text-align: center ;
@@ -44,27 +44,25 @@ a {
   margin-right: auto ;
   background-color: #3f3f3f
 }
-#nav_of_links a {
+#nav-of-links a {
   padding: 15px 15px ;
   text-decoration: none ; /* remove the usual UNDERLINE */
   flex: 2 ;
   font-size: 1.25em ;
   color: white ;
-  transition: background-color .1s ease ;
+  /* transition: background-color .1s ease ; */
 }
-
-/* When pointer is at the navigation bar (desktop only) */
-#nav_of_links a:hover {
+#nav-of-links a:hover {
   background-color: var(--bg-colour-hover) ;
-}
-
-#nav_of_links a:active {
   color: black ;
+}
+#nav-of-links a:active {
+  color: white ;
   background-color: var(--bg-colour-active);
 }
 
 /** Current page indicator **/
-#nav_of_links a.current_page {
+#nav-of-links a.current-page {
   color: black ;
   background-color: var(--bg-colour-hover) ;
 }
@@ -95,7 +93,7 @@ a {
 .listFunc {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif ;
   cursor: pointer ;
-  transition: background-color .125s ease ;
+  /* transition: background-color .1s ease ; */
 }
 .listFunc:hover {
   background-color: var(--bg-colour-hover) ;
@@ -104,8 +102,20 @@ a {
   background-color: var(--bg-colour-active) ;
   color: white ;
 }
+.listFunc:hover:not([id="addItem"]) {
+  background-color: var(--bg-colour-active) ;
+  color: white ;
+}
+.listFunc:active:not([id="addItem"]) {
+  box-sizing: border-box ;
+  background-color: white ;
 
-.btn_container {
+  font-weight: bold ;
+  border: 4px solid var(--bg-colour);
+  color: var(--bg-colour-active) ;
+}
+
+.btn-container {
   display: flex ;
   flex-wrap: wrap ;
   gap: 5px ;
@@ -115,7 +125,7 @@ a {
 /***********************************************************/
 /***** NEW ITEM INPUT SECTION (WITH 'ADD ITEM' BUTTON) *****/
 /***********************************************************/
-#input_wrapper {
+#input-wrapper {
   padding: 24px 0px ;
   display: flex ;
   width: 100% ;
@@ -185,7 +195,7 @@ a {
 /***************************/
 /***** LINK TO THE TOP *****/
 /***************************/
-#nav_to_top {
+#nav-to-top {
   width: 100% ; height: 30px ;
   margin-bottom: 10px ;
 }
