@@ -10,6 +10,22 @@ const ITEM_PROPERTY = {
   CHECKBOX_STATUS: "property_checkbox status",
 } ;
 
+const OS_TYPE = {
+  WINDOWS: "windows NT family",
+  MAC: "macintosh",
+  IOS: "iPhone/iPad/iPod",
+  ANDROID: "android bot",
+  LINUX: "Linux the penguin",
+}
+
+const BROWSER_TYPE = {
+  SAFARI: "wild safari",
+  FIREFOX: "Fox with a fire tail surrounding earth",
+  EDGE: "IE level up",
+  CHROME: "Google's golden child",
+  BRAVE: "Brave lion",
+}
+
 Object.freeze( ORDER, ITEM_PROPERTY ) ;
 
 /**
@@ -473,6 +489,40 @@ const gLM = ( function() {
         console.error( err ) ;
       }
     }, // PopUpMsg()
+
+    
+
+  /**
+   * Determine if the list buffer should be recovered after a single reload.
+   * 
+   * Reason:
+   * 
+   * Safari, which is for Apple devices and desktop/laptop only,
+   * pops up a message whenever a user attempts to download
+   * a file.
+   * 
+   * In this case, all items in the list buffer should be
+   * preserved for preview.
+   */
+    NeedSaveListBufferAfterReload() {
+      const ua = navigator.userAgent ;
+
+      // Platform detection
+      const isWindows = /Windows/i.test(ua);
+      const isMac = /Macintosh/i.test(ua);
+      const isIOS = /iPhone|iPad|iPod/i.test(ua);
+      const isAndroid = /Android/i.test(ua);
+      const isLinux = /Linux/i.test(ua) && !isAndroid;
+
+      // Browser detection
+      const isSafari = /^((?!chrome|android).)*safari/i.test(ua);
+      const isFirefox = /Firefox/i.test(ua);
+      const isEdge = /Edg/i.test(ua);
+      const isChrome = /Chrome/i.test(ua) && !isEdge;
+
+      alert( localStorage.getItem( tempLocalStorageName ) && isSafari ) ;
+      return localStorage.getItem( tempLocalStorageName ) && isSafari ;
+    }, // NeedSaveListBufferAfterReload()
 
     ////////////////////////////////////////////
     //////// FUNCTIONS FOR EXTERNAL USE ////////
