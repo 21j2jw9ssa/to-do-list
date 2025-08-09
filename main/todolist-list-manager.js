@@ -520,6 +520,7 @@ const gLM = ( function() {
       const isEdge = /Edg/i.test(ua);
       const isChrome = /Chrome/i.test(ua) && !isEdge;
 
+      alert(`( ${isIOS}, ${isMac} ) ${isSafari}`) ;
       return ( isIOS || isMac ) && isSafari ;
     }, // NeedSaveListBufferAfterReload()
 
