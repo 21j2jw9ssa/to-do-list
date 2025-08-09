@@ -520,8 +520,7 @@ const gLM = ( function() {
       const isEdge = /Edg/i.test(ua);
       const isChrome = /Chrome/i.test(ua) && !isEdge;
 
-      alert( localStorage.getItem( tempLocalStorageName ) && isSafari ) ;
-      return localStorage.getItem( tempLocalStorageName ) && isSafari ;
+      return ( isIOS || isMac ) && isSafari ;
     }, // NeedSaveListBufferAfterReload()
 
     ////////////////////////////////////////////
