@@ -1,8 +1,8 @@
 "use strict"
 
 const ORDER = {
-  ASCENDING: "ASS",
-  DESCENDING: "DES CHIFUMIFUMI",
+  ASCENDING: "GOING UP!",
+  DESCENDING: "GOING DOWNNN!",
 }
 
 const ITEM_PROPERTY = {
@@ -611,6 +611,8 @@ const gLM = ( function() {
       const opSys = navigator.userAgent ;
       const isIOS = /iPhone|iPad|iPod/i.test(opSys) ;
       const isMac = /Macintosh/i.test(opSys) ;
+
+      alert( `${gLM.GetTempLocalStorageStat()} ( ${isMac}, ${isIOS} ) ` ) ;
 
       if ( gLM.GetTempLocalStorageStat() && ( isMac || isIOS ) ) {
         gList.push.apply( gList,
