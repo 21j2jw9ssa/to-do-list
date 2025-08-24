@@ -1,8 +1,10 @@
 @import "../makelist.css";
+/* @import "../main/todolist-style.css"; */
 
 /****************************/
 /***** HELP DESCRIPTION *****/
 /****************************/
+
 ul {
   text-align: left ;
 }
@@ -14,20 +16,79 @@ ul {
 /**********************/
 /***** HELP GUIDE *****/
 /**********************/
+
+/* TABLE OF CONTENTS */
+#table-of-contents {
+  padding: 0 20px ;
+  text-align: left ;
+  background-color: #cfcfcf ;
+  /* border: 1px solid gray ; */
+  border-radius: 20px ;
+}
+#table-of-contents h2 {
+  padding: 20px 0 ;
+  text-align: center ;
+  border-bottom: 1px solid gray ;
+}
+#table-of-contents li {
+  list-style-type: none ;
+  font-size: 18px ;
+  line-height: 2 ;
+}
+#table-of-contents a:hover {
+  color: red ;
+}
+#table-of-contents a:active {
+  text-shadow: 0px 0px 5px orange ;
+  color: yellow ;
+}
+
 #help-guide {
   padding: 0px 20px ;
 }
 
+/* Subtitle link target height */
+.itemlook, .instruction-functions {
+  scroll-margin-top: 120px ;
+}
+
+/* For 'sort item' subtitles */
+.instructions-sort-items-mode {
+  scroll-margin-top: 145px ;
+}
+
 #instructions {
   list-style-type: none ;
-  padding-left: 20px ;
-  padding-right: 20px ;
+  padding: 0 20px ;
 }
 
 /* SUBTITLES */
 #instructions li > h2 {
   padding-top: 30px ;
   font-weight: 500 ;
+}
+
+/* THE "WHAT AN ITEM LOOKS LIKE" SECTION */
+/* item as example of "What an item looks like" */
+.sample-item {
+  text-align: center ;
+}
+
+i[class="material-symbols-rounded"] {
+  vertical-align: middle ;
+  font-size: 29px !important ;
+  padding: 0 ;
+  margin: 0 ;
+}
+
+.description-title {
+  font-size: 20px;
+  padding: 10px 0 ;
+  font-weight: 600 ;
+}
+dd {
+  line-height: 1.5 ;
+  padding: 5px 0 ;
 }
 
 /********************************************************/
@@ -48,7 +109,7 @@ th {
 }
 /* EVEN ROWS, i.e. 2nd row, 4th row, 6th row, etc. */
 tbody > tr:nth-of-type(even) {
-  background-color: rgb(223,223,223) ;
+  background-color: #dfdfdf ;
 }
 p {
   line-height: 1.5 ;
@@ -99,7 +160,6 @@ p {
 }
 .tabs > .tab:nth-of-type(1) {
   border-left: none ;
-  /* background-color: black ; */
 }
 
 /************************************/
@@ -143,6 +203,7 @@ code:not(.examples) {
 /***** RSD on mobile devices *****/
 /*********************************/
 @media screen and (max-width: 500px) {
+
   /**********************/
   /***** HELP GUIDE *****/
   /**********************/

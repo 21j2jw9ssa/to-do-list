@@ -13,7 +13,7 @@
 
 document.addEventListener( "DOMContentLoaded", function() {
 
-  const sortItemsDropdown = document.getElementById( "dropdown-list" ) ;
+  const sortItemsDropdown = document.getElementById( "dropdown" ) ;
 
   // Direct users to the (sub) topics by the tab selected
   sortItemsDropdown.addEventListener( "change", function() {
@@ -27,4 +27,14 @@ document.addEventListener( "DOMContentLoaded", function() {
     }
   });
 
+  menu.querySelectorAll("li").forEach(item => {
+    item.addEventListener( "click", () => {
+      console.log(item) ;
+      const targetId = `sort-items-${item.dataset.mode}` ;
+      if ( targetId ) {
+        const target = document.getElementById( targetId ) ;
+        if ( target ) target.scrollIntoView() ;
+      }
+    });
+  });
 }) ;
