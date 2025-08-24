@@ -1,0 +1,69 @@
+/**************************************/
+/***** DROPDOWN FOR SORTING ITEMS *****/
+/**************************************/
+
+/* Container */
+.dropdown {
+  padding: 10px 0 10px ;
+  position: relative ;
+  display: inline-block ;
+}
+
+/* Button */
+.dropdown-toggle {
+  font-family: var(--font) ;
+  background-color: var(--bg-colour-dropdown) !important ;
+  border: none ;
+  padding: 10px 15px ;
+  font-size: 1em ;
+  cursor: pointer ;
+  border-radius: 8px ;
+  width: 300px ; /* fit to content */
+  white-space: nowrap ;
+  transition:
+    box-shadow .2s ease,
+    background-color .2s ease ;
+}
+.dropdown-toggle:not(.disabled):hover {
+  /* background-color uses !important
+     as its receives no response
+     as
+  */
+  background-color: #ff7f7f !important ;
+  box-shadow: 0px 0px 20px #ffaf5f ;
+}
+
+/* Menu */
+.dropdown-menu {
+  text-align: left ;
+  display: none ;
+  position: absolute ;
+  top: 100% ;
+  left: 0 ;
+  background-color: white ;
+  border-radius: 8px ;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) ;
+  list-style: none ;
+  padding: 0 ;
+  margin: 5px 0 0 ;
+  width: max-content ; /* natural width based on content */
+  min-width: 100% ;    /* match button width */
+  white-space: nowrap ;
+  z-index: 100 ;
+}
+
+/* Menu items */
+.dropdown-menu li {
+  padding: 10px;
+  cursor: pointer;
+  border-bottom: 1px solid #eee;
+  transition: background-color 0.1s ease ;
+}
+
+.dropdown-menu li:hover {
+  background: #ffefdf;
+}
+
+.dropdown-menu li:last-child {
+  border-bottom: none;
+}
