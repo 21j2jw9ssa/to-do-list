@@ -1,7 +1,19 @@
-:root { /* 2 : 1 : 4 (dec) */
-  --bg-colour:        #bfdf7f ; /* -40, -20, -80 (hex) */
-  --bg-colour-hover:  #9fcf4f ; /* -60, -30, -b0 (hex) */
-  --bg-colour-active: #7fbf00 ; /* -80, -40, -100 (hex) */
+:root { /* ratio => 1 : 2 : 1 (dec) */
+  --bg-colour-background: #f7f7f7 ;
+
+  --bg-colour:          #5fbf5f ; /* -40, -c0, -80 (hex) */
+  --bg-colour-hover:    #4f9f4f ; /*   0, -a0, -50 (hex) */
+  --bg-colour-active:   #3f7f3f ; /*   0, -c0, -60 (hex) */
+
+  --bg-colour-warning:         #df0000 ;
+  --bg-colour-warning-hover:   #bf0000 ;
+  --bg-colour-warning-active:  #9f0000 ;
+
+  --bg-colour-dropdown:        #ffdf7f ;
+
+  --bg-colour-item:            #6fdf6f ;
+
+  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif ;
 }
 
 /**********************/
@@ -10,8 +22,8 @@
 body {
   line-height: 1 ;
   text-align: center ;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif ;
-  background-color: white ;
+  font-family: var(--font) ;
+  background-color: var(--bg-colour-background) ;
   padding: 10px ;
   font-size: 18px ;
   margin: 0 ;
@@ -20,8 +32,17 @@ body {
   margin-right: auto ;
 }
 
+/* All links are normal-typed */
 a {
   text-decoration: none ;
+}
+
+/* Wrapper that contains title + navigation bar */
+#header-wrapper {
+  position: sticky;
+  top: 0;                                   /* stick to top */
+  background: var(--bg-colour-background);  /* prevent content showing through */
+  z-index: 1000;                            /* ensure above content */
 }
 
 /**********************/
@@ -31,6 +52,10 @@ a {
   font-size: 48px ;
   font-weight: 500 ;
   margin-bottom: 20px ;
+
+  position: sticky;  /* sticks after reaching top */
+  top: 0;            /* stick to very top */
+  z-index: 1000;     /* stay above other content */
 }
 
 /**************************/
@@ -40,9 +65,14 @@ a {
   display: flex ; /* make sure each tab has the SAME width */
   flex: 100% ;
   text-align: center ;
-  margin-left: auto ;
-  margin-right: auto ;
-  background-color: #3f3f3f
+  margin: 0 auto ;
+  background-color: #3f3f3f ;
+  position: sticky;  /* sticks after reaching top */
+  top: 0;            /* stick to very top */
+  z-index: 1000;     /* stay above other content */
+}
+#nav-of-links.is-stuck {
+  box-shadow: 0 3px 8px #00000080 ;
 }
 #nav-of-links a {
   padding: 15px 15px ;
@@ -50,20 +80,20 @@ a {
   flex: 2 ;
   font-size: 1.25em ;
   color: white ;
-  /* transition: background-color .1s ease ; */
+  transition: background-color .1s ease ;
 }
 #nav-of-links a:hover {
-  background-color: var(--bg-colour-hover) ;
-  color: black ;
+  background-color: var(--bg-colour) ;
 }
 #nav-of-links a:active {
-  color: white ;
-  background-color: var(--bg-colour-active);
+  font-weight: bold ;
+  background-color: var(--bg-colour-active) ;
 }
 
 /** Current page indicator **/
 #nav-of-links a.current-page {
-  color: black ;
+  color: white ;
+  font-weight: bold ;
   background-color: var(--bg-colour-hover) ;
 }
 
@@ -72,6 +102,14 @@ a {
 /******************************/
 
 /** All function buttons but the one named "add item" **/
+.listFunc {
+  font-family: inherit ;
+  cursor: pointer ;
+  transition:
+    background-color .1s ease,
+    box-shadow .1s ease ;
+}
+
 .listFunc:not( [ id="addItem" ] ) {
   line-height: 25px ;
   box-sizing: border-box ;
@@ -79,40 +117,44 @@ a {
   align-items: center ;
   justify-content: center ;
   font-size: 150% ;
-  height: 96px ;
+  height: 72px ;
   width: 49% ;
-  color: black ;
   background-color: var(--bg-colour) ;
   border-radius: 6.25px ;
   border-style: none ;
-  padding: 0px 10px ;
+  padding: 0px 20px ;
   flex: 1 1 auto ;
 }
-
-/** All function buttons **/
-.listFunc {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif ;
-  cursor: pointer ;
-  /* transition: background-color .1s ease ; */
-}
 .listFunc:hover {
-  background-color: var(--bg-colour-hover) ;
+  background-color: var(--bg-colour-active) ;
+  font-weight: bold ;
+  box-shadow: 0px 0px 10px var(--bg-colour-active) ;
+  color: white ;
 }
 .listFunc:active {
-  background-color: var(--bg-colour-active) ;
-  color: white ;
-}
-.listFunc:hover:not([id="addItem"]) {
-  background-color: var(--bg-colour-active) ;
-  color: white ;
-}
-.listFunc:active:not([id="addItem"]) {
   box-sizing: border-box ;
   background-color: white ;
-
   font-weight: bold ;
-  border: 4px solid var(--bg-colour);
+  box-shadow: 0px 0px 10px var(--bg-colour-active) ;
+
+  border: 4px solid var(--bg-colour) ;
   color: var(--bg-colour-active) ;
+}
+#deleteList {
+  background-color: var(--bg-colour-warning) ;
+  color: white ;
+  font-weight: bold ;
+}
+#deleteList:hover {
+  background-color: var(--bg-colour-warning-active) ;
+  color: white ;
+  box-shadow: 0px 0px 10px var(--bg-colour-warning-active) ;
+}
+#deleteList:active {
+  background-color: white ;
+  box-shadow: 0px 0px 10px var(--bg-colour-warning-hover) ;
+  border: 4px solid var(--bg-colour-warning) ;
+  color: var(--bg-colour-warning-hover) ;
 }
 
 .btn-container {
@@ -133,9 +175,9 @@ a {
 }
 #inputItem {
   flex: 1 ;
-  width: 30% ;
+  width: 20% ;
   padding: 12px 6px ;
-  font-size: 18px ;
+  font-size: inherit ;
   border: 2px solid #7f7f7f ;
   border-top-left-radius: 24px ;
   border-bottom-left-radius: 24px ;
@@ -151,6 +193,7 @@ a {
   display: flex ; /* key part */
   align-items: center ; /* vertical centering */
   justify-content: center ; /* horizontal centering */
+  width: 100px ;
   padding: 0px 8px ;
   font-size: 18px ;
   color: black ;
@@ -163,40 +206,23 @@ a {
   cursor: pointer ;
 }
 #addItem:hover {
-  background-color: var(--bg-colour-hover) ;
-}
-#addItem:active {
   background-color: var(--bg-colour-active) ;
   color: white ;
+  box-shadow: 0px 0px 10px var(--bg-colour-active) ;
 }
-
-/***************************************/
-/***** DROPDOWN FOR ORDERING ITEMS *****/
-/***************************************/
-.custom-select {
-  margin: 20px 0px ;
-  font-size: 18px ;
-}
-
-#dropdown-list {
-  margin: 20px 0px ;
-  font-size: 18px ;
-  padding: 10px 10px ;
-  border-radius: 50px ;
-  cursor: pointer ;
-}
-#dropdown-list:hover {
-  background-color: #efefef ;
-}
-#dropdown-list:focus {
-  background-color: #dfdfdf ;
+#addItem:active {
+  background-color: white ;
+  box-shadow: 0px 0px 10px var(--bg-colour-hover) ;
+  border: 4px solid var(--bg-colour) ;
+  color: var(--bg-colour-hover) ;
 }
 
 /***************************/
 /***** LINK TO THE TOP *****/
 /***************************/
 #nav-to-top {
-  width: 100% ; height: 30px ;
+  width: 100% ;
+  height: 30px ;
   margin-bottom: 10px ;
 }
 
@@ -213,17 +239,12 @@ a {
 /***** FOR DESKTOP/LAPTOP/TV USERS *****/
 /***************************************/
 @media (min-width: 700px) {
+  #mainTitle {
+    font-size: 300% ;
+  }
   .listFunc:not( [ id="addItem" ] )  {
     line-height: 30px ;
-    width: 30% ;
+    width: 20% ;
     flex: 1 1 auto ;
-  }
-
-  .listFunc:not( [ id="addItem" ] ):nth-child(odd) {
-    order: 1; /* top row */
-  }
-
-  .listFunc:not( [ id="addItem" ] ):nth-child(even) {
-    order: 2; /* bottom row */
   }
 }
