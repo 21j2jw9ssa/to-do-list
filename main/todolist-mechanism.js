@@ -15,18 +15,15 @@
 //////// HTML TAGS ////////
 ///////////////////////////
 
-const items = document.getElementsByTagName( "tag" ) ;  //// "tag" items
-const dropdownList = document.getElementById( "dropdown-list" ) ;
-
-document.addEventListener( "DOMContentLoaded", function() {
-
-gLM.RecoverListBuffer() ;
-
 function UpdateDropdownState() {
-  console.log( `Number of items: ${items.length}` ) ;
-  dropdownList.disabled = items.length === 0 ;
-  if ( dropdownList.disabled ) dropdownList.value = "" ;
+  console.log( `Number of items: ${gLM.GetListSize()}` ) ;
+  gLM.GetListSize() === 0 ? disableDropdown() : enableDropdown() ;
 } // UpdateDropdownState()
+
+document.addEventListener( "DOMContentLoaded", async function() {
+
+await gLM.LoadListLastState() ;
+UpdateDropdownState() ;
 
 /////////////////////////////////////////////
 //////// ITEM TRIGGERING INTEGRATION ////////
@@ -35,20 +32,20 @@ function UpdateDropdownState() {
 const listBuffer = document.getElementById( "buffer" ) ;
 
 listBuffer.addEventListener( "click", function( event ) {
-  console.log( `CLICKING: ${event.target.dataset.typeName}` ) ;
   if ( event.target.dataset.typeName === "remove" ) {
-    const parentElem = event.target.parentElement ; // Get the parent of the clicked ".remove" element
-    const parentIndex = Array.from( parentElem.parentNode.children ).indexOf( parentElem ) ;
+    const ctnt = event.target.parentElement.parentElement.parentElement ;
+    const index = +ctnt.dataset.index ;
 
-    gLM.RmvItemFromList( parentIndex ) ;
-    parentElem.remove() ; // Remove the parent element from the DOM
+    gLM.RmvItemFromList( index ) ;
+    ctnt.remove() ; // Remove the parent element from the DOM
 
     gLM.UpdateAllItemsIndices() ;
+    gLM.GetListSize() === 0 ? gLM.DeleteList() : gLM.SaveList() ;
   } // if: remove an item in the list
   else if ( event.target.dataset.typeName === "edit" ) {
-    const parentElem = event.target.parentElement ;
-    const tagElem = parentElem.querySelector("tag") ;
-    const index = +parentElem.dataset.index ;
+    const ctnt = event.target.parentElement.parentElement ;
+    const tagElem = ctnt.querySelector(".tag") ;
+    const index = +ctnt.parentElement.dataset.index ;
 
     swal.fire({
       title: "Edit the item\'s contents:",
@@ -64,13 +61,15 @@ listBuffer.addEventListener( "click", function( event ) {
       if ( ! val.isDismissed ) {
         tagElem.textContent = val.value ;
         gLM.EditItemCtnt( index, val.value ) ;
+        gLM.SaveList() ;
       } // if editing permitted
     }) ;
   } // else if: get the contents of a specific item adjusted
-  else if ( event.target.name === "done" ) {
+  else if ( event.target.className === "done" ) {
     const chkbox = event.target ;
-    const tagElem = chkbox.parentElement.parentElement.querySelector("tag") ;
-    const index = +chkbox.parentElement.parentElement.dataset.index ;
+    const upCtnt = chkbox.parentElement.parentElement ;
+    const tagElem = upCtnt.querySelector(".tag") ;
+    const index = +upCtnt.parentElement.parentElement.dataset.index ;
 
     if ( chkbox.checked ) {
       tagElem.style.textDecoration = "line-through" ;
@@ -82,6 +81,7 @@ listBuffer.addEventListener( "click", function( event ) {
     } // else: the item is yet to be done
 
     gLM.EditItemChk( index, chkbox.checked ) ;
+    gLM.SaveList() ;
   } // else if: have a specific item checked / unchecked
 
   UpdateDropdownState() ;
@@ -91,10 +91,12 @@ listBuffer.addEventListener( "click", function( event ) {
 //////// BUTTON-TRIGGERED FUNCTIONS ////////
 ////////////////////////////////////////////
 
+//// BUTTON 1-a: Add an item to the list by clicking the 'save list' button
 document.getElementById( "addItem" ).addEventListener( "click", function() {
   let inp = document.getElementById( "inputItem" ) ;
   if ( inp.value.trim() !== "" ) {
     gLM.AddItem() ;
+    gLM.SaveList() ;
     inp.value = "" ;
   } else {
     gLM.PopUpMsg( "error", "New item contents must NOT be empty" ) ;
@@ -114,13 +116,8 @@ document.getElementById( "inputItem" ).addEventListener( "keydown", function( ev
   } // if the key is 'Enter'
 }) ;
 
-//// BUTTON 2: SORT ALL ITEMS IN THE LIST
-dropdownList.addEventListener( "change", function() {
-  gLM.SortItems() ;
-}) ;
-
-//// BUTTON 3: CLEAR THE LIST BUFFER
-document.getElementById( "clearBuffer" ).addEventListener( "click", function() {
+//// BUTTON 2: CLEAR THE LIST BUFFER
+document.getElementById( "deleteList" ).addEventListener( "click", function() {
   if ( gLM.GetListSize() > 0 ) {
     swal.fire({
       allowEscapeKey: false,
@@ -130,115 +127,41 @@ document.getElementById( "clearBuffer" ).addEventListener( "click", function() {
              and cannot be undone.\
              \n\nWould you like to continue?',
       showCancelButton: true,
-    }).then( function( wantToDelete ) {
+    }).then( async function( wantToDelete ) {
       if ( wantToDelete.isConfirmed ) {
-        gLM.ClearListBuffer() ;
+        await gLM.ClearListBuffer() ;
+        gLM.DeleteList() ;
         gLM.PopUpMsg( "success", "List cleared" ) ;
         UpdateDropdownState() ;
       }
     }) ;
   } else {
     gLM.PopUpMsg( "error", "The list is empty" ) ;
-    UpdateDropdownState() ;
-  }
-
-}) ;
-
-//// BUTTON 4: SAVE THE LIST IN THE WEB BROWSER
-document.getElementById( "saveFile" ).addEventListener( "click", function() {
-  if ( gLM.GetListSize() > 0 ) {
-    if ( gLM.GetLocalStorageStat() ) {
-      swal.fire({
-        allowEscapeKey: false,
-        allowOutsideClick: false,
-        title: 'Save this list as a file?',
-        text: 'There\'s already one saved on this site.\
-               \nDoing so will overwrite the old one\
-               and it\'ll be unrecoverable.\
-               \n\nWould you like to continue?',
-        showCancelButton: true,
-      }).then( function( wantToOverwrite ) {
-        if ( wantToOverwrite.isConfirmed ) {
-          gLM.SaveList() ;
-          gLM.PopUpMsg( "success", "File saved successfully" ) ;
-        }
-      }) ;
-    } else {
-      gLM.SaveList() ;
-      gLM.PopUpMsg( "success", "File saved successfully" ) ;
-    }
-  } else {
-    gLM.PopUpMsg( "error", "The list to save must NOT be empty." ) ;
   }
 }) ;
 
-//// BUTTON 5: LOAD THE LIST IN THE WEB BROWSER
-document.getElementById( "loadFile" ).addEventListener( "click", async function() {
-  if ( gLM.GetLocalStorageStat() ) {
-    if ( gLM.GetListSize() > 0 ) {
-      swal.fire({
-        allowEscapeKey: false,
-        allowOutsideClick: false,
-        title: 'Load file?',
-        text: 'Doing so will overwrite the list and become unrecoverable.\
-               \nContinue anyway?',
-        showCancelButton: true,
-      }).then( function( wantToLoadFile ) {
-        if ( wantToLoadFile.isConfirmed ) {
-          return new Promise( async function() {
-            await gLM.LoadFileIntoList();
-            UpdateDropdownState() ;
-            gLM.PopUpMsg( "success", "File loaded successfully" ) ;
-          }) ;
-        }
-      }) ;
-    } else {
-      await gLM.LoadFileIntoList() ;
-      UpdateDropdownState() ;
-      gLM.PopUpMsg( "success", "File loaded successfully" ) ;
-    }
-  } else {
-    gLM.PopUpMsg( "error", "No local file stored" ) ;
-  }
-}) ;
-
-//// BUTTON 6: DELETE THE FILE IN THE WEB BROWSER (i.e. THE LIST ITSELF)
-document.getElementById( "clearFile" ).addEventListener( "click", function() {
-  if ( gLM.GetLocalStorageStat() ) {
-    swal.fire({
-      allowEscapeKey: false,
-      allowOutsideClick: false,
-      title: 'Delete the local file?',
-      text: 'It will destroy the file\
-             and cannot be undone.\
-             \n\nWould you like to continue?',
-      showCancelButton: true,
-    }).then( function( wantToDeleteFile ) {
-      if ( wantToDeleteFile.isConfirmed ) {
-        gLM.DeleteList() ;
-        gLM.PopUpMsg( "success", "File deleted successfully" ) ;
-      }
-      UpdateDropdownState() ;
-    }) ;
-  } else {
-    gLM.PopUpMsg( "error", "There is no local list file" ) ;
-    UpdateDropdownState() ;
-  }
-}) ;
-
-//// BUTTON 7: EXPORT AS A FILE
+//// BUTTON 3: EXPORT AS A FILE
 document.getElementById( "exportFile" ).addEventListener( "click", function() {
-  if ( items.length > 0 ) {
+  if ( gLM.GetListSize() > 0 ) {
     ExportFile() ;
   } else {
-    gLM.PopUpMsg( "error", "Cannot export as a file.\nThere should be least one item in the list." ) ;
+    let msg ="Cannot export as a file.<br>There should be least one item in the list." ;
+    gLM.PopUpMsg( "error", msg, true ) ;
   }
 }) ;
 
-//// BUTTON 8: IMPORT A FILE
+//// BUTTON 4: IMPORT A FILE
 document.getElementById( "importFile" ).addEventListener( "click", async function() {
   await ImportFile() ;
   UpdateDropdownState() ;
 }) ;
+
+menu.querySelectorAll("li").forEach(item => {
+  item.addEventListener( "click", async () => {
+    await gLM.SortItems() ;
+    UpdateDropdownState() ;
+    gLM.SaveList() ;
+  });
+});
 
 }) ;

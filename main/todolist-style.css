@@ -1,20 +1,21 @@
 @import "../makelist.css";
+@import "../sort-dropdown.css";
+@import "todolist-style-items.css";
 
 /****************************/
 /***** GLOBAL VARIABLES *****/
 /****************************/
 :root {
-  --chkboxSize: 25px ;
+  --chkboxSize: 28px ;
+  --chkboxColour: #3f9f3f ;
 }
 
 /*******************************/
 /***** LIST BUFFER SECTION *****/
 /*******************************/
 #buffer {
-  text-align: left ;
-  font-size: 36px ;
-  border: 4px dashed var(--bg-colour-hover) ;
   border-radius: 10px ;
+  margin-bottom: 20px ;
 }
 
 /******************************/
@@ -23,15 +24,111 @@
 
 /** INDIVIDUAL ITEM ENTITIES **/
 .items {
-  font-size: 28px;
+  font-size: 29px ;
+  text-align: left ;
   list-style-type: none ; /* no notations */
-  padding: calc( var(--chkboxSize) / 20 ) 0px ;
+  background: white;
+  border-radius: 12px;
+  margin: 0 6px 12px ;
+  padding: 12px 8px;
+  display: flex;
+  align-items: stretch ;
+  gap: 6px;
+  box-shadow: 0 3px 3px #7f7f7f3f ;
+}
+
+/* Drag handle on the left */
+.items > [data-type-name="drag"] {
+  font-size: inherit ;
+  cursor: grab;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  color: #1f1f1f ;
+  padding: 3px ;
 }
 
 /** ITEM CONTENTS **/
-tag {
+.tag {
   list-style-type: inherit ;
-  padding-left: calc( var(--chkboxSize) * .4 ) ;
+  padding-left: calc( var(--chkboxSize) * .3 ) ;
+  flex: 1 ;
+  justify-content: center ;
+  align-items: center ;
+}
+
+/* Content area fills the rest */
+.items .content {
+  flex: 1 ;
+  display: flex ;
+  flex-direction: column ;  /* stack top + bottom */
+  justify-content: space-between ;
+}
+
+/* Upper row (checkbox + tag) */
+.upper-content {
+  display: flex;
+  align-items: center;
+  padding-bottom: 10px ;
+}
+
+/* Lower row (icons aligned right) */
+.lower-content {
+  display: flex;
+  justify-content: flex-end; /* push icons to the right */
+  gap: 12px;
+  padding-top: 10px ;
+}
+
+.material-symbols-rounded {
+  user-select: none;
+  box-sizing: content-box ;
+  background: none ;
+  cursor: pointer ;
+  border: none ;
+  padding: 0px calc( var(--chkboxSize) / 4 ) ;
+}
+
+.lower-content .material-symbols-rounded {
+  cursor: pointer ;
+  color: #1f1f1f ;
+}
+
+.lower-content .material-symbols-rounded:hover {
+  color: #bf0000 ;
+  opacity: .6 ;
+}
+.lower-content .material-symbols-rounded:active {
+  color: darkred ;
+  opacity: inherit ;
+}
+
+.material-symbols-rounded[data-type-name="edit"] {
+  font-size: inherit ;
+}
+
+.material-symbols-rounded[data-type-name="remove"] {
+  font-size: inherit ;
+  color: red ;
+}
+
+.material-symbols-rounded[data-type-name="drag"]:hover {
+  color: #5f5f5f ;
+}
+.material-symbols-rounded[data-type-name="drag"]:active {
+  color: black ;
+}
+
+/**********************************************/
+/***** EMOJIS AS functions (offline only) *****/
+/**********************************************/
+.offline-emoji-labelled {
+  background: none ;
+  border: none ;
+  font-size: 28px ;
+  cursor: pointer ;
+  padding: 0px 0px ;
 }
 
 /** CHECKBOX button **/
@@ -60,8 +157,8 @@ tag {
   border-radius: 4px ;
 }
 .checkbox-container input:checked ~ .checkmark {
-  background-color: #4caf50 ;
-  border-color: #4caf50 ;
+  background-color: var(--chkboxColour) ;
+  border-color: var(--chkboxColour) ;
 }
 .checkmark::after {
   content: "" ;
@@ -79,56 +176,11 @@ tag {
   transform: rotate(45deg) ;
 }
 
-/**************************************/
-/***** GOOGLE ICONS (online only) *****/
-/**************************************/
-
-/** EDIT & DELETE buttons **/
-.material-symbols-rounded {
-  box-sizing: content-box ;
-  background: none ;
-  width: 20px ;
-  cursor: pointer ;
-  border: none ;
-  padding: 0px calc( var(--chkboxSize) / 5 ) ;
-}
-
-/** EDIT buttons **/
-.material-symbols-rounded[data-type-name="edit"] {
-  font-size: .9em ;
-}
-
-/** DELETE buttons **/
-.material-symbols-rounded[data-type-name="remove"] {
-  color: red ;
-  font-size: .9em ;
-}
-
-.material-symbols-rounded:hover {
-  opacity: .6 ;
-}
-
-.material-symbols-rounded:active {
-  opacity: 1 ;
-  color: crimson ;
-}
-
-/**********************************************/
-/***** EMOJIS AS functions (offline only) *****/
-/**********************************************/
-.offline-emoji-labelled {
-  background: none ;
-  border: none ;
-  font-size: 28px ;
-  cursor: pointer ;
-  padding: 0px 0px ;
-}
-
 /***********************/
 /***** SWEETALERTS *****/
 /***********************/
 .swal2-html-container {
-  /* text-align: left ; */
+  text-align: left ;
 }
 
 /*************************************/
