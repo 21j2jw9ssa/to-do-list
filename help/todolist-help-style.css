@@ -1,5 +1,5 @@
 @import "../makelist.css";
-/* @import "../main/todolist-style.css"; */
+@import "notice_block.css";
 
 /****************************/
 /***** HELP DESCRIPTION *****/
@@ -22,7 +22,6 @@ ul {
   padding: 0 20px ;
   text-align: left ;
   background-color: #cfcfcf ;
-  /* border: 1px solid gray ; */
   border-radius: 20px ;
 }
 #table-of-contents h2 {
@@ -40,6 +39,7 @@ ul {
 }
 #table-of-contents a:active {
   text-shadow: 0px 0px 5px orange ;
+  font-weight: 500 ;
   color: yellow ;
 }
 
@@ -77,6 +77,7 @@ ul {
 i[class="material-symbols-rounded"] {
   vertical-align: middle ;
   font-size: 29px !important ;
+  cursor: auto ;
   padding: 0 ;
   margin: 0 ;
 }
