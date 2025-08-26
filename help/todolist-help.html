@@ -18,7 +18,6 @@
 		<link rel="apple-touch-icon" sizes="180x180" href="../icons/favicon/apple-touch-icon.png" />
 		<meta name="apple-mobile-web-app-title" content="MakeList" />
 		<link rel="manifest" href="../icons/favicon/site.webmanifest" />
-
 	</head>
 	<body>
 		<div id="header-wrapper">
@@ -65,9 +64,9 @@
 			<li id="what-an-item-looks-like" class="itemlook">
 				<h2>What an item looks like</h2>
 				<p>
-					An item looks like the following:
+					Each item looks like the following:
 				</p>
-				<div class="items sample-item">
+				<li class="items sample-item">
 					<div class="material-symbols-rounded" data-type-name="drag">
 						drag_indicator
 					</div>
@@ -77,7 +76,9 @@
 								<input type="checkbox" name="sample-input" class="done">
 								<span class="checkmark"></span>
 							</label>
-							<span class="tag">example item</span>
+							<span class="tag">
+								example item as a demo
+							</span>
 						</div>
 						<div class="lower-content">
 							<div class="material-symbols-rounded" data-type-name="edit">
@@ -88,7 +89,7 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				</li>
 				<dl>
 					<!-- ITEM PART 0: DRAG INDICATORS -->
 					<dt class="description-title">
@@ -99,18 +100,20 @@
 						icon
 					</dt>
 					<dd>
-						An icon that is used to drag an entire item
-						and drop it at a specific position.
+						An icon to drag an entire item
+						and drop it at a specific position.<br>
+						Once dropped, it has the list updated.
 					</dd>
 					<!-- ITEM PART 1: CONTENTS -->
 					<dt class="description-title">
 						Item content
 					</dt>
 					<dd>
-						The essential part of an item that is used to clarify what to be done.
+						The essential part of an item to clarify what to be done.
 					</dd>
 					<dd>
-						It must contain at least one non-space characters, e.g. numbers, letters and symbols.
+						It must contain at least one non-space characters,<br>
+						e.g. numbers (0~9), letters (A~Z, a~z) and symbols.
 					</dd>
 
 					<!-- ITEM PART 2: THE CHECKBOX -->
@@ -134,22 +137,22 @@
 						<label class="checkbox-container sample-checkbox" style="vertical-align: middle;">
 							<input type="checkbox" name="sample-input" class="done" checked disabled>
 							<span class="checkmark"></span>
-						</label>.
+						</label>,<br>then has the list updated.
 					</dd>
+					<dd>A checkbox's binary status:</dd>
 					<dd>
-						When the checkbox of an item is
 						<label class="checkbox-container sample-checkbox" style="vertical-align: middle;">
 							<input type="checkbox" name="sample-input" class="done" disabled>
 							<span class="checkmark"></span>
-						</label>, the item's content turns black with no additional text decoration. This means the item has yet been done.
+						</label>:
+						item is not yet done; its content is purely black.
 					</dd>
 					<dd>
-						When the checkbox turns
 						<label class="checkbox-container sample-checkbox" style="vertical-align: middle;">
 							<input type="checkbox" name="sample-input" class="done" checked disabled>
 							<span class="checkmark"></span>
-						</label>,
-						on the other hand, the item's content turns gray and is striken through. It shows that the item has already been done.
+						</label>:
+						item has already been done; its content is gray and crossed out.
 					</dd>
 
 					<!-- ITEM PART 3: THE EDIT ICON -->
@@ -162,7 +165,8 @@
 					</dt>
 					<dd>
 						Allows a user to edit a specific item.<br>
-						After editing, the item must be neither empty nor with mere spaces.
+						The item after being editted must be neither empty nor with mere spaces.<br>
+						Once done, it has the list updated.
 					</dd>
 
 					<!-- ITEM PART 4: THE DELETE ICON -->
@@ -175,12 +179,10 @@
 					</dt>
 					<dd>
 						Allows a user to delete a specific item.<br>
-						It cannot be undone once This icon is clicked, however.
+						This action cannot be undone once it is clicked, however.<br>
+						Once done, it has the list updated.
 					</dd>
 				</dl>
-				<p>
-					The to-do list is saved automatically with any of the above properties changed.
-				</p>
 			</li>
 			<li id="add-item" class="instruction-functions">
 				<h2>Add item</h2>
@@ -230,20 +232,24 @@
 						</tbody>
 					</table>
 				</p>
-				<p class="important-block warning">
-					It's not suggested to type info associated with your privacy. Hackers may obtain it.
-				</p>
+				<div class="important-block caution">
+					<h4>Caution!</h4>
+					<p>
+						It's highly not suggested to enter something associated with personal identity or info.
+					</p>
+				</div>
 			</li>
 			<li id="sort-items" class="instruction-functions">
 				<h2>Sort items</h2>
 				<p>
-					Sorts all items in the list buffer by a specific property such as contents and checkbox status.<br>
+					Sorts all items in the list by a specific property such as contents and checkbox status.<br>
 				</p>
 				<p>
 					By default, the list starts empty.<br>
 					That is, the dropdown list is not for use at this state.<br>
-					To enable the dropdown list, there should be at least one item in the list.<br>
-					Users may either import a to-do list or add an item to enable the dropdown.
+					To enable the dropdown list,
+					there should be at least one item in the list.<br>
+					To make it, import a to-do list or add an item to the list.
 				</p>
 				<p>
 					There are four ways to sort items:
@@ -786,22 +792,23 @@
 					</span>
 				</p>
 			</li>
-			<li id="how-to-do-list-works" class="instruction-functions">
+			<!-- <li id="how-to-do-list-works" class="instruction-functions">
 				<h2>How the To-do List works</h2>
 				<p>
 					By default, the list starts empty.<br>
 					It means the dropdown list is not available.
 				</p>
 				In this case
-			</li>
+			</li> -->
 		</ul>
-		<br>
+		<button id="backToTop" title="Go to top">⬆ back to the top</button>
 		<footer>
 			All contents is made by myself.<br>All rights reserved.
 		</footer>
 		<script src="../nav.js"></script>				<!-- NAVIGATION BAR -->
-		<script src="load_examples.js"></script> <!-- EXAMPLE LISTS LOADING -->
-		<script src="tab_control.js"></script> 	<!-- TAB DISPLAY -->
-		<script src="item_sample_loading.js"></script> 	<!-- TAB DISPLAY -->
+		<script src="load_examples.js"></script>		<!-- EXAMPLE LISTS LOADING -->
+		<script src="tab_control.js"></script> 			<!-- TAB DISPLAY -->
+		<script src="item_sample_loading.js"></script> 	<!-- SAMPLE ITEM LOADING -->
+		<script src="../back-to-top.js"></script>		<!-- BACK-TO-TOP BUTTON -->
 	</body>
 </html>
