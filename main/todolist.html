@@ -37,18 +37,17 @@
 			<button id="importFile" title="import list" class="listFunc">import list</button>
 			<button id="deleteList" title="delete list" class="listFunc">delete list</button>
 		</div>
-		<div class="dropdown" class="custom-select" title="sort items">
+		<div class="dropdown custom-select" title="sort items">
 			ordering items from
 			<div class="dropdown">
 				<button class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">
-					👇 choose a sorting
 				</button>
 				<ul class="dropdown-menu" role="listbox">
 					<li role="option" data-mode="magnitude-asc">
-						📋⬆️ smallest to largest
+						📝⬆️ smallest to largest
 					</li>
 					<li role="option" data-mode="magnitude-desc">
-						📋⬇️ largest to smallest
+						📝⬇️ largest to smallest
 					</li>
 					<li role="option" data-mode="checkbox-status-asc">
 						✔️⬆️ latest done to earliest done
@@ -56,12 +55,27 @@
 					<li role="option" data-mode="checkbox-status-desc">
 						✔️⬇️ earliest done to latest done
 					</li>
+                    <!-- 					
+					<li role="option" data-mode="deadline-asc">
+						📅⬆️ closest to farthest
+					</li>
+					<li role="option" data-mode="deadline-desc">
+						📅⬇️ farthest to closest
+					</li>
+					<li role="option" data-mode="priority-asc">
+						⌚⬆️ low to high
+					</li>
+					<li role="option" data-mode="priority-desc">
+						⌚⬇️ high to low
+					</li>
+					 -->
 				</ul>
 			</div>
 		</div>
 
 		<!-- LIST BUFFER -->
 		<div id="buffer"></div>
+		<button id="backToTop">⬆ back to the top</button>
 
 		<!-- MODULES -->
 		<script src="https://raw.githack.com/SortableJS/Sortable/master/Sortable.js"></script> 	<!-- MODULE FOR DRAGGABLE LIST ITEMS -->
@@ -74,7 +88,8 @@
 		<script src="todolist-file-handling.js"></script>                                    		<!-- FILE IMPORT/EXPORT -->
 		<script src="todolist-list-item-draggable.js"></script>                              		<!-- DRAGGABLE LIST ITEMS -->
 		<script src="todolist-mechanism.js"></script>                                        		<!-- BUTTON LISTENERS -->
-		<script src="../sort-dropdown.js"></script>                                          		<!-- DROPDOWN -->
+		<script src="sort-dropdown.js"></script>                                          		<!-- DROPDOWN -->
+		<script src="../back-to-top.js"></script>                                                   <!-- BACK-TO-TOP BUTTON -->
 
 		<footer>
 			All contents is made by myself.<br>All rights reserved.
