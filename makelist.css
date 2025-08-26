@@ -216,45 +216,43 @@ a {
 /***** LINK TO THE TOP *****/
 /***************************/
 #backToTop {
-  box-sizing: border-box ;
-  font-family: var(--font);
-  position: fixed ;
-  bottom: 20px ;
-  right: 20px ;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
   z-index: 100;
   opacity: 0;                /* hidden initially */
   pointer-events: none;      /* disable clicks when hidden */
   background-color: #333;
   color: white;
   border: none;
-  border-radius: 1000px ;
-  padding: 10px 20px ;
-  width: 200px ;
-  height: 50px ;
-  font-weight: 400 ;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
   font-size: 18px;
   cursor: pointer;
-  transition:
-    opacity .2s ease,  /* fade animation */
-    background-color .1s ease,
-    color .1s ease,
-    font-weight .1s ease
-    ;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  transition: opacity 0.3s ease;  /* fade animation */
 }
+
 #backToTop.show {
   opacity: 1;
   pointer-events: auto;      /* clickable only when shown */
 }
+
 #backToTop:hover {
-  background-color: #555555;
-  opacity: 1 ;
+  background-color: #555;
 }
-#backToTop:active {
-  border: 4px solid #555555 ;
-  background-color: white ;
-  color: #555555 ;
-  font-weight: 600 ;
-  /* opacity: 1 ; */
+
+.material-symbols-rounded {
+  vertical-align: middle ;
+  font-size: 29px !important ;
+  cursor: auto ;
+  padding: 0 ;
+  margin: 0 ;
+}
+
+.material-symbols-rounded:is(#backToTop) {
+  cursor: pointer ;
 }
 
 footer {
