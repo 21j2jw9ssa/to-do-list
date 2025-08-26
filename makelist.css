@@ -243,7 +243,7 @@ a {
   background-color: #555;
 }
 
-.material-symbols-rounded {
+i[class="material-symbols-rounded"] {
   vertical-align: middle ;
   font-size: 29px !important ;
   cursor: auto ;
