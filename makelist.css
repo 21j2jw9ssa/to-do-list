@@ -9,10 +9,6 @@
   --bg-colour-warning-hover:   #bf0000 ;
   --bg-colour-warning-active:  #9f0000 ;
 
-  --bg-colour-dropdown:        #ffdf7f ;
-
-  --bg-colour-item:            #6fdf6f ;
-
   --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif ;
 }
 
@@ -89,7 +85,6 @@ a {
   font-weight: bold ;
   background-color: var(--bg-colour-active) ;
 }
-
 /** Current page indicator **/
 #nav-of-links a.current-page {
   color: white ;
@@ -109,7 +104,6 @@ a {
     background-color .1s ease,
     box-shadow .1s ease ;
 }
-
 .listFunc:not( [ id="addItem" ] ) {
   line-height: 25px ;
   box-sizing: border-box ;
@@ -124,6 +118,7 @@ a {
   border-style: none ;
   padding: 0px 20px ;
   flex: 1 1 auto ;
+  color: black ;
 }
 .listFunc:hover {
   background-color: var(--bg-colour-active) ;
@@ -220,10 +215,50 @@ a {
 /***************************/
 /***** LINK TO THE TOP *****/
 /***************************/
-#nav-to-top {
-  width: 100% ;
-  height: 30px ;
-  margin-bottom: 10px ;
+#backToTop {
+  box-sizing: border-box ;
+  font-family: var(--font);
+  position: fixed ;
+  bottom: 20px ;
+  right: 20px ;
+  z-index: 100;
+  opacity: 0;                /* hidden initially */
+  pointer-events: none;      /* disable clicks when hidden */
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 1000px ;
+  padding: 10px 20px ;
+  width: 200px ;
+  height: 50px ;
+  font-weight: 400 ;
+  font-size: 18px;
+  cursor: pointer;
+  transition:
+    opacity .2s ease,  /* fade animation */
+    background-color .1s ease,
+    color .1s ease,
+    font-weight .1s ease
+    ;
+}
+#backToTop.show {
+  opacity: 1;
+  pointer-events: auto;      /* clickable only when shown */
+}
+#backToTop:hover {
+  background-color: #555555;
+  opacity: 1 ;
+}
+#backToTop:active {
+  border: 4px solid #555555 ;
+  background-color: white ;
+  color: #555555 ;
+  font-weight: 600 ;
+  /* opacity: 1 ; */
+}
+
+footer {
+  padding: 10px ;
 }
 
 /**************************************/
@@ -232,6 +267,7 @@ a {
 @media (max-width: 700px) {
   .listFunc:not( [ id="addItem" ] )  {
     font-size: 125% ;
+    width: 60% ;
   }
 }
 
@@ -244,7 +280,7 @@ a {
   }
   .listFunc:not( [ id="addItem" ] )  {
     line-height: 30px ;
-    width: 20% ;
+    width: 30% ;
     flex: 1 1 auto ;
   }
 }
