@@ -251,10 +251,6 @@ i[class="material-symbols-rounded"] {
   margin: 0 ;
 }
 
-.material-symbols-rounded:is(#backToTop) {
-  cursor: pointer ;
-}
-
 footer {
   padding: 10px ;
 }
