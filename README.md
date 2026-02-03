@@ -1,5 +1,9 @@
 # To-do List
 
+To see the To-do List site, go to [the main page](https://21j2jw9ssa.github.io/to-do-list/main/todolist.html)
+
+For on-site instructions, check out [the help page](https://21j2jw9ssa.github.io/to-do-list/help/todolist-help.html).
+
 To-do List (MakeList) is a website handling to-do list items,<br>
 where users may
 - ***add* items** to the list
@@ -13,10 +17,6 @@ where users may
 - **import a text file** to create a *new* list
 
 and so on.
-
-To see the To-do List site, go to [the main page](https://21j2jw9ssa.github.io/to-do-list/main/todolist.html)
-
-For on-site instructions, check out [the help page](https://21j2jw9ssa.github.io/to-do-list/help/todolist-help.html).
 
 # How to use the To-do List (MakeList)
 
